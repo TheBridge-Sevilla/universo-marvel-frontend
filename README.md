@@ -1,2 +1,2 @@
 # universo-marvel-frontend
-Repositorio del fronend del proyecto de tripulaciones The Bridge
+Repositorio del frontend del proyecto de tripulaciones The Bridge
