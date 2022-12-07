@@ -6,7 +6,6 @@ import Personaje from '../Personaje';
 function App() {
 
   return (<>
-    <Menu />
     <Personaje />
   </>
   )

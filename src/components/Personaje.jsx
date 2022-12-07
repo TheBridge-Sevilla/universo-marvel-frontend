@@ -1,4 +1,5 @@
 import { React, useState, useEffect } from "react"
+import { Button, Container, Image } from "react-bootstrap"
 
 export default function Personaje() {
     const [entidad, setEntidad] = useState('personajes')
@@ -9,24 +10,39 @@ export default function Personaje() {
     const [error, setError] = useState(null)
     const [personajes, setPersonajes] = useState([])
 
-    async function fetchJson() {
+    async function fetchApi() {
         const data = await fetch(url)
         const json = await data.json()
         setPersonajes(json.docs)
     }
 
     useEffect(() => {
-        fetchJson().catch(error => setError(error))
+        fetchApi().catch(error => setError(error))
     }, [pagina]);
 
     console.log(personajes, error)
     return (
-        <div>
+        <Container className="d-flex flex-column justify-content-center align-items-center" fluid>
             {personajes.map(personaje =>
-                <p key={personaje.Id}>
-                    {personaje.name}
-                </p>
+                <>
+                    <Image
+                        className="vw-100"
+                        src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+                        alt={personaje.name}
+                    />
+                    <h1>{personaje.name}</h1>
+                    <Button
+                        onClick={() => window.open(personaje.urls.filter(url => url.type === 'detail').url, '_blank')}>
+                        Ver personaje
+                    </Button>
+                    <Button
+                    onClick={() => window.open(personaje.urls[2].url, '_blank')}>
+                        Ver comics
+                    </Button>
+                </>
             )}
-        </div>
+        </Container>
     )
 }
+
+/* personaje.urls[0].url */
