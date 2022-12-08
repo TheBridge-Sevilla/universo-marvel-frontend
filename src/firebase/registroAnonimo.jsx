@@ -1,4 +1,4 @@
-import { signInAnonymously ,onAuthStateChanged} from "firebase/auth";
+import { signInAnonymously ,onAuthStateChanged,GoogleAuthProvider} from "firebase/auth";
 import { auth } from "./firebase";
 import {useContextoUsuario} from "../contexto/contextoUsuario"
 import {useSignOut} from "./useSignOut"
@@ -9,6 +9,7 @@ export default function RegistroAnonimo(){
 const { cerrarSesion } = useSignOut()
 const { usuario, setUsuario } = useContextoUsuario();
 const { iniciarSesionConG } = useSignWithG()
+
 
 const inicioAnonimo =()=>{
 signInAnonymously(auth)
@@ -36,7 +37,6 @@ signInAnonymously(auth)
   return(
     <div>
         {usuario == "invitado" ? <button onClick={cerrarSesion}>Cerrar Sesion</button> :<button onClick={()=>inicioAnonimo()}>Inicia sesion de Invitado</button>}
-        <button onClick={()=>console.log(auth.currentUser.accessToken)}>UID</button>
         {usuario && usuario!= "invitado" ? <button onClick={cerrarSesion}>Cerrar Sesion</button>  :<button onClick={iniciarSesionConG}>Inicia sesion con google</button>}
 
 

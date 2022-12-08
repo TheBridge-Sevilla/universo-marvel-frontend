@@ -1,27 +1,35 @@
-import { signInWithPopup, GoogleAuthProvider, linkWithCredential } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, linkWithPopup } from "firebase/auth";
 import { auth } from "./firebase";
+import { useContextoUsuario } from "../contexto/contextoUsuario"
 
 export function useSignWithG() {
-    
+    const { usuario, setUsuario } = useContextoUsuario();
 
     const provider = new GoogleAuthProvider();
     const iniciarSesionConG = () => {
-        const pending = new GoogleAuthProvider(auth.id_token)
-        console.log('pending', pending)
-        signInWithPopup(auth, provider).then(() => {
-        })
-            .catch((error) => {
-                console.log(error)
-            }).then(() => {
-                linkWithCredential(auth.currentUser, pending)
-                    .then((usercred) => {
-                        console.log('usercred', usercred)
-                        const user = usercred.user;
-                        console.log("Anonymous account successfully upgraded", user);
-                    }).catch((error) => {
-                        console.log("Error upgrading anonymous account", error);
-                    });
+        if (usuario == "invitado") {
+
+            linkWithPopup(auth.currentUser, provider).then((result) => {
+                // Accounts successfully linked.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const user = result.user;
+                setUsuario(user.displayName)
+                console.log("Anonymous account successfully upgraded", user);
+
+              }).catch((error) => {
+                console.log("Error upgrading anonymous account", error);
+
+              });
+        }
+        else {
+            signInWithPopup(auth, provider).then((resultado) => {
+                const nombre = resultado.user.displayName
+                setUsuario(nombre)
             })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
 
     }
 
