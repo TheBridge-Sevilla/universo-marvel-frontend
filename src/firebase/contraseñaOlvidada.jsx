@@ -21,9 +21,6 @@ export default function ContraseñaOlvidada() {
       })
   }
 
-
-
-
   const forgotPasswordHandler = (e) => {
     e.preventDefault()
     const email = emailRef.current.value;

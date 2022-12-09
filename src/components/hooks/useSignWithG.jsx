@@ -1,6 +1,6 @@
 import { signInWithPopup, GoogleAuthProvider, linkWithPopup } from "firebase/auth";
-import { auth } from "./firebase";
-import { useContextoUsuario } from "../contexto/contextoUsuario"
+import { auth } from "../../firebase/firebase";
+import { useContextoUsuario } from "../../context/contextoUsuario"
 
 export function useSignWithG() {
     const { usuario, setUsuario } = useContextoUsuario();
@@ -16,10 +16,9 @@ export function useSignWithG() {
                 setUsuario(user.displayName)
                 console.log("Anonymous account successfully upgraded", user);
 
-              }).catch((error) => {
+            }).catch((error) => {
                 console.log("Error upgrading anonymous account", error);
-
-              });
+            });
         }
         else {
             signInWithPopup(auth, provider).then((resultado) => {

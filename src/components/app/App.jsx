@@ -1,10 +1,13 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Personaje from '../Personaje'
+import Personaje from '../personaje'
+import Registrarse from '../../firebase/registrarse'
+import RegistroAnonimo from '../../firebase/registroAnonimo'
 
 function App () {
   return (<>
-    <Personaje />
+    <Registrarse />
+    <RegistroAnonimo />
   </>
   )
 }

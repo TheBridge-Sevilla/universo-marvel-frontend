@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { React, useRef } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase"
 
@@ -9,8 +9,6 @@ const IniciarSesion = () => {
 
   const emailRef = useRef();
   const contraseñaRef = useRef();
-
-
 
   const iniciarSesion = (email, contraseña,) => {
     signInWithEmailAndPassword(auth, email, contraseña).then(() => {
@@ -34,13 +32,13 @@ const IniciarSesion = () => {
     if (!email || !contraseña) {
 
     }
-    if (email && contraseña){
+    if (email && contraseña) {
 
-    } 
+    }
   };
 
   return (
-        <></>
+    <></>
   );
 };
 

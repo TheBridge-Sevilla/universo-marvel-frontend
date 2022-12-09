@@ -1,9 +1,9 @@
-import { auth } from "./firebase";
+import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
-import {useContextoUsuario} from "../contexto/contextoUsuario"
+import { useContextoUsuario } from "../../context/contextoUsuario"
 
 export function useSignOut() {
-    const {  setUsuario } = useContextoUsuario();
+    const { setUsuario } = useContextoUsuario();
 
 
     const cerrarSesion = () => {
@@ -15,6 +15,6 @@ export function useSignOut() {
                 console.log(error)
             })
     }
-    
+
     return { cerrarSesion }
 }
