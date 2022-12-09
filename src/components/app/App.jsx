@@ -1,10 +1,8 @@
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Menu from '../Menu';
-import Personaje from '../Personaje';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Personaje from '../Personaje'
 
-function App() {
-
+function App () {
   return (<>
     <Personaje />
   </>
