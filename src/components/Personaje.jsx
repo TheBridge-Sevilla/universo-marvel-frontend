@@ -5,9 +5,8 @@ export default function Personaje() {
    const [entidad, setEntidad] = useState('personajes')
    const [pagina, setPagina] = useState(1)
    const [limite, setLimite] = useState(10)
-   const url = `${
-      import.meta.env.VITE_BACKEND_URL
-   }/${entidad}?page=${pagina}&limit=${limite}`
+/*    const url = `${import.meta.env.VITE_BACKEND_URL}/${entidad}?page=${pagina}&limit=${limite}` */
+const url = `${import.meta.env.VITE_BASE_URL}/${entidad}`
    const [personajes, setPersonajes] = useState([])
 
    async function fetchApi() {
