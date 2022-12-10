@@ -1,6 +1,6 @@
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
-import { useContextoUsuario } from "../../context/contextoUsuario"
+import { useContextoUsuario } from "../../context/ContextoUsuario"
 
 export function useSignOut() {
     const { setUsuario } = useContextoUsuario();

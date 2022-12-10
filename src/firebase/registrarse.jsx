@@ -6,7 +6,7 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useContextoUsuario } from '../context/contextoUsuario'
+import { useContextoUsuario } from '../context/ContextoUsuario'
 
 const Registrarse = () => {
   const emailRef = useRef()

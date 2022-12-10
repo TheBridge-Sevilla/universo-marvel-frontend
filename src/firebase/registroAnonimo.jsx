@@ -4,7 +4,7 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useContextoUsuario } from '../context/contextoUsuario'
+import { useContextoUsuario } from '../context/ContextoUsuario'
 import { useSignOut } from '../components/hooks/useSignOut'
 import { useSignWithG } from '../components/hooks/useSignWithG'
 
