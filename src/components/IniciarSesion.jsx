@@ -3,7 +3,9 @@ import { Container, Image } from 'react-bootstrap'
 
 function IniciarSesion() {
   return (
-    <></>
+    <Container>
+      
+    </Container>
   )
 }
 

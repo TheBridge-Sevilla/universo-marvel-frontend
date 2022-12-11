@@ -6,7 +6,7 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useContextoUsuario } from '../context/ContextoUsuario'
+import { useContextoUsuario } from '../../context/ContextoUsuario'
 
 const Registrarse = () => {
   const emailRef = useRef()
@@ -48,7 +48,6 @@ const Registrarse = () => {
             setTipo('error')
           }
         })
-
         .then(() => {
           setUsuario(auth.currentUser.displayName)
         })
