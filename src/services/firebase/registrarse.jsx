@@ -67,7 +67,7 @@ const Registrarse = () => {
   }
 
   return (
-    <div className="form flex flex-column">
+    {/* <div className="form flex flex-column">
       <form
         className="flex flex-column justify-content-center align-items-center"
         onSubmit={onSubmit}
@@ -98,7 +98,7 @@ const Registrarse = () => {
       <button onClick={() => console.log(usuario)}>
         mostrar nombre de usuario
       </button>
-    </div>
+    </div> */}
   )
 }
 export default Registrarse

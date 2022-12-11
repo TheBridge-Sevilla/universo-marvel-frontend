@@ -37,7 +37,8 @@ export default function RegistroAnonimo() {
   })
 
   return (
-    <div>
+    <></>
+/*     <div>
       {usuario == 'invitado' ? (
         <button onClick={cerrarSesion}>Cerrar Sesion</button>
       ) : (
@@ -50,6 +51,6 @@ export default function RegistroAnonimo() {
       ) : (
         <button onClick={iniciarSesionConG}>Inicia sesion con google</button>
       )}
-    </div>
+    </div> */
   )
 }

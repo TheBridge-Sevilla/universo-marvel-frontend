@@ -10,9 +10,10 @@ export function obtenerPersonajes() {
     const json = await data.json()
     setPersonajesData(json.docs)
   }
+
   useEffect(() => {
     fetchApi().catch((error) => console.log(error))
   }, [pagina])
 
-  return {personajesData, pagina, setPagina}
+  return { personajesData, pagina, setPagina }
 }
