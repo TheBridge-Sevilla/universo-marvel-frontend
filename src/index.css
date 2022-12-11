@@ -2,14 +2,17 @@ body{
     margin: 0;
 }
 :root {
-    --background: white;
-    --text-primary: black;
-    --text-secondary: royalblue;
-    --accent: purple;
+    --background: #f7f7f7;
+    --text: #212121;
+    --primary: #ff0100;
+    --secondary: #f6f6f6;
+    --terciary: #313131;
+    --valid: #3ccf4e;
+    --invalid: #e30815;
+    --accent : #e7e7e7;
+
   }
   [data-theme='dark'] {
-    --background: black;
-    --text-primary: white;
-    --text-secondary: grey;
-    --accent: darkred;
+    --text : #f7f7f7;
+    --background: #212121;
   }
