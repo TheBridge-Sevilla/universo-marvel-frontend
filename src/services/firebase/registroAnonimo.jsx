@@ -15,16 +15,16 @@ export default function RegistroAnonimo() {
 
   const inicioAnonimo = () => {
     signInAnonymously(auth)
-      .then((resultado) => {
+      .then(resultado => {
         console.log(resultado)
         setUsuario('invitado')
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error)
         // ...
       })
   }
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
@@ -38,7 +38,7 @@ export default function RegistroAnonimo() {
 
   return (
     <></>
-/*     <div>
+    /*     <div>
       {usuario == 'invitado' ? (
         <button onClick={cerrarSesion}>Cerrar Sesion</button>
       ) : (

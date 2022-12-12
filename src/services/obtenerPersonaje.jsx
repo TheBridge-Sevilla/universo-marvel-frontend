@@ -12,7 +12,7 @@ export function obtenerPersonajes() {
   }
 
   useEffect(() => {
-    fetchApi().catch((error) => console.log(error))
+    fetchApi().catch(error => console.log(error))
   }, [pagina])
 
   return { personajesData, pagina, setPagina }

@@ -1,66 +1,66 @@
 .unio-text {
-    font-family: 'Rajdhani';
-    letter-spacing: 0.435em;
-    font-size: 22px;
+  font-family: 'Rajdhani';
+  letter-spacing: 0.435em;
+  font-size: 22px;
 
-    -webkit-animation: fade 3s infinite;
-    -moz-animation: fade 3s infinite;
-    -o-animation: fade 3s infinite;
-    animation: fade 3s infinite;
+  -webkit-animation: fade 3s infinite;
+  -moz-animation: fade 3s infinite;
+  -o-animation: fade 3s infinite;
+  animation: fade 3s infinite;
 }
 
 @keyframes fade {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-o-keyframes fade {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-moz-keyframes fade {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fade {
-    0% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 1;
+  }
 
-    50% {
-        opacity: 0;
-    }
+  50% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }

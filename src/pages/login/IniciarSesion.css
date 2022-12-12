@@ -1,19 +1,19 @@
 .form-control {
-    background: none;
-    border-color: #FF0100;
-    color: #FF0100;
+  background: none;
+  border-color: #ff0100;
+  color: #ff0100;
 }
 
 .form-control:focus {
-    background: none;
-    color: #FF0100;
-    border-color: #F6F6F6;
+  background: none;
+  color: #ff0100;
+  border-color: #f6f6f6;
 }
 
 #sign-in {
-    background-color: #FF0100 ;
+  background-color: #ff0100;
 }
 
 #sign-in:hover {
-    background-color: #ac0000;
+  background-color: #ac0000;
 }

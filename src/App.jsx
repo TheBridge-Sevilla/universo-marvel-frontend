@@ -7,7 +7,7 @@ import Feed from './pages/feed/Feed'
 function App() {
   return (
     <>
-    <IniciarSesion />
+      <IniciarSesion />
     </>
   )
 }
