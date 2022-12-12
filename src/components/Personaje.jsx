@@ -25,18 +25,19 @@ export default function Personaje() {
 
   return (
     <>
+      {' '}
+      <PaginacionPersonajes
+        setPagina={setPagina}
+        pagina={pagina}
+        setPaginacion={setPaginacion}
+        paginacion={paginacion}
+      />
       {personajes.map((personaje) => (
         <Container
           key={personaje.Id}
           className="d-flex flex-column justify-content-center align-items-center"
           fluid
         >
-          <PaginacionPersonajes
-            setPagina={setPagina}
-            pagina={pagina}
-            setPaginacion={setPaginacion}
-            paginacion={paginacion}
-          />
           <Image
             className="vw-100"
             src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
