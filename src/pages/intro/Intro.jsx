@@ -1,4 +1,3 @@
-import React from 'react'
 import './Intro.css'
 import { Container, Image } from 'react-bootstrap'
 
