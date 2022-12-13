@@ -1,18 +1,13 @@
-import './IniciarSesion.css'
 import { Button, FloatingLabel, Form } from 'react-bootstrap'
 import { Google } from 'react-bootstrap-icons'
+import TextField from '@mui/material/TextField'
 
 function IniciarSesion() {
   return (
     <Form className='h-100 d-flex flex-column justify-content-center'>
       <h2 className='mb-5'>Iniciar sesion</h2>
       <Form.Group>
-        <FloatingLabel label='Usuario' className='mb-3'>
-          <Form.Control type='text' size='lg' placeholder='Usuario' />
-        </FloatingLabel>
-        <FloatingLabel label='Contraseña' className='mb-3'>
-          <Form.Control type='password' size='lg' placeholder='Password' />
-        </FloatingLabel>
+        <TextField label='ejemplo' focused color='primary' />
       </Form.Group>
       <Form.Group className='d-flex justify-content-between mt-3'>
         <Form.Check type='checkbox' id='remember-me' label='recuerdame' />
