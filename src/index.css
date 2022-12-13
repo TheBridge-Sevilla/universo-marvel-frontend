@@ -1,20 +1,42 @@
-body{
-    margin: 0;
+body {
+  margin: 0;
 }
-:root {
-    --background: #f7f7f7;
-    --text: #212121;
-    --primary: #ff0100;
-    --secondary: #f6f6f6;
-    --terciary: #313131;
-    --valid: #3ccf4e;
-    --invalid: #e30815;
-    --accent : #e7e7e7;
-    --hover : #FBB6B5;
-    --box-shadow : inset 3.77687px 11.3306px 37.7687px rgba(151, 71, 255, 0.4);
 
-  }
-  [data-theme='dark'] {
-    --text : #f7f7f7;
-    --background: #212121;
-  }
+:root {
+  --background: #f7f7f7;
+  --text: #212121;
+  --primary: #ff0100;
+  --secondary: #f6f6f6;
+  --terciary: #313131;
+  --valid: #3ccf4e;
+  --invalid: #e30815;
+  --accent: #e7e7e7;
+  --hover: #d00000;
+  --box-shadow: inset 3.77687px 11.3306px 37.7687px rgba(151, 71, 255, 0.4);
+
+}
+
+[data-theme='dark'] {
+  --text: #f7f7f7;
+  --background: #212121;
+}
+
+.btn-danger {
+  background-color: var(--primary);
+}
+
+.btn-danger:hover {
+  background-color: var(--hover);
+}
+
+#google-icon {
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+#google-icon:hover {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}

@@ -18,7 +18,7 @@ function IniciarSesion() {
         <Form.Check type='checkbox' id='remember-me' label='recuerdame' />
         <a id='forgot-password'>Contraseña olvidada?</a>
       </Form.Group>
-      <Button id='sign-in' size='lg' className='w-100 mt-5' variant='danger'>
+      <Button size='lg' className='w-100 mt-5' variant='danger'>
         Continuar
       </Button>
       <Form.Group className='d-flex flex-column justify-content-center align-items-center mt-5'>
