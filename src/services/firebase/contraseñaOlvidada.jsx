@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { auth } from "./firebase"
 import { sendPasswordResetEmail } from "firebase/auth";
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 
 export default function ContraseñaOlvidada() {
   const emailRef = useRef();
@@ -33,6 +34,15 @@ export default function ContraseñaOlvidada() {
   }
 
   return (
-    <></>
+    <>
+      <FloatingLabel label='Email' className='mb-3'>
+        <Form.Control type='email' size='lg' placeholder='Email' ref={emailRef} />
+      </FloatingLabel>
+      <button
+        className="my-1 mx-4"
+        onClick={forgotPasswordHandler}>
+        {t("recuperar-contraseña")}
+      </button>
+    </>
   )
 }

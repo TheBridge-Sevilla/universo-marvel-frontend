@@ -6,7 +6,9 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useContextoUsuario } from '../../context/ContextoUsuario'
+import { useContextoUsuario } from '../../context/contextoUsuario'
+import { Button, FloatingLabel, Form } from 'react-bootstrap'
+import { Google } from 'react-bootstrap-icons'
 
 const Registrarse = () => {
   const emailRef = useRef()
@@ -60,45 +62,33 @@ const Registrarse = () => {
     const nombre = nombreRef.current.value
 
     if (!email || !contraseña || !nombre) {
+      console.log("submit funciona falta datos")
     }
     if (email && contraseña && nombre) {
       registrarUsuario(email, contraseña, nombre)
+      console.log("submit funciona")
     }
   }
 
   return (
-    {/* <div className="form flex flex-column">
-      <form
-        className="flex flex-column justify-content-center align-items-center"
-        onSubmit={onSubmit}
-      >
-        <h1 className="text-blue-600">crear cuenta</h1>
-        <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          placeholder="Email"
-          type="email"
-          ref={emailRef}
-        />
-        <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          placeholder="nombre"
-          type="name"
-          ref={nombreRef}
-        />
-        <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          type="password"
-          placeholder="contraseña"
-          onChange={(e) => setContraseña(e.target.value)}
-        />
-        <button className="my-2 font-bold" type="submit">
-          Registrarse
-        </button>
-      </form>
-      <button onClick={() => console.log(usuario)}>
-        mostrar nombre de usuario
-      </button>
-    </div> */}
+    <Form className='h-100 d-flex flex-column justify-content-center' onSubmit={onSubmit}>
+    <h2 className='mb-5'>Registrarse</h2>
+    <Form.Group >
+      <FloatingLabel label='Usuario' className='mb-3'>
+        <Form.Control type='text' size='lg' placeholder='Usuario' ref={nombreRef}/>
+      </FloatingLabel>
+      <FloatingLabel label='Email' className='mb-3'>
+        <Form.Control type='email' size='lg' placeholder='Email' ref={emailRef}/>
+      </FloatingLabel>
+      <FloatingLabel label='Contraseña' className='mb-3'>
+        <Form.Control type='password' size='lg' placeholder='Password' onChange={(e) => setContraseña(e.target.value)} />
+      </FloatingLabel>
+    <Button size='lg' className='w-100 mt-5' variant='danger' type="submit">
+      Crear Cuenta
+    </Button>
+    </Form.Group>
+
+  </Form>
   )
 }
 export default Registrarse

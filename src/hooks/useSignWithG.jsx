@@ -1,6 +1,6 @@
 import { signInWithPopup, GoogleAuthProvider, linkWithPopup } from "firebase/auth";
-import { auth } from "../firebase/firebase";
-import { useContextoUsuario } from "../context/ContextoUsuario"
+import { auth } from "../services/firebase/firebase";
+import { useContextoUsuario } from "../context/contextoUsuario"
 
 export function useSignWithG() {
     const { usuario, setUsuario } = useContextoUsuario();
