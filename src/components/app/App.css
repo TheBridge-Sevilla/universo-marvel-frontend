@@ -1,0 +1,17 @@
+.App {
+  color: var(--text);
+  background-color: var(--background);
+  height: 100%;
+  font-size: large;
+  font-weight: bold;
+  padding: 20px;
+  height: calc(100vh);
+  transition: all .5s;
+}
+button {
+  color: var(--text);
+  background-color: var(--background);
+  border: 2px var(--primary) solid;
+  float: right;
+  transition: all .5s;
+}
