@@ -1,4 +1,3 @@
-import './IniciarSesion.css'
 import { Button, FloatingLabel, Form } from 'react-bootstrap'
 import { Google } from 'react-bootstrap-icons'
 
