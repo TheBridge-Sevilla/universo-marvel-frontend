@@ -10,6 +10,8 @@ body{
     --valid: #3ccf4e;
     --invalid: #e30815;
     --accent : #e7e7e7;
+    --hover : #FBB6B5;
+    --box-shadow : inset 3.77687px 11.3306px 37.7687px rgba(151, 71, 255, 0.4);
 
   }
   [data-theme='dark'] {
