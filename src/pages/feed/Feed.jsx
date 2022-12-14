@@ -23,7 +23,7 @@ function Feed() {
           fluid
         >
           <Image
-            className='vw-5'
+            className='vw-6'
             src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
             alt={`${personaje.name} imagen`}
           />
