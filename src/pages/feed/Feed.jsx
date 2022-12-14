@@ -1,9 +1,9 @@
 import React from 'react'
 import { obtenerPersonajes } from '../../services/obtenerPersonaje'
 import { Container, Image, Button } from 'react-bootstrap'
-
+import PaginacionPersonajes from '../../components/PaginacionPersonajes'
 function Feed() {
-  const { personajesData, pagina, setPagina } = obtenerPersonajes()
+  const { personajesData, pagina, setPagina, paginacion } = obtenerPersonajes()
   const pasarPagina = e => {
     e.preventDefault()
     setPagina(pagina + 1)
@@ -11,6 +11,11 @@ function Feed() {
 
   return (
     <Container>
+      <PaginacionPersonajes 
+      paginacion={paginacion}
+      setPagina={setPagina}
+      pagina={pagina}
+      />
       {personajesData.map(personaje => (
         <Container
           key={personaje.Id}
