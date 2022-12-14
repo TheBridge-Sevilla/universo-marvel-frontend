@@ -1,48 +1,73 @@
-import React from 'react'
 import { obtenerPersonajes } from '../../services/obtenerPersonaje'
-import { Container, Image, Button } from 'react-bootstrap'
+import { Container, Image, Button, Form } from 'react-bootstrap'
 import PaginacionPersonajes from '../../components/PaginacionPersonajes'
-function Feed() {
-  const { personajesData, pagina, setPagina, paginacion } = obtenerPersonajes()
-  const pasarPagina = e => {
-    e.preventDefault()
-    setPagina(pagina + 1)
-  }
+import { React, useRef, useState, useEffect } from 'react'
+import Spinner from 'react-bootstrap/Spinner'
 
-  return (
-    <Container>
-      <PaginacionPersonajes 
-      paginacion={paginacion}
-      setPagina={setPagina}
-      pagina={pagina}
-      />
-      {personajesData.map(personaje => (
-        <Container
-          key={personaje.Id}
-          className='d-flex flex-column justify-content-center align-items-center'
-          fluid
-        >
-          <Image
-            className='vw-6'
-            src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-            alt={`${personaje.name} imagen`}
+function Feed() {
+  const [pagina, setPagina] = useState(1)
+  const [personajes, setPersonajes] = useState()
+  const [filtro, setFiltro] = useState('')
+
+  useEffect(() => {
+    console.log('filtro', filtro)
+    obtenerPersonajes(setPersonajes, pagina, filtro)
+  }, [pagina, filtro])
+
+  if (!personajes) {
+    //Componentizar?
+    return <Spinner animation='border' />
+  } else {
+    console.log('personajes', personajes)
+    return (
+      <Container>
+        <PaginacionPersonajes
+          personajes={personajes}
+          pagina={pagina}
+          setPagina={setPagina}
+        />
+        {/* Mejor en un componente */}
+        <Form className='h-100 d-flex flex-column justify-content-center'>
+          <Form.Control
+            type='text'
+            size='lg'
+            placeholder='Filtro'
+            onChange={event => {
+              setFiltro(event.target.value)
+              setPagina(1)
+            }}
           />
-          <h1>{personaje.name}</h1>
-          <Button
-            onClick={() =>
-              window.open(
-                personaje.urls.filter(obj => obj.type === 'detail')[0].url,
-                '_blank'
-              )
-            }
-          >
-            Ver personaje en Marvel
-          </Button>
+        </Form>
+
+        {/****************************/}
+        <Container className='d-flex justify-content-center align-items-center flex-column p-1'>
+          {personajes.docs.map(personaje => (
+            <Container
+              key={personaje.Id}
+              className='d-flex flex-column'
+            >
+              <Image
+                className='w-100'
+                src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+                alt={`${personaje.name} imagen`}
+              />
+              <h1>{personaje.name}</h1>
+              <Button
+                onClick={() =>
+                  window.open(
+                    personaje.urls.filter(obj => obj.type === 'detail')[0].url,
+                    '_blank'
+                  )
+                }
+              >
+                Ver personaje en Marvel
+              </Button>
+            </Container>
+          ))}
         </Container>
-      ))}
-      <Button onClick={pasarPagina}> Pasar pagina</Button>
-    </Container>
-  )
+      </Container>
+    )
+  }
 }
 
 export default Feed

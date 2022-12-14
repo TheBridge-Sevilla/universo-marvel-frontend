@@ -14,11 +14,11 @@ function PaginacionPersonajes(props) {
     props.setPagina(parseInt(e.target.textContent))
   }
   const paginaSiguiente = () => {
-    if (props.pagina < props.paginacion.totalPages) {
+    if (props.pagina < props.personajes.totalPages) {
       props.setPagina(props.pagina + 1)
     }
   }
-  const ultimaPagina = () => props.setPagina(props.paginacion.totalPages)
+  const ultimaPagina = () => props.setPagina(props.personajes.totalPages)
 
   //Creacion de etiquetas y condiciones para que sean visibles
   const etiquetaInicio =
@@ -50,7 +50,7 @@ function PaginacionPersonajes(props) {
     <Pagination.Item active>{props.pagina}</Pagination.Item>
   )
   const etiquetaNumSiguiente =
-    props.pagina <= props.paginacion.totalPages - 1 ? (
+    props.pagina <= props.personajes.totalPages - 1 ? (
       <Pagination.Item onClick={paginaNumerada}>
         {' '}
         {props.pagina + 1}{' '}
@@ -59,7 +59,7 @@ function PaginacionPersonajes(props) {
       ''
     )
   const etiquetaNumPosteriores =
-    props.pagina < props.paginacion.totalPages - 2 ? (
+    props.pagina < props.personajes.totalPages - 2 ? (
       <Pagination.Item onClick={paginaNumerada}>
         {' '}
         {props.pagina + 2}{' '}
@@ -68,41 +68,29 @@ function PaginacionPersonajes(props) {
       ''
     )
 
-  props.pagina != props.paginacion.totalPages - 2 ? (
+  props.pagina != props.personajes.totalPages - 2 ? (
     <Pagination.Next onClick={paginaSiguiente} />
   ) : (
     ''
   )
   const etiquetaPuntosFin =
-    props.pagina < props.paginacion.totalPages - 3 ? (
+    props.pagina < props.personajes.totalPages - 3 ? (
       <Pagination.Ellipsis />
     ) : (
       ''
     )
   const etiquetaSiguiente =
-    props.pagina < props.paginacion.totalPages - 2 ? (
+    props.pagina < props.personajes.totalPages - 2 ? (
       <Pagination.Next onClick={paginaSiguiente} />
     ) : (
       ''
     )
   const etiquetaFinal =
-    props.pagina != props.paginacion.totalPages ? (
+    props.pagina != props.personajes.totalPages ? (
       <Pagination.Last onClick={ultimaPagina} />
     ) : (
       ''
     )
-
-  /* 
-  Intento generear etiquetas numeradas fallido
-  let listaPaginas = [];
-  if (props.pagina>props.paginacion.totalPages-3)
-  for (let listado = 2; listado = -2; listado--) {
-    listaPaginas.push(
-      <Pagination.Item key={props.pagina - listado} active={props.pagina}>
-        {props.pagina - listado}
-      </Pagination.Item>,
-    );
-  }  */
 
   return (
     <Pagination>
