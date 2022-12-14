@@ -16,7 +16,7 @@ function Feed() {
 
   if (!personajes) {
     //Componentizar?
-    return <Spinner animation='border' />
+    return <span><Spinner animation='border' />Cargando personajes</span> 
   } else {
     console.log('personajes', personajes)
     return (
