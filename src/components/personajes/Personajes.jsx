@@ -50,7 +50,6 @@ function Personajes(props) {
           </Button> */}
           </Container>
         ))}
-        <Button onClick={pasarPagina}> Pasar pagina</Button>
       </Container>
     </Container>
   )

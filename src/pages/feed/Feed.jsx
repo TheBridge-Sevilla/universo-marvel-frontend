@@ -38,7 +38,7 @@ function Feed() {
             }}
           />
         </Form>
-        <Personajes personajes=personajes/>
+        <Personajes personajes={personajes}/>
       </Container>
     )
   }
