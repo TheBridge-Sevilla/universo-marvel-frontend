@@ -1,64 +1,47 @@
-import React from 'react'
-import './feed.css'
 import { obtenerPersonajes } from '../../services/obtenerPersonaje'
-import { Container, Image, Button } from 'react-bootstrap'
-import { AiFillStar } from 'react-icons/ai'
-import { BsArrowLeftShort } from 'react-icons/bs'
-import { FaRegUserCircle } from 'react-icons/fa'
+import { Container, Image, Button, Form } from 'react-bootstrap'
+import PaginacionPersonajes from '../../components/PaginacionPersonajes'
+import { React, useRef, useState, useEffect } from 'react'
+import Spinner from 'react-bootstrap/Spinner'
+import Personajes from '../../components/personajes/Personajes'
+
 
 function Feed() {
-  const { personajesData, pagina, setPagina } = obtenerPersonajes()
-  const pasarPagina = e => {
-    e.preventDefault()
-    setPagina(pagina + 1)
-  }
+  const [pagina, setPagina] = useState(1)
+  const [personajes, setPersonajes] = useState()
+  const [filtro, setFiltro] = useState('')
 
-  return (
-    <Container >
-      <div className='contenedor_iconos'>
-      <span className='span_izquierda'> <BsArrowLeftShort /></span>
-      <span className='span_derecha'> <FaRegUserCircle /></span>
-      </div>
-      <div className='contenedor_buscar'>
-        <input type="text" placeholder='Buscar...'/>
-      </div>
-      <Container className='d-flex  flex-wrap' >
+  useEffect(() => {
+    obtenerPersonajes(setPersonajes, pagina, filtro)
+  }, [pagina, filtro])
 
-        {personajesData.map(personaje => (
-          <Container id='contenedor_personaje'
-            key={personaje.Id}
-            className='d-flex flex-column justify-content-center text-white'
-          >
-            <Image
-              className=''
-              src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-              alt={`${personaje.name} imagen`}
-            />
-            <div>
-              <div className='contenedor_nombre'>
-                <p>{personaje.name}</p>
-              </div>
-              <div className='contenedor_valoracion'>
-                <p><span><AiFillStar /></span> 4.9</p>
-              </div>
-            </div>
-
-            {/*    <Button
-            onClick={() =>
-              window.open(
-                personaje.urls.filter(obj => obj.type === 'detail')[0].url,
-                '_blank'
-              )
-            }
-          >
-            Ver personaje en Marvel
-          </Button> */}
-          </Container>
-        ))}
-        <Button onClick={pasarPagina}> Pasar pagina</Button>
+  if (!personajes) {
+    //Componentizar?
+    return <span><Spinner animation='border' />Cargando personajes</span> 
+  } else {
+    return (
+      <Container>
+        <PaginacionPersonajes
+          personajes={personajes}
+          pagina={pagina}
+          setPagina={setPagina}
+        />
+        {/* Mejor en un componente */}
+        <Form className='h-100 d-flex flex-column justify-content-center'>
+          <Form.Control
+            type='text'
+            size='lg'
+            placeholder='Filtro'
+            onChange={event => {
+              setFiltro(event.target.value)
+              setPagina(1)
+            }}
+          />
+        </Form>
+        <Personajes personajes=personajes/>
       </Container>
-    </Container>
-  )
+    )
+  }
 }
 
 export default Feed
