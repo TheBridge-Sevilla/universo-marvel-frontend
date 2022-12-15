@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -8,14 +7,12 @@ import {
 import { auth } from './firebase'
 import { useTranslation } from 'react-i18next'
 import { useContextoUsuario } from '../../context/contextoUsuario'
+import { useContextoAlert } from './../../context/contextoAlert'
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
   const { t } = useTranslation()
+  const { setMensaje, setTipo } = useContextoAlert()
   const { usuario, setUsuario } = useContextoUsuario()
-  // eslint-disable-next-line no-unused-vars
-  const [mensaje, setMensaje] = useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [tipo, setTipo] = useState('')
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
