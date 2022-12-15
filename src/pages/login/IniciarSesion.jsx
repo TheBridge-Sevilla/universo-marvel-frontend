@@ -3,15 +3,9 @@ import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import ContraseñaOlvidada from "../../services/firebase/contraseñaOlvidada"
 
-
-
 function IniciarSesion() {
   const emailRef = useRef();
   const contraseñaRef = useRef();
-
-/*   const {
-    setUsuario
-  } = useContextoUsuario(); */
 
   const iniciarSesion = (email, contraseña,) => {
     signInWithEmailAndPassword(auth, email, contraseña).then(() => {
