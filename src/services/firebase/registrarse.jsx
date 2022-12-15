@@ -1,4 +1,4 @@
-import { React, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -18,7 +18,7 @@ const Registrarse = () => {
     if (usuario == 'invitado') {
       const credential = EmailAuthProvider.credential(email, contraseña)
       linkWithCredential(auth.currentUser, credential)
-        .then((usercred) => {
+        .then(usercred => {
           const user = usercred.user
           setUsuario(nombre)
           console.log('Anonymous account successfully upgraded', user)
@@ -28,7 +28,7 @@ const Registrarse = () => {
             displayName: nombre,
           })
         })
-        .catch((error) => {
+        .catch(error => {
           console.log('Error upgrading anonymous account', error)
         })
     } else {
@@ -38,7 +38,7 @@ const Registrarse = () => {
             displayName: nombre,
           })
         })
-        .catch((e) => {
+        .catch(e => {
           if (e.code == 'auth/email-already-in-use') {
             setMensaje(t('email-registrado'))
             setTipo('error')
@@ -67,38 +67,38 @@ const Registrarse = () => {
   }
 
   return (
-    {/* <div className="form flex flex-column">
+    <div className='form flex flex-column'>
       <form
-        className="flex flex-column justify-content-center align-items-center"
+        className='flex flex-column justify-content-center align-items-center'
         onSubmit={onSubmit}
       >
-        <h1 className="text-blue-600">crear cuenta</h1>
+        <h1 className='text-blue-600'>crear cuenta</h1>
         <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          placeholder="Email"
-          type="email"
+          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
+          placeholder='Email'
+          type='email'
           ref={emailRef}
         />
         <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          placeholder="nombre"
-          type="name"
+          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
+          placeholder='nombre'
+          type='name'
           ref={nombreRef}
         />
         <input
-          className="my-1 w-11 md:w-9 lg:w-6 lg:my-2"
-          type="password"
-          placeholder="contraseña"
-          onChange={(e) => setContraseña(e.target.value)}
+          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
+          type='password'
+          placeholder='contraseña'
+          onChange={e => setContraseña(e.target.value)}
         />
-        <button className="my-2 font-bold" type="submit">
+        <button className='my-2 font-bold' type='submit'>
           Registrarse
         </button>
       </form>
       <button onClick={() => console.log(usuario)}>
         mostrar nombre de usuario
       </button>
-    </div> */}
+    </div>
   )
 }
 export default Registrarse
