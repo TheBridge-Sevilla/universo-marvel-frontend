@@ -16,7 +16,7 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-    <NuevoUsuario />
+    <IniciarSesion />
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
