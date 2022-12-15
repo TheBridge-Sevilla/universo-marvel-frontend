@@ -9,16 +9,16 @@ import {
 import { useTranslation } from 'react-i18next'
 import { Container } from 'react-bootstrap'
 import { useSignWithG } from './../../hooks/useSignWithG'
-import { iniciarSesionAnonima } from '../../services/firebase/iniciarSesionAnonima'
+import { sesionInvitado } from '../../services/firebase/sesionInvitada'
 
 function IniciarSesion() {
   const { t } = useTranslation()
   const { iniciarSesionConG } = useSignWithG()
-  const { inicioAnonimo } = iniciarSesionAnonima()
+  const { inicioAnonimo } = sesionInvitado()
 
   return (
-    <Container className='h-100' fluid>
-      <h1 className='mb-5'>{t('iniciar-sesion')}</h1>
+    <Container className='h-100 d-flex flex-column justify-content-center' fluid>
+      <h1 className='my-5'>{t('iniciar-sesion')}</h1>
       <FormGroup className='mt-5 mx-5 d-flex flex-column justify-content-center'>
         <TextField
           name='nombre'
@@ -36,11 +36,11 @@ function IniciarSesion() {
           <FormControlLabel control={<Checkbox />} label={t('recordar')} />
           <a>{t('contraseña-olvidada')}</a>
         </Container>
-        <Button className='mb-5' size='large'>
+        <Button className='mb-3' size='large'>
           {t('continuar')}
         </Button>
       </FormGroup>
-      <Container className='d-flex justify-content-center my-5'>
+      <Container className='d-flex justify-content-center mt-5'>
         <Google
           size={40}
           className='zoom-animation mx-4'
