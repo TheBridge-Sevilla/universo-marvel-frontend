@@ -1,34 +1,54 @@
-import { Button, FloatingLabel, Form } from 'react-bootstrap'
-import { Google } from 'react-bootstrap-icons'
-import TextField from '@mui/material/TextField'
+import { DoorOpen, Google } from 'react-bootstrap-icons'
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  TextField,
+} from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { Container } from 'react-bootstrap'
 
 function IniciarSesion() {
+  const { t } = useTranslation()
+
   return (
-    <Form className='h-100 d-flex flex-column justify-content-center'>
-      <h2 className='mb-5'>Iniciar sesion</h2>
-      <Form.Group>
-        <TextField label='ejemplo' focused color='primary' />
-      </Form.Group>
-      <Form.Group className='d-flex justify-content-between mt-3'>
-        <Form.Check type='checkbox' id='remember-me' label='recuerdame' />
-        <a id='forgot-password'>Contraseña olvidada?</a>
-      </Form.Group>
-      <Button size='lg' className='w-100 mt-5' variant='danger'>
-        Continuar
-      </Button>
-      <Form.Group className='d-flex flex-column justify-content-center align-items-center mt-5'>
-        <Google
-          size={40}
-          className='d-flex justify-content-center align-items-center mb-5'
-          id='google-icon'
+    <Container
+      className='h-100 d-flex flex-column justify-content-center'
+      fluid
+    >
+      <h1 className='mb-5'>{t('iniciar-sesion')}</h1>
+      <FormGroup className='mt-5 mx-5'>
+        <TextField
+          name='nombre'
+          label={t('nombre')}
+          type='text'
+          className='mb-4'
+          focused
         />
-        <a>
-          <h4>
-            <u>Crear cuenta</u>
-          </h4>
-        </a>
-      </Form.Group>
-    </Form>
+        <TextField
+          name='contraseña'
+          label={t('contraseña')}
+          type='password'
+          className='mb-2'
+          focused
+        />
+        <Container className='d-flex justify-content-between align-items-center mb-5'>
+          <FormControlLabel control={<Checkbox />} label={t('recordar')} />
+          <a>{t('contraseña-olvidada')}</a>
+        </Container>
+        <Button className='mb-5' size='large'>
+          {t('continuar')}
+        </Button>
+      </FormGroup>
+      <Container className='d-flex justify-content-center my-5'>
+        <Google size={40} className='zoom-animation mx-4' />
+        <DoorOpen size={40} className='zoom-animation mx-4' />
+      </Container>
+      <h5 className='mt-5'>
+        <u>{t('crear-cuenta')}</u>
+      </h5>
+    </Container>
   )
 }
 

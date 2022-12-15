@@ -1,1 +1,10 @@
-{}
+{
+    "iniciar-sesion": "Iniciar sesión",
+    "contraseña-olvidada" : "¿Contraseña olvidada?",
+    "continuar":"Continuar",
+    "crear-cuenta":"Crear cuenta",
+    "recordar":"Recuérdame"
+
+
+
+}
