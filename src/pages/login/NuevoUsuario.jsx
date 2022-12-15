@@ -9,53 +9,50 @@ function NuevoUsuario() {
   const { iniciarSesionConG } = useSignWithG()
 
   return (
-    <Container
-      className='h-100 d-flex flex-column justify-content-center'
-      fluid
-    >
-      <h1>{t('registro')}</h1>
-      <FormGroup className='mx-4'>
+    <Container fluid>
+      <h1 className='text-left' >{t('registro')}</h1>
+      <FormGroup className='d-flex flex-column justify-content-center mx-4'>
         <TextField
           name='usuario'
           label={t('usuario')}
           type='text'
-          className='my-4'
+          className='my-3'
           focused
         />
         <TextField
           name='nombre'
           label={t('nombre')}
           type='text'
-          className='my-4'
+          className='my-3'
           focused
         />
         <TextField
           name='apellidos'
           label={t('apellidos')}
           type='text'
-          className='my-4'
+          className='my-3'
           focused
         />
         <TextField
           name='email'
           label={t('apellidos')}
           type='email'
-          className='my-4'
+          className='my-3'
           focused
         />
         <TextField
           name='contraseña'
           label={t('contraseña')}
           type='password'
-          className='my-4'
+          className='my-3'
           focused
         />
-        <Button className='my-5' size='large'>
+        <Button className='my-4' size='large'>
           {t('crear-cuenta')}
         </Button>
       </FormGroup>
       <FormGroup className='d-flex flex-column justify-content-center align-items-center'>
-        <p className='mb-5'>o</p>
+        <p className='mb-4'>o</p>
         <Google
           size={50}
           className='zoom-animation mx-4'

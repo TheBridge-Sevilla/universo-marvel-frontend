@@ -86,7 +86,7 @@ button,
 .MuiTypography-root,
 .MuiFormLabel-root {
   font-weight: bold !important;
-  letter-spacing: 2%;
+  letter-spacing: 2% !important;
 
 }
 
@@ -142,4 +142,8 @@ p {
   font-weight: normal;
   font-size: 10px;
   letter-spacing: 2%;
+}
+
+.text-left {
+  text-align: left !important;
 }
