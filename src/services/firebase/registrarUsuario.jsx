@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   createUserWithEmailAndPassword,
   updateProfile,
@@ -6,13 +6,16 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useContextoUsuario } from '../../context/ContextoUsuario'
+import { useTranslation } from 'react-i18next'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
-const Registrarse = () => {
-  const emailRef = useRef()
-  const nombreRef = useRef()
-  const [contraseña, setContraseña] = useState()
+export const RegistrarUsuario = (nombre, email, contraseña) => {
+  const { t } = useTranslation()
   const { usuario, setUsuario } = useContextoUsuario()
+  // eslint-disable-next-line no-unused-vars
+  const [mensaje, setMensaje] = useState('')
+  // eslint-disable-next-line no-unused-vars
+  const [tipo, setTipo] = useState('')
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -50,55 +53,17 @@ const Registrarse = () => {
         })
         .then(() => {
           setUsuario(auth.currentUser.displayName)
+          console.log(auth.currentUser)
         })
     }
   }
 
   async function onSubmit(e) {
     e.preventDefault()
-    const email = emailRef.current.value
-    const nombre = nombreRef.current.value
-
-    if (!email || !contraseña || !nombre) {
-    }
     if (email && contraseña && nombre) {
       registrarUsuario(email, contraseña, nombre)
     }
   }
 
-  return (
-    <div className='form flex flex-column'>
-      <form
-        className='flex flex-column justify-content-center align-items-center'
-        onSubmit={onSubmit}
-      >
-        <h1 className='text-blue-600'>crear cuenta</h1>
-        <input
-          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
-          placeholder='Email'
-          type='email'
-          ref={emailRef}
-        />
-        <input
-          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
-          placeholder='nombre'
-          type='name'
-          ref={nombreRef}
-        />
-        <input
-          className='my-1 w-11 md:w-9 lg:w-6 lg:my-2'
-          type='password'
-          placeholder='contraseña'
-          onChange={e => setContraseña(e.target.value)}
-        />
-        <button className='my-2 font-bold' type='submit'>
-          Registrarse
-        </button>
-      </form>
-      <button onClick={() => console.log(usuario)}>
-        mostrar nombre de usuario
-      </button>
-    </div>
-  )
+  return { onSubmit }
 }
-export default Registrarse
