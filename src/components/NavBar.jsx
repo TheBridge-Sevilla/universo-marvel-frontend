@@ -36,7 +36,7 @@ export default function NavBar() {
             setValue(newValue)
           }}
         >
-          <BottomNavigationAction label='Home' icon={<RoofingIcon />} sx={{ display: 'none' }}/>
+          <BottomNavigationAction label='Loading' icon={<RoofingIcon />} sx={{ display: 'none' }}/>
           <BottomNavigationAction label='Home' icon={<RoofingIcon />} />
           <BottomNavigationAction label='Personaje' icon={iconoPersonaje3} />
           <BottomNavigationAction label='Setting' icon={<SettingsIcon />} />
