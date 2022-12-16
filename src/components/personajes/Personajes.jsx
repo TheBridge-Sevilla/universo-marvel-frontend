@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './personajes.css'
 import { obtenerPersonajes } from '../../services/obtenerPersonaje'
-import { Container, Image, Button } from 'react-bootstrap'
+import { Container, Image, Button, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import { BsArrowLeftShort } from 'react-icons/bs'
 import { FaRegUserCircle } from 'react-icons/fa'
@@ -15,23 +15,28 @@ const style = {
   padding: 8,
 }
 
-function Personajes(props) {
+function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [pagina, setPagina] = useState(1)
+  const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
+  const [filtro, setFiltro] = useState('')
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL
-      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
-      }&filter=${props.filtro}`
+    const url = `${
+      import.meta.env.VITE_BASE_URL
+    }/personajes?page=${pagina}&limit=${
+      import.meta.env.VITE_PAGINATION_LIMIT
+    }&filter=${filtro}`
     fetch(url)
       .then(data => data.json())
       .then(json => setPersonajes(json))
     setPagina(1)
-  }, [props.filtro])
+  }, [filtro])
 
   function siguientePaginaPersonajes() {
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
-      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${props.filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
+      pagina + 1
+    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
 
     setPagina(pagina + 1)
     fetch(url)
@@ -42,6 +47,9 @@ function Personajes(props) {
         nuevosPersonajes.docs = personajes.docs.concat(json.docs)
         setPersonajes(nuevosPersonajes)
       })
+  }
+  if (personajeSeleccionado) {
+    return <div>{personajeSeleccionado.name}</div>
   }
 
   if (!personajes) {
@@ -54,45 +62,61 @@ function Personajes(props) {
     )
   } else {
     return (
-      <InfiniteScroll className="contenedor_scroll d-flex flex-wrap mt-4"
-        dataLength={personajes.docs.length}
-        hasMore={pagina < personajes.totalPages}
-        next={siguientePaginaPersonajes}
-        loader={
-          <span>
-            <Spinner animation='border' />
-            Cargando personajes
-          </span>
-        }
-      >
-        {personajes.docs.map(personaje => (
-          <Container
-            id='contenedor_personaje'
-            key={personaje.Id}
-            className='d-flex flex-column justify-content-center text-white'
-          >
-            <Image
-              className=''
-              src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-              alt={`${personaje.name} imagen`}
-            />
-            <div>
-              <div className='contenedor_nombre'>
-                <p>{personaje.name}</p>
+      <>
+        {' '}
+        <Form className='h-100 d-flex flex-column justify-content-center'>
+          <Form.Control
+            type='text'
+            size='lg'
+            placeholder='Filtro'
+            onChange={event => {
+              setFiltro(event.target.value)
+            }}
+          />
+        </Form>
+        <InfiniteScroll
+          className='contenedor_scroll d-flex flex-wrap mt-4'
+          dataLength={personajes.docs.length}
+          hasMore={pagina < personajes.totalPages}
+          next={siguientePaginaPersonajes}
+          loader={
+            <span>
+              <Spinner animation='border' />
+              Cargando personajes
+            </span>
+          }
+        >
+          {personajes.docs.map((personaje, i) => (
+            <Container
+              id='contenedor_personaje'
+              className='d-flex flex-column justify-content-center text-white'
+              key={i}
+              onClick={() => {
+                setPersonajeSeleccionado(personaje)
+              }}
+            >
+              <Image
+                className=''
+                src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+                alt={`${personaje.name} imagen`}
+              />
+              <div>
+                <div className='contenedor_nombre'>
+                  <p>{personaje.name}</p>
+                </div>
+                <div className='contenedor_valoracion'>
+                  <p>
+                    <span>
+                      <AiFillStar />
+                    </span>{' '}
+                    4.9
+                  </p>
+                </div>
               </div>
-              <div className='contenedor_valoracion'>
-                <p>
-                  <span>
-                    <AiFillStar />
-                  </span>{' '}
-                  4.9
-                </p>
-              </div>
-            </div>
-          </Container>
-        ))}
-      </InfiniteScroll>
-
+            </Container>
+          ))}
+        </InfiniteScroll>
+      </>
     )
   }
 }
