@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import useLocalStorage from 'use-local-storage'
 import IniciarSesion from './pages/login/IniciarSesion'
 import Intro from './pages/intro/Intro'
-import Feed from './pages/feed/Feed'
+import Personajes from './components/personajes/Personajes'
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const [theme, setTheme] = useLocalStorage(
@@ -17,8 +17,8 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-    <IniciarSesion />
-    <Feed/>
+    {/* <IniciarSesion /> */}
+    <Personajes/>
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
