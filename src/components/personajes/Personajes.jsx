@@ -7,6 +7,7 @@ import { BsArrowLeftShort } from 'react-icons/bs'
 import { FaRegUserCircle } from 'react-icons/fa'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Personaje from '../personaje/Personaje'
 
 const style = {
   height: 30,
@@ -49,7 +50,7 @@ function Personajes() {
       })
   }
   if (personajeSeleccionado) {
-    return <div>{personajeSeleccionado.name}</div>
+    return <Personaje personaje={personajeSeleccionado}   />
   }
 
   if (!personajes) {
