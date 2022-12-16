@@ -73,7 +73,13 @@ Ejemplo de para una URL de backend:
 
 ### Información.
 
- Extraida de la APi [Universo Marvel](https://developer.marvel.com/).<img align="center" src="https://cdn.icon-icons.com/icons2/2845/PNG/512/marvel_logo_icon_181411.png" width="100" alt="Marvel"> 
+ Extraida de la APi [Universo Marvel](https://developer.marvel.com/).<img align="center" src="https://cdn.icon-icons.com/icons2/2845/PNG/512/marvel_logo_icon_181411.png" width="100" alt="Api Marvel"> 
 
 ### Traducciones.
-Traducciones realizadas a través de [DeepL](https://www.deepl.com/es/translator).<img align="center" src="https://upload.wikimedia.org/wikipedia/commons/e/ed/DeepL_logo.svg" width="100" alt="Marvel">
+Traducciones realizadas a través de [DeepL](https://www.deepl.com/es/translator).<img align="center" src="https://upload.wikimedia.org/wikipedia/commons/e/ed/DeepL_logo.svg" width="100" alt="Traductor DeepL">
+
+### Estilos.
+Componentes y diseños utilizando [Bootstrap](https://react-bootstrap.github.io/).<img align="center" src="https://i.imgur.com/DRUiMyM.png" width="100" alt="Bootstrap">
+
+
+Interfaz de usuario desarrollado con [Material-UI](https://mui.com/).<img align="center" src="https://mui.com/static/logo.png" width="50" alt="Bootstrap">
