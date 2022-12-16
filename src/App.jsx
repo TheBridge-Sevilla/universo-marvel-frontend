@@ -5,6 +5,8 @@ import FormularioRegistro from './pages/login/FormularioRegistro'
 import Inicio from './pages/intro/Inicio'
 import { useContextoUsuario } from './context/contextoUsuario'
 import Feed from './pages/feed/Feed'
+//import IniciarSesion from './pages/login/IniciarSesion'
+import NavBar from './components/NavBar'
 
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -23,8 +25,7 @@ function App() {
       {usuario ? <Feed/> :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
-    
-
+      <NavBar />
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
