@@ -3,8 +3,7 @@ import IniciarSesion from '../pages/login/IniciarSesion'
 import Intro from '../pages/intro/Intro'
 
 export default function Mapa(props) {
-
-  switch (props.value) {
+  switch (Object.values(props)[0]) {
     case 1:
       return <IniciarSesion />
     case 2:
