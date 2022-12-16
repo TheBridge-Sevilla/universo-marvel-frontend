@@ -94,6 +94,7 @@ button {
   background-color: var(--primary) !important;
   color: var(--secondary) !important;
   height: 3.2em !important;
+
 }
 
 button:hover {

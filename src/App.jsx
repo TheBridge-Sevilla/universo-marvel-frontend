@@ -1,11 +1,14 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import useLocalStorage from 'use-local-storage'
-import IniciarSesion from './pages/login/IniciarSesion'
-import NuevoUsuario from './pages/login/NuevoUsuario'
 import FormularioRegistro from './pages/login/FormularioRegistro'
+import Inicio from './pages/intro/Inicio'
+import { useContextoUsuario } from './context/contextoUsuario'
+import Feed from './pages/feed/Feed'
+
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const {usuario,pantalla} = useContextoUsuario()
   const [theme, setTheme] = useLocalStorage(
     'theme',
     defaultDark ? 'dark' : 'light'
@@ -17,7 +20,11 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-    <FormularioRegistro />
+      {usuario ? <Feed/> :<></>}
+      {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
+      {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
+    
+
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )

@@ -2,7 +2,7 @@ import { signInAnonymously } from 'firebase/auth'
 import { auth } from './firebase'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 
-export function sesionInvitado() {
+export default function sesionInvitado() {
   const { setUsuario } = useContextoUsuario()
 
   const inicioAnonimo = () => {
