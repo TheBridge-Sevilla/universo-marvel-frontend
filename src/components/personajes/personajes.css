@@ -10,6 +10,7 @@
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
+    
 }
 
 img {
@@ -29,6 +30,7 @@ img {
     width: 70%;
     height: 10px;
 }
+
 
 .contenedor_valoracion p {
     float: right;
@@ -78,3 +80,8 @@ img {
     width: 20%;
 
 }
+@media (min-width: 450px){
+    #contenedor_personaje{
+      height: auto;
+    }
+  }
