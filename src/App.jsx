@@ -10,7 +10,7 @@ import NavBar from './components/NavBar'
 
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const {usuario,pantalla} = useContextoUsuario()
+  const {usuario,pantalla, setPantalla} = useContextoUsuario()
   const [theme, setTheme] = useLocalStorage(
     'theme',
     defaultDark ? 'dark' : 'light'
@@ -22,7 +22,7 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-      {usuario ? <Feed/> :<></>}
+      {usuario ? setPantalla(2) :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
       <NavBar />

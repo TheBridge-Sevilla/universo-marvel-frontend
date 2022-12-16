@@ -1,39 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import RoofingIcon from '@mui/icons-material/Roofing'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Mapa from './Mapa'
+import { useContextoUsuario } from '../context/contextoUsuario'
 
 let iconoPersonaje3 = <img src='../../public/personaje_icon.png' width='25px' height='25px'></img>
 
+
 export default function NavBar() {
-  const [value, setValue] = React.useState()
 
-  const iconosNavegacion = () => (value? '' : 'none')
+  const {pantalla, setPantalla} = useContextoUsuario()
+  //const [value, setValue] = useState()
+ 
 
-  if (!value) {
+  const iconosNavegacion = () => (typeof(pantalla) == "number"? '' : 'none')
+
+  if (!pantalla) {
     setTimeout(() => {
-      setValue(1)
+      setPantalla('inicio')
     }, '2000')
   }
 
   useEffect(() => {
-    setValue(value)
-  }, [value])
+    setPantalla(pantalla)
+
+    console.log("pantalla",pantalla)
+  }, [pantalla])
 
   return (
     <div>
-      <Mapa value={value} />
+      <Mapa/>
       <Box
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: iconosNavegacion }}
       >
         <BottomNavigation
           showLabels
-          value={value}
+          value={pantalla}
           onChange={(event, newValue) => {
-            setValue(newValue)
+            setPantalla(newValue)
           }}
         >
           <BottomNavigationAction label='Loading' icon={<RoofingIcon />} sx={{ display: 'none' }}/>

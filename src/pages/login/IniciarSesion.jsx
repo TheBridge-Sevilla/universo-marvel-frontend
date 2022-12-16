@@ -12,7 +12,7 @@ import { useSignWithG } from './../../hooks/useSignWithG'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useState } from 'react'
 import { IniciarSesion } from '../../services/firebase/iniciarUsuario'
-
+  
 function IniciarSesionEmail() {
   const { t } = useTranslation()
   const { usuario,setOlvidarContraseña } = useContextoUsuario()
@@ -20,9 +20,6 @@ function IniciarSesionEmail() {
   const [email, setEmail] = useState('')
   const [contraseña, setContraseña] = useState('')
   const { onSubmit } = IniciarSesion(email, contraseña)
-  
-import { Button, FloatingLabel, Form } from 'react-bootstrap'
-import { Google } from 'react-bootstrap-icons'
 
 
   return (
