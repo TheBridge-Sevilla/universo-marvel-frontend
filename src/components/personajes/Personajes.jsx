@@ -20,11 +20,9 @@ function Personajes(props) {
   const [pagina, setPagina] = useState(1)
 
   useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_BASE_URL
-    }/personajes?page=${pagina}&limit=${
-      import.meta.env.VITE_PAGINATION_LIMIT
-    }&filter=${props.filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL
+      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
+      }&filter=${props.filtro}`
     fetch(url)
       .then(data => data.json())
       .then(json => setPersonajes(json))
@@ -32,9 +30,8 @@ function Personajes(props) {
   }, [props.filtro])
 
   function siguientePaginaPersonajes() {
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
-      pagina + 1
-    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${props.filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
+      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${props.filtro}`
 
     setPagina(pagina + 1)
     fetch(url)
@@ -57,45 +54,45 @@ function Personajes(props) {
     )
   } else {
     return (
-        <InfiniteScroll
-          dataLength={personajes.docs.length}
-          hasMore={pagina < personajes.totalPages}
-          next={siguientePaginaPersonajes}
-          loader={
-            <span>
-              <Spinner animation='border' />
-              Cargando personajes
-            </span>
-          }
-        >
-          {personajes.docs.map(personaje => (
-            <Container
-              id='contenedor_personaje'
-              key={personaje.Id}
-              className='d-flex flex-column justify-content-center text-white'
-            >
-              <Image
-                className=''
-                src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-                alt={`${personaje.name} imagen`}
-              />
-              <div>
-                <div className='contenedor_nombre'>
-                  <p>{personaje.name}</p>
-                </div>
-                <div className='contenedor_valoracion'>
-                  <p>
-                    <span>
-                      <AiFillStar />
-                    </span>{' '}
-                    4.9
-                  </p>
-                </div>
+      <InfiniteScroll className="contenedor_scroll d-flex flex-wrap mt-4"
+        dataLength={personajes.docs.length}
+        hasMore={pagina < personajes.totalPages}
+        next={siguientePaginaPersonajes}
+        loader={
+          <span>
+            <Spinner animation='border' />
+            Cargando personajes
+          </span>
+        }
+      >
+        {personajes.docs.map(personaje => (
+          <Container
+            id='contenedor_personaje'
+            key={personaje.Id}
+            className='d-flex flex-column justify-content-center text-white'
+          >
+            <Image
+              className=''
+              src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+              alt={`${personaje.name} imagen`}
+            />
+            <div>
+              <div className='contenedor_nombre'>
+                <p>{personaje.name}</p>
               </div>
-            </Container>
-          ))}
-        </InfiniteScroll>
-        
+              <div className='contenedor_valoracion'>
+                <p>
+                  <span>
+                    <AiFillStar />
+                  </span>{' '}
+                  4.9
+                </p>
+              </div>
+            </div>
+          </Container>
+        ))}
+      </InfiniteScroll>
+
     )
   }
 }
