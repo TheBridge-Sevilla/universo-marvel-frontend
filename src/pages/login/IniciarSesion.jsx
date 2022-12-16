@@ -1,6 +1,6 @@
 import { DoorOpen, Google } from 'react-bootstrap-icons'
 import {
-  Button,
+  // Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
@@ -12,6 +12,7 @@ import { useSignWithG } from './../../hooks/useSignWithG'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useState } from 'react'
 import { IniciarSesion } from '../../services/firebase/iniciarUsuario'
+import { Button } from 'react-bootstrap'
 
 function IniciarSesionEmail() {
   const { t } = useTranslation()
@@ -21,8 +22,7 @@ function IniciarSesionEmail() {
   const [contraseña, setContraseña] = useState('')
   const { onSubmit } = IniciarSesion(email, contraseña)
   
-import { Button, FloatingLabel, Form } from 'react-bootstrap'
-import { Google } from 'react-bootstrap-icons'
+
 
 
   return (
