@@ -147,3 +147,12 @@ p {
 .text-left {
   text-align: left !important;
 }
+.text-right{
+  text-align: right !important;
+}
+.no-underline{
+  text-decoration: none;
+}
+.pointer{
+  cursor: pointer;
+}

@@ -6,10 +6,13 @@ export const useContextoUsuario = () => useContext(ContextoUsuario)
 
 export const ContextoUsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState('')
+  const [olvidarContraseña, setOlvidarContraseña]=useState(false)
 
   const contextValue = {
     usuario,
     setUsuario,
+    olvidarContraseña,
+    setOlvidarContraseña
   }
 
   return (
