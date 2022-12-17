@@ -25,7 +25,8 @@ function App() {
       {usuario ? setPantalla('home') :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
-      <NavBar />
+      <NavBar /> */}
+      <Inicio/>
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
