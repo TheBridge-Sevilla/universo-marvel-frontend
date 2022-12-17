@@ -22,7 +22,7 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-      {usuario ? setPantalla(2) :<></>}
+      {usuario ? setPantalla('home') :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
       <NavBar />
