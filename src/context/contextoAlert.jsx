@@ -5,14 +5,15 @@ const ContextoAlert = createContext({})
 export const useContextoAlert = () => useContext(ContextoAlert)
 
 export const ContextoAlertProvider = ({ children }) => {
-  const [mensaje, setMensaje] = useState('')
-  const [tipo, setTipo] = useState('')
+  const [alert, setAlert] = useState({
+    mensaje: undefined,
+    open: false,
+    tipo: 'info',
+  })
 
   const contextValue = {
-    mensaje,
-    setMensaje,
-    tipo,
-    setTipo,
+    alert,
+    setAlert,
   }
 
   return (

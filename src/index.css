@@ -57,9 +57,9 @@ input {
   color: var(--secondary) !important;
 }
 
-.MuiSvgIcon-root {
+/* .MuiSvgIcon-root {
   color: var(--primary);
-}
+} */
 
 .MuiFormControlLabel-root {
   color: var(--secondary);

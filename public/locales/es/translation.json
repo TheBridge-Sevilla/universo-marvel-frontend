@@ -3,8 +3,11 @@
     "contraseña-olvidada" : "¿Contraseña olvidada?",
     "continuar":"Continuar",
     "crear-cuenta":"Crear cuenta",
-    "recordar":"Recuérdame"
-
+    "recordar":"Recuérdame",
+    "registro": "Registro",
+    "usuario": "Usuario",
+    "email": "Correo",
+    "contraseña":"Contraseña"
 
 
 }

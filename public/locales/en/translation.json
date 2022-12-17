@@ -3,6 +3,10 @@
     "contraseña-olvidada" : "Forgotten password?",
     "continuar":"Continue",
     "crear-cuenta":"Create account",
-    "recordar":"Remember me"
+    "recordar":"Remember me",
+    "registro": "Sign in",
+    "usuario": "User",
+    "email": "Email",
+    "contraseña":"Password"
     
 }

@@ -5,14 +5,12 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
-import { useTranslation } from 'react-i18next'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useContextoAlert } from './../../context/contextoAlert'
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
-  const { t } = useTranslation()
-  const { setMensaje, setTipo } = useContextoAlert()
   const { usuario, setUsuario } = useContextoUsuario()
+  const { setAlert } = useContextoAlert()
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -39,18 +37,8 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
           })
         })
         .catch(e => {
-          if (e.code == 'auth/email-already-in-use') {
-            setMensaje(t('email-registrado'))
-            setTipo('error')
-          }
-          if (e.code == 'auth/weak-password') {
-            setMensaje(t('contraseña-corta'))
-            setTipo('error')
-          }
-        })
-        .then(() => {
-          setUsuario(auth.currentUser.displayName)
-          console.log(auth.currentUser)
+          console.log(e.message)
+          setAlert({ mensaje: e.message, open: true, tipo: 'error' })
         })
     }
   }
