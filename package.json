@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
+    "postinstall": "npm run build",
+    "serve-heroku": "vite --host 0.0.0.0 --port $PORT preview",
     "preview": "vite preview",
     "format": "prettier --write .",
     "lint": "eslint --fix . --ext .js,.jsx"
