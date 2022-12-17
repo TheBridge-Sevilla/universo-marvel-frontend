@@ -5,8 +5,8 @@
     height: 230px;
     border-radius: 40px;
     border: solid 0.1rem;
-    border-color: #48405c48;
-    background: #27213857;
+    border-color: var(--border-personajes);
+    background: var(--background-personajes);
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
@@ -41,7 +41,7 @@
 }
 
 .contenedor_valoracion p span {
-    color: yellow;
+    color: var(--valoracion);
 }
 
 .contenedor_buscar {
@@ -52,8 +52,8 @@
 
 .contenedor_buscar input {
     background: none;
-    border-color: #FF0100;
-    color: #FF0100;
+    border-color: var(--primary);
+    color: var(--primary);
     border-radius: 10px;
     width: 90%;
     height: 40px;
@@ -63,7 +63,7 @@
 
 .contenedor_iconos {
 
-    color: white;
+    color: var(--secondary);
     padding-bottom: 4rem;
 }
 
