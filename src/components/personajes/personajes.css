@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
-#contenedor_personaje {
+#contenedor_personajes {
     width: 48%;
     height: 230px;
     border-radius: 40px;
@@ -13,7 +13,7 @@
     
 }
 
-img {
+.imagen_personajes {
     width: 100%;
     height: 65%;
     border-radius: 30px;
