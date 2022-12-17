@@ -1,4 +1,4 @@
-import Feed from '../pages/feed/Feed'
+import Personajes from '../components/personajes/Personajes'
 import IniciarSesion from '../pages/login/IniciarSesion'
 import Intro from '../pages/intro/Intro'
 //import Inicio from '../pages/intro/Inicio'
@@ -14,7 +14,7 @@ export default function Mapa() {
     case 1:
       return <IniciarSesion />
     case 2:
-      return<Feed />
+      return<Personajes />
     case 3:
        return <FormularioRegistro />
     default:

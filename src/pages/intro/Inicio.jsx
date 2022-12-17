@@ -13,7 +13,7 @@ const Inicio = () => {
             className='h-100 d-flex flex-column justify-content-around align-items-center m'
             fluid
         >
-            <Image src='unio-icon.svg' alt='unio-icon' className='m-5 ' fluid />
+            {/* <Image src='unio-icon.svg' alt='unio-icon' className='m-5 ' fluid /> */}
             <Container className='d-flex flex-column  justify-content-flex-end m-5'>
 
                 <Button className='mb-5' size='large' onClick={()=>setPantalla('formulario')}>
