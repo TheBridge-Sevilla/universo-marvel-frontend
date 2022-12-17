@@ -4,10 +4,8 @@
     "continuar":"Continuar",
     "crear-cuenta":"Crear cuenta",
     "recordar":"Recuérdame",
-    "registro": "Registro",
     "usuario": "Usuario",
-    "email": "Correo",
-    "contraseña":"Contraseña"
-
-
+    "email": "Email",
+    "contraseña": "Contraseña",
+    "registro": "registro"
 }

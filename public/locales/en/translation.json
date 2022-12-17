@@ -4,9 +4,9 @@
     "continuar":"Continue",
     "crear-cuenta":"Create account",
     "recordar":"Remember me",
-    "registro": "Sign in",
     "usuario": "User",
     "email": "Email",
-    "contraseña":"Password"
+    "contraseña": "Password",
+    "registro": "Sign in"
     
 }

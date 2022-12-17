@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+#contenedor_personajes {
+    width: 48%;
+    height: 230px;
+    border-radius: 40px;
+    border: solid 0.1rem;
+    border-color: #48405c48;
+    background: #27213857;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    
+}
+
+.imagen_personajes {
+    width: 100%;
+    height: 65%;
+    border-radius: 30px;
+
+
+
+}
+
+.contenedor_nombre p {
+    padding: 1px;
+    font-size: 10px;
+    padding-top: 0.5rem;
+    float: left;
+    width: 70%;
+    height: 10px;
+}
+
+
+.contenedor_valoracion p {
+    float: right;
+    padding: 1px;
+    font-size: 10px;
+    padding-top: 0.5rem;
+
+}
+
+.contenedor_valoracion p span {
+    color: yellow;
+}
+
+.contenedor_buscar {
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.contenedor_buscar input {
+    background: none;
+    border-color: #FF0100;
+    color: #FF0100;
+    border-radius: 10px;
+    width: 90%;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    padding: 1rem;
+}
+
+.contenedor_iconos {
+
+    color: white;
+    padding-bottom: 4rem;
+}
+
+.span_izquierda {
+    font-size: 30px;
+    float: left;
+    width: 20%;
+}
+
+.span_derecha {
+    font-size: 30px;
+
+    float: right;
+    width: 20%;
+
+}
+@media (min-width: 450px){
+    #contenedor_personaje{
+      height: auto;
+    }
+  }
