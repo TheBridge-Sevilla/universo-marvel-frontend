@@ -1,22 +1,25 @@
 .contenedor_principal {
-    background-color: #15121e;
+    background-color: var(--background);
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    display:flex;
+    flex-direction: column;
 
 }
 
 .contenedor_imagen {
  width: 80%;
- height: 70%;
+ display: flex;
+ flex-direction: column;
 
 }
  .imagen_personaje{
     border: solid 10px gray;
     width: 100%;
-    height: 50%;
+    height: auto;
     border-radius: 40px;
 
  }

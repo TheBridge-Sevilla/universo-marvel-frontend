@@ -1,5 +1,5 @@
 :root {
-  --background: #F7F7F7;
+  --background:  #15121E;
   --text: #212121;
   --primary: #FF0100;
   --secondary: #F6F6F6;
@@ -16,7 +16,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   margin: 0;
-  background-color: #15121E;
+  background-color: var(--background);
   color: var(--primary);
 }
 .App {
@@ -24,7 +24,7 @@ body {
 }
 [data-theme='dark'] {
   --text: #F7F7F7;
-  --background: #212121;
+  --background:  #15121E;
 }
 .btn-danger {
   background-color: var(--primary);
