@@ -5,9 +5,10 @@ import FormularioRegistro from './pages/login/FormularioRegistro'
 import Inicio from './pages/intro/Inicio'
 import { useContextoUsuario } from './context/contextoUsuario'
 import Feed from './pages/feed/Feed'
-//import IniciarSesion from './pages/login/IniciarSesion'
 import NavBar from './components/NavBar'
-
+import IniciarSesion from './pages/login/IniciarSesion'
+import Intro from './pages/intro/Intro'
+import Personajes from './components/personajes/Personajes'
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const {usuario,pantalla, setPantalla} = useContextoUsuario()
