@@ -8,7 +8,7 @@ function Personaje(props) {
     <div className='contenedor_principal'>
       <div className='contenedor_imagen'>
         <Image
-          className=''
+          className='imagen_personaje'
           src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
           alt={`${personaje.name} imagen`}
         />

@@ -13,6 +13,10 @@
  height: 70%;
 
 }
- img{
+ .imagen_personaje{
     border: solid 10px gray;
+    width: 100%;
+    height: 50%;
+    border-radius: 40px;
+
  }

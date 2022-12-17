@@ -89,7 +89,7 @@ function Personajes() {
         >
           {personajes.docs.map((personaje, i) => (
             <Container
-              id='contenedor_personaje'
+              id='contenedor_personajes'
               className='d-flex flex-column justify-content-center text-white'
               key={i}
               onClick={() => {
@@ -97,7 +97,7 @@ function Personajes() {
               }}
             >
               <Image
-                className=''
+                className='imagen_personajes'
                 src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
                 alt={`${personaje.name} imagen`}
               />
