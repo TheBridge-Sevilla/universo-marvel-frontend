@@ -22,7 +22,6 @@ const Inicio = () => {
                 <Button className='mb-5' size='large' onClick={inicioAnonimo} >
                     Entrar como Invitado
                 </Button>
-                {usuario ? <button onClick={()=>console.log(usuario)} >Usuario</button>: <></>}
             </Container>
 
             <h1 className='unio-text text-uppercase'>Unio</h1>

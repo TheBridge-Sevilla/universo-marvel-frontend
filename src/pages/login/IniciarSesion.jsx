@@ -50,9 +50,7 @@ function IniciarSesionEmail() {
               <Button className='mb-5' size='large' type='submit'>
                 {t('continuar')}
               </Button>
-              {usuario ? <Button onClick={() => console.log(usuario)} className='mb-5' size='large' type='submit'>
-                usuario
-              </Button> : <></>}
+
             </FormGroup>
           </form>
           <Container className='d-flex justify-content-center my-5'>
