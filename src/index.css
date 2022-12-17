@@ -127,3 +127,19 @@ p {
 .pointer{
   cursor: pointer;
 }
+.aparecer-animacion {
+  visibility: hidden;
+  -webkit-animation: cssAnimation 2s forwards; 
+  animation: cssAnimation 2s forwards;
+
+}
+@keyframes cssAnimation {
+  0%   {visibility: hidden; opacity:0}
+  90%  {visibility: visible; opacity:0.9}
+  100% {visibility: visible; opacity:1}
+}
+@-webkit-keyframes cssAnimation {
+  0%   {visibility: hidden; opacity:0}
+  90%  {visibility: visible; opacity:0.9}
+  100% {visibility: visible; opacity:1}
+}

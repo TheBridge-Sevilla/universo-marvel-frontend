@@ -22,10 +22,11 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-      {usuario ? setPantalla(2) :<></>}
+{/*       {usuario ? setPantalla(2) :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
-      <NavBar />
+      <NavBar /> */}
+      <Inicio/>
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
