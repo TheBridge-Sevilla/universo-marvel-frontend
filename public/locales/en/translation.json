@@ -1,1 +1,12 @@
-{}
+{
+    "iniciar-sesion": "Sign in",
+    "contraseña-olvidada" : "Forgotten password?",
+    "continuar":"Continue",
+    "crear-cuenta":"Create account",
+    "recordar":"Remember me",
+    "usuario": "User",
+    "email": "Email",
+    "contraseña": "Password",
+    "registro": "Sign in"
+    
+}
