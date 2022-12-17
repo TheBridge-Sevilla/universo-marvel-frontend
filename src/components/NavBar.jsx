@@ -12,11 +12,17 @@ let iconoPersonaje3 = <img src='../../public/personaje_icon.png' width='25px' he
 
 export default function NavBar() {
 
-  const {pantalla, setPantalla} = useContextoUsuario()
-  //const [value, setValue] = useState()
+  const {pantalla, setPantalla, usuario} = useContextoUsuario()
+  const [value, setValue] = useState()
  
+  const mapaPantallas = {
+    o: 'default',
+    1: 'home',
+    2: 'personajes',
+    3: 'setting'
+  }
 
-  const iconosNavegacion = () => (typeof(pantalla) == "number"? '' : 'none')
+  const iconosNavegacion = () => usuario? '' : 'none'
 
   if (!pantalla) {
     setTimeout(() => {
@@ -25,22 +31,21 @@ export default function NavBar() {
   }
 
   useEffect(() => {
-    setPantalla(pantalla)
-
-    console.log("pantalla",pantalla)
-  }, [pantalla])
-
+    setValue(value)
+  }, [value])
+  
+setPantalla(mapaPantallas[value])
   return (
     <div>
-      <Mapa/>
+      <Mapa value={value}/>
       <Box
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: iconosNavegacion }}
       >
         <BottomNavigation
           showLabels
-          value={pantalla}
+          value={value}
           onChange={(event, newValue) => {
-            setPantalla(newValue)
+            setValue(newValue)
           }}
         >
           <BottomNavigationAction label='Loading' icon={<RoofingIcon />} sx={{ display: 'none' }}/>

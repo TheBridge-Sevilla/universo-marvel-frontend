@@ -8,14 +8,13 @@ import { useContextoUsuario } from '../context/contextoUsuario'
 export default function Mapa() {
   
   const {pantalla} = useContextoUsuario()
-
-  console.log(pantalla,"case")
+   
   switch (pantalla) {
-    case 1:
+    case 'home':
       return <IniciarSesion />
-    case 2:
-      return<Personajes />
-    case 3:
+    case 'personajes':
+      return <Personajes />
+    case 'setting':
        return <FormularioRegistro />
     default:
       return <Intro />
