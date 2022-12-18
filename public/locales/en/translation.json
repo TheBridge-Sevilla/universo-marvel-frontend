@@ -8,5 +8,7 @@
     "email": "Email",
     "contraseña": "Password",
     "registro": "Sign in",
-    "sesion-invitado": "Continue like guest"
+    "sesion-invitado": "Continue like guest",
+    "error-404": "Oops! We can't find the page you are looking for",
+    "paginas-interesantes": "You may be interested in:"
 }
