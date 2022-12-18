@@ -203,6 +203,14 @@ p {
   text-decoration: none;
 }
 
+/* botones de la bottom bar */
+.MuiBottomNavigation-root {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--primary) !important;
+}
+
 /* routes css */
 .fadeIn {
   animation: 0.5s fadeIn forwards;

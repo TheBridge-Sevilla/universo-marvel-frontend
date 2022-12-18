@@ -5,7 +5,8 @@ import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Personaje from '../../components/personaje/Personaje'
-import BottomBar from '../../components/BottomBar'
+import BottomBar from '../../components/bottomBar'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
@@ -40,6 +41,7 @@ function Personajes() {
         setPersonajes(nuevosPersonajes)
       })
   }
+
   if (personajeSeleccionado) {
     return <Personaje personaje={personajeSeleccionado} />
   }
@@ -47,69 +49,80 @@ function Personajes() {
   if (!personajes) {
     //Componentizar?
     return (
-      <span>
+      <span className='h-100 d-flex justify-content-center align-items-center'>
         <Spinner animation='border' />
         Cargando personajes
       </span>
     )
   } else {
     return (
-      <>
-        {' '}
-        <Container className='my-4'>
-          <Form.Control
-            type='text'
-            size='lg'
-            placeholder='Filtro'
-            onChange={event => {
-              setFiltro(event.target.value)
-            }}
-          />
-        </Container>
-        <InfiniteScroll
-          className='contenedor_scroll d-flex flex-wrap mt-4'
-          dataLength={personajes.docs.length}
-          hasMore={pagina < personajes.totalPages}
-          next={siguientePaginaPersonajes}
-          loader={
-            <span>
-              <Spinner animation='border' />
-              Cargando personajes
-            </span>
-          }
+      <LazyMotion features={domAnimation}>
+        <m.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+            delay: 1,
+          }}
+          transition={{ duration: 0.5 }}
         >
-          {personajes.docs.map((personaje, i) => (
-            <Container
-              id='contenedor_personajes'
-              className='d-flex flex-column justify-content-center text-white'
-              key={i}
-              onClick={() => {
-                setPersonajeSeleccionado(personaje)
+          {' '}
+          <Container className='my-4'>
+            <Form.Control
+              type='text'
+              size='lg'
+              placeholder='Filtro'
+              onChange={event => {
+                setFiltro(event.target.value)
               }}
-            >
-              <Image
-                className='imagen_personajes'
-                src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-                alt={`${personaje.name} imagen`}
-              />
-              <div>
-                <div className='contenedor_nombre'>
-                  <p>{personaje.name}</p>
+            />
+          </Container>
+          <InfiniteScroll
+            className='contenedor_scroll d-flex flex-wrap mt-4'
+            dataLength={personajes.docs.length}
+            hasMore={pagina < personajes.totalPages}
+            next={siguientePaginaPersonajes}
+            loader={
+              <span>
+                <Spinner animation='border' />
+                Cargando personajes
+              </span>
+            }
+          >
+            {personajes.docs.map((personaje, i) => (
+              <Container
+                id='contenedor_personajes'
+                className='d-flex flex-column justify-content-center text-white'
+                key={i}
+                onClick={() => {
+                  setPersonajeSeleccionado(personaje)
+                }}
+              >
+                <Image
+                  className='imagen_personajes'
+                  src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+                  alt={`${personaje.name} imagen`}
+                />
+                <div>
+                  <div className='contenedor_nombre'>
+                    <p>{personaje.name}</p>
+                  </div>
+                  <div className='contenedor_valoracion'>
+                    <p>
+                      <span>
+                        <AiFillStar />
+                      </span>{' '}
+                      4.9
+                    </p>
+                  </div>
                 </div>
-                <div className='contenedor_valoracion'>
-                  <p>
-                    <span>
-                      <AiFillStar />
-                    </span>{' '}
-                    4.9
-                  </p>
-                </div>
-              </div>
-            </Container>
-          ))}
-        </InfiniteScroll>
-        <BottomBar />
-      </>
+              </Container>
+            ))}
+          </InfiniteScroll>
+          <BottomBar />
+        </m.div>
+      </LazyMotion>
     )
   }
 }
