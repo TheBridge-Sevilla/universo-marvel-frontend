@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import './personajes.css'
-import { obtenerPersonajes } from '../../services/obtenerPersonaje'
-import { Container, Image, Button, Form } from 'react-bootstrap'
+import { Container, Image, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
-import { BsArrowLeftShort } from 'react-icons/bs'
-import { FaRegUserCircle } from 'react-icons/fa'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Personaje from '../personaje/Personaje'
-
-const style = {
-  height: 30,
-  border: '1px solid green',
-  margin: 6,
-  padding: 8,
-}
+import Personaje from '../../components/personaje/Personaje'
+import BottomBar from '../../components/BottomBar'
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
@@ -50,7 +41,7 @@ function Personajes() {
       })
   }
   if (personajeSeleccionado) {
-    return <Personaje personaje={personajeSeleccionado}   />
+    return <Personaje personaje={personajeSeleccionado} />
   }
 
   if (!personajes) {
@@ -65,7 +56,7 @@ function Personajes() {
     return (
       <>
         {' '}
-        <Form className='h-100 d-flex flex-column justify-content-center'>
+        <Container className='my-4'>
           <Form.Control
             type='text'
             size='lg'
@@ -74,7 +65,7 @@ function Personajes() {
               setFiltro(event.target.value)
             }}
           />
-        </Form>
+        </Container>
         <InfiniteScroll
           className='contenedor_scroll d-flex flex-wrap mt-4'
           dataLength={personajes.docs.length}
@@ -117,6 +108,7 @@ function Personajes() {
             </Container>
           ))}
         </InfiniteScroll>
+        <BottomBar />
       </>
     )
   }

@@ -1,32 +1,39 @@
-import './Intro.css'
-import { Container, Image, Stack } from 'react-bootstrap'
+import './Inicio.css'
+import { Container, Image } from 'react-bootstrap'
 import { Button } from '@mui/material'
-import sesionInvitado from "../../services/firebase/sesionInvitada"
-import { useContextoUsuario } from '../../context/contextoUsuario'
+import sesionInvitado from '../../services/firebase/sesionInvitado'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const Inicio = () => {
-    const { inicioAnonimo } = sesionInvitado()
-    const {usuario, setPantalla} = useContextoUsuario()
+  const { t } = useTranslation()
+  const { inicioAnonimo } = sesionInvitado()
 
-    return (
-        <Container
-            className='h-100 d-flex flex-column justify-content-around align-items-center m'
-            fluid
-        >
-             <Image src='unio-icon.svg' alt='unio-icon' className='m-5 ' fluid /> 
-            <Container className='d-flex flex-column  justify-content-flex-end m-5'>
-
-                <Button className='mb-5 aparecer-animacion' size='large' onClick={()=>setPantalla('formulario')}>
-                    Registrarse
-                </Button>
-                <Button className='mb-5 aparecer-animacion' size='large' onClick={inicioAnonimo} >
-                    Entrar como Invitado
-                </Button>
-            </Container>
-
-            <h1 className='unio-text text-uppercase'>Unio</h1>
-        </Container>
-    )
+  return (
+    <Container
+      className='h-100 d-flex flex-column justify-content-around align-items-center m'
+      fluid
+    >
+      <Image src='unio-icon.svg' alt='unio-icon' className='m-5 ' fluid />
+      <Container className='d-flex flex-column  justify-content-flex-end m-5'>
+        <Link className='navigation-button' to='iniciar-sesion'>
+          <Button className='mb-5 aparecer-animacion' size='large'>
+            {t('iniciar-sesion')}
+          </Button>
+        </Link>
+        <Link className='navigation-button' to='dashboard'>
+          <Button
+            className='mb-5 aparecer-animacion'
+            size='large'
+            onClick={inicioAnonimo}
+          >
+            {t('sesion-invitado')}
+          </Button>
+        </Link>
+      </Container>
+      <h1 className='unio-text text-uppercase'>Unio</h1>
+    </Container>
+  )
 }
 
 export default Inicio

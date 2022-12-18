@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, FormGroup, TextField } from '@mui/material'
+import { Button, FormGroup, TextField, Link } from '@mui/material'
 import { Form } from 'react-bootstrap'
 import { Google } from 'react-bootstrap-icons'
 import { useSignWithG } from '../../hooks/useSignWithG'
 import { RegistrarUsuario } from '../../services/firebase/registrarUsuario'
+import { Link as RouterLink } from 'react-router-dom'
 
-function NuevoUsuario() {
+export default function Registro() {
   const { t } = useTranslation()
   const { iniciarSesionConG } = useSignWithG()
   const [nombre, setNombre] = useState('')
@@ -17,9 +18,9 @@ function NuevoUsuario() {
   return (
     <Form
       className='h-100 d-flex flex-column justify-content-center'
-      onSubmit={onSubmit} 
+      onSubmit={onSubmit}
     >
-      <h1>{t('registro')}</h1>
+      <h1 className='my-5'>{t('registro')}</h1>
       <FormGroup className='d-flex flex-column justify-content-center mx-4'>
         <TextField
           name='nombre'
@@ -56,12 +57,13 @@ function NuevoUsuario() {
         <p className='mb-4'>o</p>
         <Google
           size={50}
-          className='zoom-animation mx-4'
+          className='zoom-animation mb-5'
           onClick={() => iniciarSesionConG()}
         />
+        <Link component={RouterLink} to='/iniciar-sesion'>
+          {t('iniciar-sesion')}
+        </Link>
       </FormGroup>
     </Form>
   )
 }
-
-export default NuevoUsuario

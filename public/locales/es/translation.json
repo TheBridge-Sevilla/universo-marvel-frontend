@@ -7,5 +7,6 @@
     "usuario": "Usuario",
     "email": "Email",
     "contraseña": "Contraseña",
-    "registro": "registro"
+    "registro": "Registrarme",
+    "sesion-invitado": "Continuar como invitado"
 }
