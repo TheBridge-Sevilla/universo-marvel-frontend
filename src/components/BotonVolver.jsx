@@ -4,7 +4,7 @@ import { useContextoUsuario } from '../context/contextoUsuario'
 import { useEffect, useState } from 'react'
 import Nav from 'react-bootstrap/Nav';
 
-export default function IconButtons() {
+export default function BoronVolver() {
   const { pantalla, setPantalla, usuario } = useContextoUsuario()
   const [volver, setVolver] = useState()
 
@@ -17,7 +17,7 @@ export default function IconButtons() {
 
   return (
     <Nav class='d-flex justify-content-between' >
-        <ArrowCircleLeftIcon onClick={regresar} />
+        <ArrowCircleLeftIcon fontSize='large' onClick={regresar} />
       <AvatarUsuario />
     </Nav>
   )
