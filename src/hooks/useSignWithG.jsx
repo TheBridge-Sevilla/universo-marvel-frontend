@@ -5,9 +5,11 @@ import {
 } from 'firebase/auth'
 import { auth } from '../services/firebase/firebase'
 import { useContextoUsuario } from '../context/contextoUsuario'
+import { useNavigate } from 'react-router-dom'
 
 export function useSignWithG() {
   const { usuario, setUsuario } = useContextoUsuario()
+  const navigate = useNavigate()
 
   const provider = new GoogleAuthProvider()
   const iniciarSesionConG = () => {
@@ -18,6 +20,7 @@ export function useSignWithG() {
           const credential = GoogleAuthProvider.credentialFromResult(result)
           const user = result.user
           setUsuario(user.displayName)
+          navigate('/dashboard')
           console.log('Anonymous account successfully upgraded', user)
         })
         .catch(error => {
@@ -28,6 +31,7 @@ export function useSignWithG() {
         .then(resultado => {
           const nombre = resultado.user.displayName
           setUsuario(nombre)
+          navigate('/dashboard')
         })
         .catch(error => {
           console.log(error)

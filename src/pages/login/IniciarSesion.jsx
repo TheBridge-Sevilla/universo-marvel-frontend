@@ -13,7 +13,7 @@ import { useSignWithG } from './../../hooks/useSignWithG'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useState } from 'react'
 import { IniciarSesion } from '../../services/firebase/iniciarUsuario'
-import sesionInvitado from '../../services/firebase/sesionInvitado'
+import useSignLikeGuest from '../../hooks/useSignLikeGuest'
 import { Link as RouterLink } from 'react-router-dom'
 
 function IniciarSesionEmail() {
@@ -23,6 +23,7 @@ function IniciarSesionEmail() {
   const [email, setEmail] = useState('')
   const [contraseña, setContraseña] = useState('')
   const { onSubmit } = IniciarSesion(email, contraseña)
+  const { inicioAnonimo } = useSignLikeGuest()
 
   return (
     <Form
@@ -65,7 +66,7 @@ function IniciarSesionEmail() {
           <DoorOpen
             size={40}
             className='checkbox zoom-animation mx-4'
-            onClick={() => sesionInvitado()}
+            onClick={inicioAnonimo}
           />
         </Container>
         <Link component={RouterLink} to='/registro'>
