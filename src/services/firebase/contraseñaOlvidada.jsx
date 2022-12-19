@@ -5,18 +5,20 @@ import { Button, FormGroup, TextField, Link } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Container } from 'react-bootstrap'
 import { Link as RouterLink } from 'react-router-dom'
+import { useContextoAlert } from '../../context/contextoAlert'
 
 export default function ContraseñaOlvidada() {
   const [email, setEmail] = useState('')
   const { t } = useTranslation()
+  const { notificacion } = useContextoAlert()
 
   const contraseñaOlvidada = email => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        console.log('contraseña cambiada')
+        notificacion(`${t('contraseña-cambiada')}`, 'info')
       })
       .catch(e => {
-        console.log(e.message)
+        notificacion(e.message, 'error')
       })
   }
 
@@ -24,6 +26,7 @@ export default function ContraseñaOlvidada() {
     e.preventDefault()
     if (!email) {
       console.log('introduce el email')
+      notificacion(`${t('introduce-email')}`)
     } else if (email) {
       contraseñaOlvidada(email)
     }

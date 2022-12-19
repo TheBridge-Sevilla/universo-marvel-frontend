@@ -11,6 +11,7 @@
     "sesion-invitado": "Continue like guest",
     "error-404": "Oops! We can't find the page you are looking for",
     "paginas-interesantes": "You may be interested in:",
-    "contraseña-recordada" : "I remeber my password"
-
+    "contraseña-recordada": "I remeber my password",
+    "contraseña-cambiada": "New password sent to email",
+    "introduce-email": "Put your email"
 }
