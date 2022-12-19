@@ -14,6 +14,7 @@ export function useSignOut() {
       .then(() => {
         setUsuario()
         navigate('/inicio')
+        notificacion(`${'sesion-cerrada'}`)
       })
       .catch(error => {
         notificacion(error, 'error')
