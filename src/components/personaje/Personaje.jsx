@@ -13,7 +13,7 @@ function Personaje(props) {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
       personaje._id
     }&idUsuario=${auth.currentUser.uid}`
-    fetch(url)
+    fetch(url, {cache: "no-store"})
       .then(data => data.json())
       .then(json => {setValoracionPersonal(json); console.log(json)})
   },[])
