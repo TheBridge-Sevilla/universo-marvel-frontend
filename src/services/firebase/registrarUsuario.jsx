@@ -6,11 +6,12 @@ import {
 } from 'firebase/auth'
 import { auth } from './firebase'
 import { useContextoUsuario } from '../../context/contextoUsuario'
-import { useContextoAlert } from './../../context/contextoAlert'
+import { useContextoAlert } from '../../context/contextoAlert'
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
+  console.log('registrarusuario se renderiza')
   const { usuario, setUsuario } = useContextoUsuario()
-  const { setAlert } = useContextoAlert()
+  const { notificacion } = useContextoAlert()
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -38,7 +39,7 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
         })
         .catch(e => {
           console.log(e.message)
-          setAlert({ mensaje: e.message, open: true, tipo: 'error' })
+          notificacion(e.message, 'error')
         })
     }
   }
