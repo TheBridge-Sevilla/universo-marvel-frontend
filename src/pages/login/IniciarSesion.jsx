@@ -10,7 +10,6 @@ import {
 import { useTranslation } from 'react-i18next'
 import { Container, Form } from 'react-bootstrap'
 import { useSignWithG } from './../../hooks/useSignWithG'
-import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useState } from 'react'
 import { IniciarSesion } from '../../services/firebase/iniciarUsuario'
 import useSignLikeGuest from '../../hooks/useSignLikeGuest'
@@ -20,7 +19,6 @@ import { animacionLogin } from '../../services/animacionLogin'
 
 function IniciarSesionEmail() {
   const { t } = useTranslation()
-  const { setOlvidarContraseña } = useContextoUsuario()
   const { iniciarSesionConG } = useSignWithG()
   const [email, setEmail] = useState('')
   const [contraseña, setContraseña] = useState('')
@@ -59,9 +57,9 @@ function IniciarSesionEmail() {
           />
           <Container className='d-flex justify-content-between align-items-center mb-5 pointer'>
             <FormControlLabel control={<Checkbox />} label={t('recordar')} />
-            <a onClick={() => setOlvidarContraseña(true)}>
-              {t('contraseña-olvidada')}
-            </a>
+            <Link component={RouterLink} to='/contraseña-olvidada'>
+            {t('contraseña-olvidada')}
+          </Link>
           </Container>
           <Button className='mb-5' size='large' type='submit'>
             {t('continuar')}

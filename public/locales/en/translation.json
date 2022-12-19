@@ -1,6 +1,6 @@
 {
     "iniciar-sesion": "Sign in",
-    "contraseña-olvidada": "Forgotten password?",
+    "contraseña-olvidada": "Forgot password?",
     "continuar": "Continue",
     "crear-cuenta": "Create account",
     "recordar": "Remember me",
@@ -10,5 +10,7 @@
     "registro": "Sign in",
     "sesion-invitado": "Continue like guest",
     "error-404": "Oops! We can't find the page you are looking for",
-    "paginas-interesantes": "You may be interested in:"
+    "paginas-interesantes": "You may be interested in:",
+    "contraseña-recordada" : "I remeber my password"
+
 }

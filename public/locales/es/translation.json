@@ -10,5 +10,6 @@
     "registro": "Registrarme",
     "sesion-invitado": "Continuar como invitado",
     "error-404": "Oops! No encontramos la página que buscas :(",
-    "paginas-interesantes": "Quizás te puede interesar:"
+    "paginas-interesantes": "Quizás te puede interesar:",
+    "contraseña-recordada" : "He recordado mi contraseña"
 }
