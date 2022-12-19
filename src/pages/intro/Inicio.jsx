@@ -12,7 +12,7 @@ const Inicio = () => {
 
   return (
     <Container
-      className='h-100 d-flex flex-column justify-content-around align-items-center'
+      className='ocupar-pantalla d-flex flex-column justify-content-around align-items-center'
       fluid
     >
       <Image src='unio-icon.svg' alt='unio-icon' className='m-5 ' fluid />

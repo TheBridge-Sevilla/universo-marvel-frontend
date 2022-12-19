@@ -28,7 +28,7 @@ export default function Registro() {
       transition={transicion}
     >
       <Form
-        className='h-100 d-flex flex-column justify-content-center'
+        className='ocupar-pantalla d-flex flex-column justify-content-center'
         onSubmit={onSubmit}
       >
         <h1 className='my-5'>{t('registro')}</h1>

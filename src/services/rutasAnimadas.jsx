@@ -5,12 +5,13 @@ import Registro from './../pages/login/Registro'
 import Personajes from './../pages/personajes/Personajes'
 import ErrorPage from './../pages/notFound/Error404'
 import { AnimatePresence } from 'framer-motion'
+import { Container } from 'react-bootstrap'
 
 function RutasAnimadas() {
   const location = useLocation()
 
   return (
-    <main className='h-100' style={{ overflowX: 'hidden' }}>
+    <Container style={{ overflowX: 'hidden' }}>
       <AnimatePresence mode='wait'>
         <Routes location={location} key={location.pathname}>
           <Route path='/' element={<Inicio />} />
@@ -20,7 +21,7 @@ function RutasAnimadas() {
           <Route path='/' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
-    </main>
+    </Container>
   )
 }
 
