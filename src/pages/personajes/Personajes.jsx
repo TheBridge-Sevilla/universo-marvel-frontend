@@ -6,6 +6,8 @@ import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Personaje from '../../components/personaje/Personaje'
 import BottomBar from '../../components/BottomBar'
+import Volver from '../../components/Volver'
+import BarraAvatar from '../../components/Avatar'
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
@@ -55,6 +57,10 @@ function Personajes() {
   } else {
     return (
       <>
+      <div className='d-flex justify-content-between m-4'>
+      <Volver/>
+      <BarraAvatar/>
+      </div>
         {' '}
         <Container className='my-4'>
           <Form.Control
