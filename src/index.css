@@ -198,10 +198,12 @@ p {
   }
 }
 
+/* botones de la pantalla de inicio */
 .navigation-button {
   text-decoration: none;
 }
 
+/* botones de la bottom bar */
 .MuiBottomNavigation-root {
   position: fixed;
   bottom: 0;
@@ -209,6 +211,39 @@ p {
   background-color: var(--primary) !important;
 }
 
-.MuiBottomNavigation-root>button {
-  height: 100% !important;
+/* routes css */
+.fadeIn {
+  animation: 0.5s fadeIn forwards;
+}
+
+.fadeOut {
+  animation: 0.5s fadeOut forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+
+  to {
+    transform: translate(-20px, 0);
+    opacity: 0;
+  }
+}
+
+.ocupar-pantalla {
+  height: 100vh;
 }
