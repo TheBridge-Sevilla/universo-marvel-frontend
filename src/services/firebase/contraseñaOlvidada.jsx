@@ -5,15 +5,15 @@ import {
   Button,
   FormGroup,
   TextField,
+  Link
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Container } from 'react-bootstrap'
-import { useContextoUsuario } from '../../context/contextoUsuario'
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function ContraseñaOlvidada() {
   const [email, setEmail] = useState('')
   const { t } = useTranslation()
-  const { setOlvidarContraseña} = useContextoUsuario()
   const contraseñaOlvidada = (email) => {
     sendPasswordResetEmail(auth, email).then(() => {
       console.log("contraseña cambiada")
@@ -44,7 +44,7 @@ export default function ContraseñaOlvidada() {
     <div>
 
       <Container className='h-100' fluid>
-        <h1 className='mb-5'>{t('iniciar-sesion')}</h1>
+        <h1 className='m-5'>{t('iniciar-sesion')}</h1>
         <form >
           <FormGroup className='mt-5 mx-5 d-flex flex-column justify-content-center'>
             <TextField
@@ -56,7 +56,9 @@ export default function ContraseñaOlvidada() {
 
             />
 
-            <a className='pointer mb-5 no-underline text-right' onClick={() => setOlvidarContraseña(false)}>He recordado la contraseña</a>
+            <Link className='m-3' component={RouterLink} to='/iniciar-sesion'>
+              {t('contraseña-recordada')}
+            </Link>
             <Button className='mb-5' size='large' onClick={() => forgotPasswordHandler()}>
               {t('continuar')}
             </Button>

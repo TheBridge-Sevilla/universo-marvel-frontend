@@ -8,7 +8,6 @@ import Personaje from '../../components/personaje/Personaje'
 import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
-import BottomBar from '../../components/bottomBar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 
 

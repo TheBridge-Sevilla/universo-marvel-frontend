@@ -6,6 +6,7 @@ import Personajes from './../pages/personajes/Personajes'
 import ErrorPage from './../pages/notFound/Error404'
 import { AnimatePresence } from 'framer-motion'
 import { Container } from 'react-bootstrap'
+import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
 
 function RutasAnimadas() {
   const location = useLocation()
@@ -17,6 +18,7 @@ function RutasAnimadas() {
           <Route path='/' element={<Inicio />} />
           <Route path='iniciar-sesion' element={<IniciarSesionEmail />} />
           <Route path='registro' element={<Registro />} />
+          <Route path='contraseña-olvidada' element={<ContraseñaOlvidada />} />
           <Route path='dashboard' element={<Personajes />} />
           <Route path='/' element={<ErrorPage />} />
         </Routes>
