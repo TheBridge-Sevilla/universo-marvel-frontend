@@ -11,11 +11,11 @@ export default function Mapa() {
 
   console.log(pantalla,"case")
   switch (pantalla) {
-    case 1:
+    case 'home':
       return <IniciarSesion />
-    case 2:
+    case 'personajes':
       return<Personajes />
-    case 3:
+    case 'setting':
        return <FormularioRegistro />
     default:
       return <Intro />

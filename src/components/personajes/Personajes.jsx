@@ -8,7 +8,7 @@ import { FaRegUserCircle } from 'react-icons/fa'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Personaje from '../personaje/Personaje'
-
+import BarraAvatar from '../BarraAvatar'
 const style = {
   height: 30,
   border: '1px solid green',
@@ -66,6 +66,7 @@ function Personajes() {
       <>
         {' '}
         <Form className='h-100 d-flex flex-column justify-content-center'>
+
           <Form.Control
             type='text'
             size='lg'
@@ -75,6 +76,7 @@ function Personajes() {
             }}
           />
         </Form>
+        <BarraAvatar />
         <InfiniteScroll
           className='contenedor_scroll d-flex flex-wrap mt-4'
           dataLength={personajes.docs.length}

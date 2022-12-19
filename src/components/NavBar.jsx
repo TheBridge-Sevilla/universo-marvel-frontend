@@ -6,17 +6,25 @@ import RoofingIcon from '@mui/icons-material/Roofing'
 import SettingsIcon from '@mui/icons-material/Settings'
 import Mapa from './Mapa'
 import { useContextoUsuario } from '../context/contextoUsuario'
+import { Home } from '@mui/icons-material'
+import Personajes from './personajes/Personajes'
 
 let iconoPersonaje3 = <img src='../../public/personaje_icon.png' width='25px' height='25px'></img>
 
 
 export default function NavBar() {
 
-  const {pantalla, setPantalla} = useContextoUsuario()
-  //const [value, setValue] = useState()
- 
+  const {pantalla, setPantalla, usuario} = useContextoUsuario()
+  const [value, setValue] = useState()
 
-  const iconosNavegacion = () => (typeof(pantalla) == "number"? '' : 'none')
+ const mapaNavegacion = {
+  0: 'default',
+  1: 'home',
+  2: 'personajes',
+  3: 'setting'
+ }
+
+  const iconosNavegacion = () => (usuario? '' : 'none')
 
   if (!pantalla) {
     setTimeout(() => {
@@ -25,13 +33,14 @@ export default function NavBar() {
   }
 
   useEffect(() => {
-    setPantalla(pantalla)
-
+    setValue(value)
+    setPantalla(mapaNavegacion[value])
     console.log("pantalla",pantalla)
-  }, [pantalla])
+  }, [value])
 
   return (
     <div>
+      
       <Mapa/>
       <Box
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, display: iconosNavegacion }}
@@ -40,7 +49,7 @@ export default function NavBar() {
           showLabels
           value={pantalla}
           onChange={(event, newValue) => {
-            setPantalla(newValue)
+            setValue(newValue)
           }}
         >
           <BottomNavigationAction label='Loading' icon={<RoofingIcon />} sx={{ display: 'none' }}/>

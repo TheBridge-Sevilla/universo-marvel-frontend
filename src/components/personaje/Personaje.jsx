@@ -1,11 +1,13 @@
 import React from 'react'
 import './personaje.css'
 import { Image } from 'react-bootstrap'
+import BarraAvatar from '../BarraAvatar'
 
 function Personaje(props) {
   const personaje = props.personaje
   return (
     <div className='contenedor_principal'>
+      <BarraAvatar />
       <div className='contenedor_imagen'>
         <Image
           className=''
