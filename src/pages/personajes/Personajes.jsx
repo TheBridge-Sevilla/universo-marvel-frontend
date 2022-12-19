@@ -5,16 +5,20 @@ import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Personaje from '../../components/personaje/Personaje'
-import BottomBar from '../../components/bottomBar'
+import BottomBar from '../../components/BottomBar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
+import { json } from 'react-router-dom'
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
+  const [valoraciones, setValoraciones] = useState()
   const [pagina, setPagina] = useState(1)
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
+  const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
 
   useEffect(() => {
+    console.log(personajes)
     const url = `${
       import.meta.env.VITE_BASE_URL
     }/personajes?page=${pagina}&limit=${
@@ -22,7 +26,10 @@ function Personajes() {
     }&filter=${filtro}`
     fetch(url)
       .then(data => data.json())
-      .then(json => setPersonajes(json))
+      .then(json => {
+        setPersonajes(json.personajes)
+        setValoraciones(json.valoraciones)
+      })
     setPagina(1)
   }, [filtro])
 
@@ -43,7 +50,12 @@ function Personajes() {
   }
 
   if (personajeSeleccionado) {
-    return <Personaje personaje={personajeSeleccionado} />
+    return (
+      <Personaje
+        personaje={personajeSeleccionado}
+        valoracion={valoracionSeleccionado}
+      />
+    )
   }
 
   if (!personajes) {
@@ -97,6 +109,7 @@ function Personajes() {
                 key={i}
                 onClick={() => {
                   setPersonajeSeleccionado(personaje)
+                  setValoracionSeleccionado(valoraciones[i])
                 }}
               >
                 <Image
@@ -113,7 +126,7 @@ function Personajes() {
                       <span>
                         <AiFillStar />
                       </span>{' '}
-                      4.9
+                      {valoraciones[i] ? valoraciones[i] : 'Non rated'}
                     </p>
                   </div>
                 </div>
