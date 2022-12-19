@@ -10,18 +10,16 @@ function Personaje(props) {
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
-      personaje._id
-    }&idUsuario=${auth.currentUser.uid}`
-    fetch(url, {cache: "no-store"})
+    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${personaje._id
+      }&idUsuario=${auth.currentUser.uid}`
+    fetch(url, { cache: "no-store" })
       .then(data => data.json())
-      .then(json => {setValoracionPersonal(json); console.log(json)})
-  },[])
+      .then(json => { setValoracionPersonal(json); console.log(json) })
+  }, [])
 
   function emitirValoracion(valoracion) {
-    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
-      personaje.name
-    }`
+    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${personaje.name
+      }`
 
     fetch(url, {
       method: 'POST',
@@ -48,6 +46,9 @@ function Personaje(props) {
           src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
           alt={`${personaje.name} imagen`}
         />
+        <div className="contenedor_nombre_personaje">
+          <h5>{personaje.name}</h5>
+        </div>
         <div>
           <Box component='fieldset' mb={3} borderColor='transparent'>
             <Typography component='legend'>Tu valoración</Typography>
@@ -61,7 +62,7 @@ function Personaje(props) {
           </Box>
         </div>
         <br />
-        Valoracion global
+        Valoracion global : 
         {valoracion ? (
           <Rating
             name='half-rating-read'
@@ -70,11 +71,15 @@ function Personaje(props) {
             readOnly
           />
         ) : (
-          'por valorar'
+          ' por valorar'
         )}
-       
-        <br />
-        boton para ir a marvel
+
+        <button type="button" className="boton_personaje"
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(`${personaje.urls[0].url}`);
+          }}
+        > DESCÚBRELO</button>
       </div>
     </div>
   )
