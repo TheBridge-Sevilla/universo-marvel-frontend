@@ -10,7 +10,7 @@ import Intro from './pages/intro/Intro'
 import Personajes from './components/personajes/Personajes'
 function App() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const {usuario,pantalla, setPantalla} = useContextoUsuario()
+  const {usuario,pantalla} = useContextoUsuario()
   const [theme, setTheme] = useLocalStorage(
     'theme',
     defaultDark ? 'dark' : 'light'
@@ -22,11 +22,9 @@ function App() {
   }
   return (
     <div className='App' data-theme={theme}>
-      {usuario ? setPantalla('home') :<></>}
       {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
       {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
-      <NavBar /> */}
-      <Inicio/>
+      <NavBar />
       {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
     </div>
   )
