@@ -24,13 +24,17 @@ function Personaje(props) {
         <Valoraciones />
       </div>
       <div className="contenedor:descripcion">
-        <p>{personaje.description[i18n.language]} </p>  
+        <p>{personaje.description[i18n.language]} </p>
       </div>
       <div className="boton_personaje">
-      <button type="button" className="boton_personaje"
-      >Descubrelo</button>
-      </div>
+        <button type="button" className="boton_personaje" 
+        onClick={(e) => {
+          e.preventDefault();
+          window.open(`${personaje.urls[0].url}`);
+        }}
+        > DESCÚBRELO</button>
     </div>
+    </div >
   )
 }
 
