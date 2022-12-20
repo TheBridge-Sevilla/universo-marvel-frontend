@@ -53,10 +53,9 @@ function App() {
         Cambia a modo {theme == 'light' ? 'Noche' : 'Día'}
       </button>
       </div> */
-    <>
-    <div>current path is: { pathname}</div>
+    
     <RutasAnimadas />
-    </>
+    
   )
 }
 
