@@ -4,12 +4,14 @@ import { auth } from '../../services/firebase/firebase'
 import { useNavigate } from 'react-router-dom'
 
 export const IniciarSesion = (email, contraseña) => {
-  const { usuario, setUsuario } = useContextoUsuario()
+  const { usuario, setUsuario,setUsuarioActual,usuarioActual } = useContextoUsuario()
   const navigate = useNavigate()
   const iniciarSesionEmail = (email, contraseña) => {
     signInWithEmailAndPassword(auth, email, contraseña)
       .then(() => {
         setUsuario(auth.currentUser.displayName)
+        setUsuarioActual(auth.currentUser)
+        console.log('usuarioActual', usuarioActual)
         navigate('/dashboard')
       })
       .catch(e => {

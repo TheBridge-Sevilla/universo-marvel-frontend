@@ -8,7 +8,7 @@ import { useContextoUsuario } from '../context/contextoUsuario'
 import { useNavigate } from 'react-router-dom'
 
 export function useSignWithG() {
-  const { usuario, setUsuario } = useContextoUsuario()
+  const { usuario, setUsuario , setUsuarioActual} = useContextoUsuario()
   const navigate = useNavigate()
 
   const provider = new GoogleAuthProvider()
@@ -31,6 +31,7 @@ export function useSignWithG() {
         .then(resultado => {
           const nombre = resultado.user.displayName
           setUsuario(nombre)
+          setUsuarioActual(resultado.user)
           navigate('/dashboard')
         })
         .catch(error => {

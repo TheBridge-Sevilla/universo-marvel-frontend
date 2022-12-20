@@ -6,12 +6,14 @@ export const useContextoUsuario = () => useContext(ContextoUsuario)
 
 export const ContextoUsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState('')
-
+  const [usuarioActual, setUsuarioActual] = useState('')
   const [pantalla, setPantalla]= useState('')
 
   const contextValue = {
     usuario,
     setUsuario,
+    usuarioActual,
+    setUsuarioActual,
     pantalla,
     setPantalla
   }

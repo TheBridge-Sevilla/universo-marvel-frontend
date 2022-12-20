@@ -7,10 +7,13 @@ import {
 import { auth } from './firebase'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { useContextoAlert } from './../../context/contextoAlert'
+import { useNavigate } from 'react-router-dom'
+
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
   const { usuario, setUsuario } = useContextoUsuario()
   const { setAlert } = useContextoAlert()
+  const navigate = useNavigate()
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -19,6 +22,8 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
         .then(usercred => {
           const user = usercred.user
           setUsuario(nombre)
+          setUsuarioActual(auth.currentUser)
+          navigate('/dashboard')
           console.log('Anonymous account successfully upgraded', user)
         })
         .then(() => {
@@ -35,6 +40,11 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
           return updateProfile(auth.currentUser, {
             displayName: nombre,
           })
+        })
+        .then(() => {
+          setUsuario(nombre)
+          setUsuarioActual(auth.currentUser)
+          navigate('/dashboard')
         })
         .catch(e => {
           console.log(e.message)
