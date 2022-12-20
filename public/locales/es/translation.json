@@ -1,11 +1,20 @@
 {
     "iniciar-sesion": "Iniciar sesión",
-    "contraseña-olvidada" : "¿Contraseña olvidada?",
-    "continuar":"Continuar",
-    "crear-cuenta":"Crear cuenta",
-    "recordar":"Recuérdame",
+    "contraseña-olvidada": "¿Contraseña olvidada?",
+    "continuar": "Continuar",
+    "crear-cuenta": "Crear cuenta",
+    "recordar": "Recuérdame",
     "usuario": "Usuario",
     "email": "Email",
     "contraseña": "Contraseña",
-    "registro": "registro"
+    "registro": "Registrarme",
+    "sesion-invitado": "Continuar como invitado",
+    "error-404": "Oops! No encontramos la página que buscas :(",
+    "paginas-interesantes": "Quizás te puede interesar:",
+    "contraseña-recordada": "He recordado mi contraseña",
+    "contraseña-cambiada": "Nueva contraseña enviada al email",
+    "introduce-email": "Introduce tu email",
+    "enlace-cuentas": "Cuentas enlazadas correctamente, bienvenido de nuevo",
+    "bienvenido": "bienvenido",
+    "sesion-cerrada": "Sesión cerrada correctamente"
 }

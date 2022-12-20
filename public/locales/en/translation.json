@@ -1,12 +1,20 @@
 {
     "iniciar-sesion": "Sign in",
-    "contraseña-olvidada" : "Forgotten password?",
-    "continuar":"Continue",
-    "crear-cuenta":"Create account",
-    "recordar":"Remember me",
+    "contraseña-olvidada": "Forgot password?",
+    "continuar": "Continue",
+    "crear-cuenta": "Create account",
+    "recordar": "Remember me",
     "usuario": "User",
     "email": "Email",
     "contraseña": "Password",
-    "registro": "Sign in"
-    
+    "registro": "Sign in",
+    "sesion-invitado": "Continue like guest",
+    "error-404": "Oops! We can't find the page you are looking for",
+    "paginas-interesantes": "You may be interested in:",
+    "contraseña-recordada": "I remeber my password",
+    "contraseña-cambiada": "New password sent to email",
+    "introduce-email": "Put your email",
+    "enlace-cuentas": "accounts linked correctly, welcome back",
+    "bienvenido": "welcome",
+    "sesion-cerrada": "Session successfully closed"
 }
