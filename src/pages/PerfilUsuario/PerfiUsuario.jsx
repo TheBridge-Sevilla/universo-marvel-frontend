@@ -5,41 +5,38 @@ import { Form } from 'react-bootstrap'
 import { RegistrarUsuario } from '../../services/firebase/registrarUsuario'
 import { auth, storage } from '../../services/firebase/firebase'
 import { updateProfile, updatePassword } from 'firebase/auth'
-//import { useContextoUsuario } from '../../context/contextoUsuario'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
-//import { Link as RouterLink } from 'react-router-dom'
-//import { motion } from 'framer-motion'
-//import { animacionLogin } from '../../services/animacionLogin'
 import BarraAvatar from '../../components/Avatar'
 import BottomBar from '../../components/BottomBar'
+import { useContextoUsuario } from '../../context/contextoUsuario'
+import "./PerfilUsuario.css"
 
 export default function PerfilUsuario() {
-  //  const {usuario} = useContextoUsuario()
+  const {usuario} = useContextoUsuario()
   const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [contraseña, setContraseña] = useState('')
   const { onSubmit } = RegistrarUsuario(email, contraseña)
 
-  const currentUser = auth.currentUser
-  const usuario = auth.currentUser.displayName
-  const emailUsuario = auth.currentUser.email
-  const avatarSinImagen =
-    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+const currentUser = 'prueba'
+const avatarSinImagen =
+'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
   const [imagenPerfil, setImagenPerfil] = useState(avatarSinImagen)
 
-  console.log(emailUsuario, 'auth')
+ // console.log(emailUsuario, 'auth')
   const [loading, setLoading] = useState(false)
   const [foto, setFoto] = useState()
   //actualizar foto de perfil
 
+
   async function upload(file, currentUser) {
     const fileRef = ref(storage, currentUser.uid + '.png')
 
-    await uploadBytes(fileRef, file)
-    const fotoURL = await getDownloadURL(fileRef)
+     await uploadBytes(fileRef, file)
+    const fotoURL = await getDownloadURL(fileRef) 
 
-    updateProfile(currentUser, { photoURL: fotoURL })
-    setImagenPerfil(fotoURL)
+     updateProfile(currentUser, { photoURL: fotoURL })
+    setImagenPerfil(fotoURL) 
 
     /*     setMensaje(t("imagen-subida"))
     setTipo("success") */
@@ -49,6 +46,7 @@ export default function PerfilUsuario() {
       setImagenPerfil(currentUser.photoURL)
     }
   }, [auth])
+
   const handleChange = e => {
     if (e.target.files[0]) {
       setFoto(e.target.files[0])
@@ -60,29 +58,24 @@ export default function PerfilUsuario() {
     setLoading(false)
   }
   const borrarFoto = () => {
-    upload(avatarSinImagen, currentUser)
+    setFoto(avatarSinImagen)
     setLoading(false)
   }
 
-  //  const { animacion, transicion } = animacionLogin()
-
   return (
-    /*     <motion.div
-      className='h-100'
-      initial='initial'
-      animate='in'
-      exit='out'
-      variants={animacion}
-      transition={transicion}
-    > */
     <div className='h-mv d-flex flex-column justify-content-center mx-4'>
       <h6 className='my-5'>{t('Perfil')}</h6>
       <div className='h-mv d-flex flex-row justify-content-center mx-4'>
         <BarraAvatar sizes={139} imagenPerfil={imagenPerfil} />{' '}
         <div className='h-mv d-flex flex-column justify-content-center mx-4'>
-          <Button label={t('subir')} onClick={subirFoto}>
-            Cambiar avatar
-          </Button>
+      
+    
+      <TextField id='imagenAvatar' type='file' label={t('subir')} onClick={handleChange}></TextField>
+ 
+      <Button label={t('subir')} onClick={subirFoto}>
+        Cambiar avatar
+      </Button>
+
           <Button label={t('borrar')} onClick={borrarFoto}>
             Borrar
           </Button>
@@ -97,7 +90,7 @@ export default function PerfilUsuario() {
             disabled
             name='nombre'
             label={t('usuario')}
-            defaultValue={usuario}
+/*             defaultValue={usuario} */
             type='text'
             className='my-3'
           />
@@ -106,7 +99,7 @@ export default function PerfilUsuario() {
             name='email'
             label={t('email')}
             type='email'
-            defaultValue={emailUsuario}
+    /*         defaultValue={emailUsuario} */
             className='my-3'
             onChange={e => {
               setEmail(e.target.value)
@@ -127,148 +120,5 @@ export default function PerfilUsuario() {
       </Form>
       <BottomBar />
     </div>
-    /*     </motion.div> */
   )
 }
-
-/* 
-
-function DatosJugador() {
-    const { t } = useTranslation();
-    const nombreRef = useRef();
-    const contraseñaRef = useRef();
-    const currentUser = auth.currentUser;
-    const [cambioNombre, setCambioNombre] = useState(false)
-    const [CambioContraseña, setCambioContraseña] = useState(false)
-    const { setTipo, setMensaje,usuario, setUsuario } = useContextoUsuario();
-    const [loading, setLoading] = useState(false)
-    const [foto, setFoto] = useState()
-    const [nombre, setNombre] = useState()
-const email = currentUser.email
-const [imagenPerfil, setImagenPerfil] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
-const iconoFoto = <img src="https://cdn-icons-png.flaticon.com/512/32/32220.png" />
-
-//actualizar foto de perfil
-
-async function upload(file, currentUser) {
-    const fileRef = ref(storage, currentUser.uid + '.png');
-
-
-    await uploadBytes(fileRef, file);
-    const fotoURL = await getDownloadURL(fileRef);
-
-    updateProfile(currentUser, { photoURL: fotoURL });
-    setImagenPerfil(fotoURL)
-
-
-    setMensaje(t("imagen-subida"))
-    setTipo("success")
-}
-
-useEffect(() => {
-    if (currentUser && currentUser.photoURL) {
-        setImagenPerfil(currentUser.photoURL)
-    }
-    setUsuario(currentUser.displayName)
-
-}, [auth])
-
-
-async function cambiarNombre(nombre) {
-    return updateProfile(currentUser, {
-        displayName: nombre,
-    }).catch((error) => {
-        console.log(error)
-    });
-}
-
-async function cambiarContraseña(nuevaContraseña) {
-    updatePassword(currentUser, nuevaContraseña).then(() => {
-        setMensaje(t("error-contraseña"))
-        setTipo("success")
-    }).catch(() => {
-        setMensaje(t("imagen-subida"))
-        setTipo("error")
-    });
-}
-
-function onSubmitNombre(e) {
-    e.preventDefault();
-    const nombre = nombreRef.current.value
-    if (!nombre) {
-        setMensaje(t("campos-obligatorios"))
-        setTipo("error")
-    }
-    if (nombre) {
-        cambiarNombre(nombre)
-        setCambioNombre(!cambioNombre)
-        setUsuario(nombre)
-    }
-}
-
-function onSubmitContraseña(e) {
-    e.preventDefault();
-    const contraseña = contraseñaRef.current.value
-    if (!contraseña) {
-        setMensaje(t("campos-obligatorios"))
-        setTipo("error")
-    }
-    if (contraseña) {
-        cambiarContraseña(contraseña)
-        setCambioContraseña(!CambioContraseña)
-    }
-}
-
-const handleChange = (e) => {
-    if (e.target.files[0]) {
-        setFoto(e.target.files[0])
-        setLoading(true)
-    }
-
-}
-const handleClick = () => {
-    upload(foto, currentUser,)
-    setLoading(false)
-
-}
-const handleNombre = ()=>{
-    setCambioNombre(!cambioNombre)
-    setCambioContraseña(false)
-}
-const handleContraseña = ()=>{
-    setCambioContraseña(!CambioContraseña)
-    setCambioNombre(false)
-}
-
-return (
-    <div className="form flex flex-column ">
-
-
-        <h2 className='flex align-items-center justify-content-center text-4xl  mb-4 text-primary'>{t("menu")}</h2>
-
-        <label style={{ cursor: 'pointer' }} htmlFor="file-input">
-            <div className="relative">
-                <Avatar image={imagenPerfil} referrerPolicy="no-referrer" className="p-overlay-badge block m-auto mb-4 shadow-5 flex align-items-center justify-content-center  " size="xlarge" shape="circle"  >
-                    <Badge value={iconoFoto} className="shadow-5" />
-                </Avatar>
-            </div>
-        </label>
-        <input id="file-input" type="file" onChange={handleChange} hidden={true} />
-        {loading ? <Button label={t("subir")} onClick={handleClick}></Button> : <></>}
-        <p className='flex align-items-center justify-content-center  m-2 bold text-4xl'>{usuario}</p>
-        <p className='flex align-items-center justify-content-center  m-3 bold '> {email}</p>
-        <UsuarioClasificacion />
-        <Button className='flex align-items-center justify-content-center  m-auto my-3 font-bold w-9' label={t("cambiar-nombre")} onClick={() =>handleNombre() }></Button>
-        {cambioNombre ? <div className="flex justify-content-center flex-wrap" ><InputText className='flex align-items-center justify-content-center  m-auto font-bold w-9' placeholder={t("nombre")} type="name" ref={nombreRef} />
-            <Button className='flex align-items-center justify-content-center  my-2 font-bold p-button-outlined w-9' type="submit" label={t("actualizar-nombre")} onClick={onSubmitNombre}></Button> </div> : ""}
-
-        <Button  className='flex align-items-center justify-content-center  m-auto mb-2 font-bold w-9' label={t("cambiar-contraseña")} onClick={() => handleContraseña()}></Button>
-        {CambioContraseña ? <div className='flex justify-content-center flex-wrap ' ><Password  className='flex align-items-center justify-content-center  m-auto font-bold w-9' placeholder={t("contraseña")} type="password" ref={contraseñaRef} toggleMask />
-            <Button className='flex align-items-center justify-content-center  my-2 font-bold p-button-outlined  w-9' type="submit" label={t("actualizar-contraseña")} onClick={onSubmitContraseña}></Button> </div> : ""}
-    </div>
-
-)
-
-
-}
-export default DatosJugador */
