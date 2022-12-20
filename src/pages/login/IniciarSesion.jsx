@@ -16,6 +16,7 @@ import useSignLikeGuest from '../../hooks/useSignLikeGuest'
 import { Link as RouterLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { animacionLogin } from '../../services/animacionLogin'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
 function IniciarSesionEmail() {
   const { t } = useTranslation()
@@ -25,6 +26,8 @@ function IniciarSesionEmail() {
   const { onSubmit } = IniciarSesion(email, contraseña)
   const { inicioAnonimo } = useSignLikeGuest()
   const { animacion, transicion } = animacionLogin()
+  const { switchRecordar } = useContextoUsuario()
+
 
   return (
     <motion.div
@@ -56,10 +59,10 @@ function IniciarSesionEmail() {
             onChange={e => setContraseña(e.target.value)}
           />
           <Container className='d-flex justify-content-between align-items-center mb-5 pointer'>
-            <FormControlLabel control={<Checkbox />} label={t('recordar')} />
+            <FormControlLabel control={<Checkbox  onChange={() => switchRecordar()} />} label={t('recordar')} />
             <Link component={RouterLink} to='/contraseña-olvidada'>
-            {t('contraseña-olvidada')}
-          </Link>
+              {t('contraseña-olvidada')}
+            </Link>
           </Container>
           <Button className='mb-5' size='large' type='submit'>
             {t('continuar')}

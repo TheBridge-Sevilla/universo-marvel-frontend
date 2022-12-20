@@ -3,13 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 //import useLocalStorage from 'use-local-storage'
 import RutasAnimadas from './services/rutasAnimadas'
 import { useContextoUsuario } from './context/contextoUsuario'
-import {auth} from "./services/firebase/firebase"
+import { auth } from "./services/firebase/firebase"
 import { useEffect } from 'react'
-import  {useNavigate}  from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 function App() {
-  const {setUsuario, setUsuarioActual} = useContextoUsuario()
+  const { setUsuario, setUsuarioActual, isRecordarLocal } = useContextoUsuario()
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
 
   /* const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const [theme, setTheme] = useLocalStorage(
@@ -22,12 +24,17 @@ function App() {
     setTheme(newTheme)
   } */
 
+
+
+
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
+      if (user && isRecordarLocal === 'recordar') {
         // User is signed in.
         setUsuario(user.displayName);
         setUsuarioActual(user);
+        if (pathname === "/" || pathname === "/iniciar-sesion" || pathname === "/registro" || pathname === "/contraseña-olvidada"|| pathname === "/dashboard" )
         navigate('/dashboard');
       } else {
         // User is signed out.
@@ -37,8 +44,8 @@ function App() {
       }
     });
     return () => unsubscribe();
-  }, []);
-  
+  }, [auth]);
+
 
   return (
     /*     <div className='App' data-theme={theme}>
@@ -46,9 +53,10 @@ function App() {
         Cambia a modo {theme == 'light' ? 'Noche' : 'Día'}
       </button>
       </div> */
-
-      <RutasAnimadas />
-
+    <>
+    <div>current path is: { pathname}</div>
+    <RutasAnimadas />
+    </>
   )
 }
 

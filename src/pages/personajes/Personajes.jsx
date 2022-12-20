@@ -9,13 +9,18 @@ import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-
+import {useSignOut} from "../../hooks/useSignOut"
+import { useContextoUsuario } from '../../context/contextoUsuario'
+import { Button } from '@mui/material'
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [pagina, setPagina] = useState(1)
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
+  const {cerrarSesion} = useSignOut()
+  const {usuario}= useContextoUsuario()
+
 
   useEffect(() => {
     const url = `${
@@ -73,6 +78,7 @@ function Personajes() {
 
         >
       <div className='d-flex justify-content-between m-4'>
+      {usuario ? <Button onClick={cerrarSesion}> Cerrar Sesion</Button> : <></>}
        <Volver/>
        <BarraAvatar/>
       </div>
