@@ -5,12 +5,14 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
+import { useTranslation } from 'react-i18next'
 import { useContextoUsuario } from '../../context/contextoUsuario'
-import { useContextoAlert } from './../../context/contextoAlert'
+import { useContextoAlert } from '../../context/contextoAlert'
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
+  const { t } = useTranslation()
   const { usuario, setUsuario } = useContextoUsuario()
-  const { setAlert } = useContextoAlert()
+  const { notificacion } = useContextoAlert()
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -19,7 +21,8 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
         .then(usercred => {
           const user = usercred.user
           setUsuario(nombre)
-          console.log('Anonymous account successfully upgraded', user)
+          console.log(user)
+          notificacion(`${t('enlace-cuentas')}, ${nombre}`, 'success')
         })
         .then(() => {
           updateProfile(auth.currentUser, {
@@ -27,7 +30,7 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
           })
         })
         .catch(error => {
-          console.log('Error upgrading anonymous account', error)
+          notificacion(error, 'error')
         })
     } else {
       createUserWithEmailAndPassword(auth, email, contraseña)
@@ -38,7 +41,7 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
         })
         .catch(e => {
           console.log(e.message)
-          setAlert({ mensaje: e.message, open: true, tipo: 'error' })
+          notificacion(e.message, 'error')
         })
     }
   }

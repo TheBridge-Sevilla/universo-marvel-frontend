@@ -3,6 +3,9 @@ import './personaje.css'
 import { Image } from 'react-bootstrap'
 import { Rating, Box, Typography } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
+import Volver from '../Volver'
+import BarraAvatar from '../Avatar'
+
 
 function Personaje(props) {
   const personaje = props.personaje
@@ -40,6 +43,10 @@ function Personaje(props) {
 
   return (
     <div className='contenedor_principal'>
+      <div className='d-flex flex-row justify-content-center'>
+      <Volver/>
+      <BarraAvatar/>
+      </div>
       <div className='contenedor_imagen'>
         <Image
           className='imagen_personaje'
