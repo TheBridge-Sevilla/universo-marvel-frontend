@@ -7,8 +7,12 @@ import ErrorPage from './../pages/notFound/Error404'
 import { AnimatePresence } from 'framer-motion'
 import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
+
+import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
+
 import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
+
 
 
 function RutasAnimadas() {
@@ -24,6 +28,7 @@ function RutasAnimadas() {
           <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
           <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
           <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
+          <Route path='perfilUsuario' element={<PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
