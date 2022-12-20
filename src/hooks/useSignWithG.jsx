@@ -10,9 +10,13 @@ import { useNavigate } from 'react-router-dom'
 import { useContextoAlert } from '../context/contextoAlert'
 
 export function useSignWithG() {
+
+  const { usuario, setUsuario , setUsuarioActual} = useContextoUsuario()
+
   const { t } = useTranslation()
-  const { usuario, setUsuario } = useContextoUsuario()
+
   const { notificacion } = useContextoAlert()
+
   const navigate = useNavigate()
   const provider = new GoogleAuthProvider()
 
@@ -34,6 +38,7 @@ export function useSignWithG() {
         .then(resultado => {
           const nombre = resultado.user.displayName
           setUsuario(nombre)
+          setUsuarioActual(resultado.user)
           navigate('/dashboard')
           notificacion(`${'bienvenido'}, ${nombre}`, 'success')
         })
