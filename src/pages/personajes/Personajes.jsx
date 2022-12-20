@@ -9,19 +9,12 @@ import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-import { json } from 'react-router-dom'
-
-
 function Personajes() {
   const [personajes, setPersonajes] = useState()
-  const [valoraciones, setValoraciones] = useState()
   const [pagina, setPagina] = useState(1)
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
-  const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
-
   useEffect(() => {
-    console.log(personajes)
     const url = `${
       import.meta.env.VITE_BASE_URL
     }/personajes?page=${pagina}&limit=${
@@ -29,18 +22,13 @@ function Personajes() {
     }&filter=${filtro}`
     fetch(url)
       .then(data => data.json())
-      .then(json => {
-        setPersonajes(json.personajes)
-        setValoraciones(json.valoraciones)
-      })
+      .then(json => setPersonajes(json))
     setPagina(1)
   }, [filtro])
-
   function siguientePaginaPersonajes() {
     const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
       pagina + 1
     }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
-
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
@@ -51,16 +39,9 @@ function Personajes() {
         setPersonajes(nuevosPersonajes)
       })
   }
-
   if (personajeSeleccionado) {
-    return (
-      <Personaje
-        personaje={personajeSeleccionado}
-        valoracion={valoracionSeleccionado}
-      />
-    )
+    return <Personaje personaje={personajeSeleccionado} />
   }
-
   if (!personajes) {
     //Componentizar?
     return (
@@ -71,7 +52,6 @@ function Personajes() {
     )
   } else {
     return (
-
       <LazyMotion features={domAnimation}>
         <m.div
           initial={{
@@ -82,7 +62,6 @@ function Personajes() {
             delay: 1,
           }}
           transition={{ duration: 0.5 }}
-
         >
       <div className='d-flex justify-content-between m-4'>
        <Volver/>
@@ -118,7 +97,6 @@ function Personajes() {
                 key={i}
                 onClick={() => {
                   setPersonajeSeleccionado(personaje)
-                  setValoracionSeleccionado(valoraciones[i])
                 }}
               >
                 <Image
@@ -135,7 +113,7 @@ function Personajes() {
                       <span>
                         <AiFillStar />
                       </span>{' '}
-                      {valoraciones[i] ? valoraciones[i] : 'Non rated'}
+                      4.9
                     </p>
                   </div>
                 </div>
