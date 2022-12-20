@@ -15,7 +15,7 @@ export default function ContraseñaOlvidada() {
   const contraseñaOlvidada = email => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        notificacion(`${t('contraseña-cambiada')}`, 'info')
+        notificacion(`${t('contraseña-cambiada')}`, 'success')
       })
       .catch(e => {
         notificacion(e.message, 'error')
@@ -25,7 +25,6 @@ export default function ContraseñaOlvidada() {
   const forgotPasswordHandler = e => {
     e.preventDefault()
     if (!email) {
-      console.log('introduce el email')
       notificacion(`${t('introduce-email')}`)
     } else if (email) {
       contraseñaOlvidada(email)
