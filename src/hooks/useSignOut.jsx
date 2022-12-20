@@ -2,9 +2,13 @@ import {auth} from "../services/firebase/firebase"
 import { signOut } from 'firebase/auth'
 import { useContextoUsuario } from '../context/contextoUsuario'
 import { useNavigate } from 'react-router-dom'
+import { useContextoAlert } from '../context/contextoAlert'
 
 export function useSignOut() {
+
   const { setUsuario,setUsuarioActual } = useContextoUsuario()
+  const { notificacion } = useContextoAlert()
+
   const navigate = useNavigate()
 
   const cerrarSesion = () => {
@@ -13,9 +17,10 @@ export function useSignOut() {
         setUsuario()
         setUsuarioActual()
         navigate('/inicio')
+        notificacion(`${'sesion-cerrada'}`)
       })
       .catch(error => {
-        console.log(error)
+        notificacion(error, 'error')
       })
   }
 
