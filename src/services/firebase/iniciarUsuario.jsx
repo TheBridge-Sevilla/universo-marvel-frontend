@@ -1,5 +1,9 @@
 import { useContextoUsuario } from '../../context/contextoUsuario'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+} from 'firebase/auth'
 import { auth } from '../../services/firebase/firebase'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
@@ -24,6 +28,9 @@ export const IniciarSesion = (email, contraseña) => {
       })
   }
   console.log(usuario)
+  const recuerdame = () => {
+      setPersistence(auth, browserLocalPersistence)
+  }
 
   const onSubmit = e => {
     e.preventDefault()
@@ -37,5 +44,5 @@ export const IniciarSesion = (email, contraseña) => {
     }
   }
 
-  return { onSubmit }
+  return { onSubmit, recuerdame }
 }

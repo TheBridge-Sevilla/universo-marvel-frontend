@@ -22,9 +22,14 @@ function IniciarSesionEmail() {
   const { iniciarSesionConG } = useSignWithG()
   const [email, setEmail] = useState('')
   const [contraseña, setContraseña] = useState('')
-  const { onSubmit } = IniciarSesion(email, contraseña)
+  const { onSubmit, recuerdame } = IniciarSesion(email, contraseña)
   const { inicioAnonimo } = useSignLikeGuest()
   const { animacion, transicion } = animacionLogin()
+  const handleCheck = e => {
+    if (e.target.checked === true) {
+      recuerdame
+    }
+  }
 
   return (
     <motion.div
@@ -56,10 +61,14 @@ function IniciarSesionEmail() {
             onChange={e => setContraseña(e.target.value)}
           />
           <Container className='d-flex justify-content-between align-items-center mb-5 pointer'>
-            <FormControlLabel control={<Checkbox />} label={t('recordar')} />
+            <FormControlLabel
+              control={<Checkbox />}
+              label={t('recordar')}
+              onChange={handleCheck}
+            />
             <Link component={RouterLink} to='/contraseña-olvidada'>
-            {t('contraseña-olvidada')}
-          </Link>
+              {t('contraseña-olvidada')}
+            </Link>
           </Container>
           <Button className='mb-5' size='large' type='submit'>
             {t('continuar')}
