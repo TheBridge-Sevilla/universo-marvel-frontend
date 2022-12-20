@@ -1,5 +1,6 @@
 :root {
   --background: #F7F7F7;
+  --background-nav: rgba(21, 18, 30, 0.8);
   --text: #212121;
   --primary: #FF0100;
   --secondary: #F6F6F6;
@@ -204,11 +205,29 @@ p {
 }
 
 /* botones de la bottom bar */
-.MuiBottomNavigation-root {
+.contenedor_barra_navegación {
+  background-color: var(--background-nav) !important;
+
+}
+
+.contenedor_navegacion {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: var(--primary) !important;
+  background-color: var(--background-nav) !important;
+  height: auto !important;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+
+
+}
+
+.contenedor_boton_navegacion {
+  background-color: var(--background-nav) !important;
+  height: auto;
+
+
 }
 
 /* routes css */
@@ -247,9 +266,10 @@ p {
 .ocupar-pantalla {
   height: 100vh;
 }
+
 :-webkit-autofill,
-:-webkit-autofill:hover, 
+:-webkit-autofill:hover,
 :-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--primary) ;
+  -webkit-text-fill-color: var(--primary);
   transition: background-color 5000s ease-in-out 0s;
 }
