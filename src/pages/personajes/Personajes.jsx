@@ -9,8 +9,6 @@ import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-import { json } from 'react-router-dom'
-
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
@@ -46,7 +44,6 @@ function Personajes() {
     fetch(url)
       .then(data => data.json())
       .then(json => {
-        
         console.log(personajes)
         let nuevosPersonajes = json.personajes
         nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
@@ -75,7 +72,6 @@ function Personajes() {
     )
   } else {
     return (
-
       <LazyMotion features={domAnimation}>
         <m.div
           initial={{
@@ -86,13 +82,11 @@ function Personajes() {
             delay: 1,
           }}
           transition={{ duration: 0.5 }}
-
         >
-      <div className='d-flex justify-content-between m-4'>
-       <Volver/>
-       <BarraAvatar/>
-      </div>
-          {' '}
+          <div className='d-flex justify-content-between m-4'>
+            <Volver />
+            <BarraAvatar />
+          </div>{' '}
           <Container className='my-4'>
             <Form.Control
               type='text'
