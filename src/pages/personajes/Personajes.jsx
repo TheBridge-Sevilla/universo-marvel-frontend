@@ -9,7 +9,7 @@ import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-
+import { json } from 'react-router-dom'
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [valoraciones, setValoraciones] = useState()
@@ -17,7 +17,6 @@ function Personajes() {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
   const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
-
   useEffect(() => {
     console.log(personajes)
     const url = `${
@@ -33,13 +32,11 @@ function Personajes() {
       })
     setPagina(1)
   }, [filtro])
-
   function siguientePaginaPersonajes() {
     console.log('nextentra')
     const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
       pagina + 1
     }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
-
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
@@ -52,8 +49,6 @@ function Personajes() {
         setValoraciones(valoraciones.concat(json.valoraciones))
       })
   }
-
-  console.log(valoraciones)
   if (personajeSeleccionado) {
     return (
       <Personaje
@@ -62,7 +57,6 @@ function Personajes() {
       />
     )
   }
-
   if (!personajes) {
     //Componentizar?
     return (
@@ -84,10 +78,11 @@ function Personajes() {
           }}
           transition={{ duration: 0.5 }}
         >
-          <div className='d-flex justify-content-between m-4'>
-            <Volver />
-            <BarraAvatar />
-          </div>{' '}
+      <div className='d-flex justify-content-between m-4'>
+       <Volver/>
+       <BarraAvatar/>
+      </div>
+          {' '}
           <Container className='my-4'>
             <Form.Control
               type='text'

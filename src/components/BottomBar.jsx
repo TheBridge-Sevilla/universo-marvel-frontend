@@ -20,9 +20,9 @@ export default function BottomBar() {
         }}
       >
         <BottomNavigationAction
-          label='Recents'
+          label='Home'
           icon={<ArrowCounterclockwise />}
-          onClick={() => navigate('introducirDireccion')}
+          onClick={() => navigate('/introducirDireccion')}
         />
         <BottomNavigationAction
           label='Personajes'
@@ -32,7 +32,7 @@ export default function BottomBar() {
         <BottomNavigationAction
           label='Ajustes'
           icon={<Gear />}
-          onClick={() => navigate('/iniciar-sesion')}
+          onClick={() => navigate('/perfilUsuario')}
         />
       </BottomNavigation>
     </Paper>
