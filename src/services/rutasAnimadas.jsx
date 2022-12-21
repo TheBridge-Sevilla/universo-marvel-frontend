@@ -8,19 +8,28 @@ import { AnimatePresence } from 'framer-motion'
 import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
 
+import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
+
+import PrivateRoute from '../components/PrivateRoute'
+import PublicRoute from '../components/PublicRoute'
+
+
+
 function RutasAnimadas() {
   const location = useLocation()
+  
 
   return (
     <Container style={{ overflowX: 'hidden' }}>
       <AnimatePresence mode='wait'>
         <Routes location={location} key={location.pathname}>
-          <Route path='/' element={<Inicio />} />
-          <Route path='iniciar-sesion' element={<IniciarSesionEmail />} />
-          <Route path='registro' element={<Registro />} />
-          <Route path='contraseña-olvidada' element={<ContraseñaOlvidada />} />
-          <Route path='dashboard' element={<Personajes />} />
-          <Route path='/' element={<ErrorPage />} />
+          <Route path='/' element={<PublicRoute><Inicio /></PublicRoute>} />
+          <Route path='iniciar-sesion' element={<PublicRoute><IniciarSesionEmail /></PublicRoute>} />
+          <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
+          <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
+          <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
+          <Route path='perfilUsuario' element={<PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
     </Container>

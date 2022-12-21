@@ -6,15 +6,21 @@ import { useNavigate } from 'react-router-dom'
 import { useContextoAlert } from '../../context/contextoAlert'
 
 export const IniciarSesion = (email, contraseña) => {
+
+  const { usuario, setUsuario,setUsuarioActual,usuarioActual } = useContextoUsuario()
+
   const { t } = useTranslation()
-  const { usuario, setUsuario } = useContextoUsuario()
+
   const { notificacion } = useContextoAlert()
+
 
   const navigate = useNavigate()
   const iniciarSesionEmail = (email, contraseña) => {
     signInWithEmailAndPassword(auth, email, contraseña)
       .then(() => {
         setUsuario(auth.currentUser.displayName)
+        setUsuarioActual(auth.currentUser)
+        console.log('usuarioActual', usuarioActual)
         navigate('/dashboard')
         notificacion(`${t('bienvenido')}, ${usuario}`, 'info')
       })
