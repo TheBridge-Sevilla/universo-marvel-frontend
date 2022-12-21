@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import './personaje.css'
 import { Image } from 'react-bootstrap'
 import { Rating, Box, Typography } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
 import Volver from '../Volver'
 import BarraAvatar from '../Avatar'
-import Navbar from '../navbar/Navbar'
 
 
 function Personaje(props) {
