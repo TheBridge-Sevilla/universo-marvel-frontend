@@ -12,7 +12,6 @@ import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { Button } from '@mui/material'
 
-
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [pagina, setPagina] = useState(1)
@@ -34,6 +33,7 @@ function Personajes() {
     setPagina(1)
   }, [filtro])
   function siguientePaginaPersonajes() {
+    console.log('nextentra')
     const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
       pagina + 1
     }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
@@ -42,9 +42,11 @@ function Personajes() {
       .then(data => data.json())
       .then(json => {
         console.log(personajes)
-        let nuevosPersonajes = json
-        nuevosPersonajes.docs = personajes.docs.concat(json.docs)
+        let nuevosPersonajes = json.personajes
+        nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
+        console.log(nuevosPersonajes)
         setPersonajes(nuevosPersonajes)
+        setValoraciones(valoraciones.concat(json.valoraciones))
       })
   }
   if (personajeSeleccionado) {
@@ -71,11 +73,10 @@ function Personajes() {
           }}
           transition={{ duration: 0.5 }}
         >
-      <div className='d-flex justify-content-between m-4'>
-       <Volver/>
-       <BarraAvatar/>
-      </div>
-          {' '}
+          <div className='d-flex justify-content-between m-4'>
+            <Volver />
+            <BarraAvatar />
+          </div>{' '}
           <Container className='my-4'>
             <Form.Control
               type='text'
