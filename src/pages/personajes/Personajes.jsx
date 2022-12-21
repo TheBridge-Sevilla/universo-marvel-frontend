@@ -5,11 +5,11 @@ import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Personaje from '../../components/personaje/Personaje'
-import BottomBar from '../../components/BottomBar'
+import Navbar from '../../components/navbar/Navbar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-import { json } from 'react-router-dom'
+
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [valoraciones, setValoraciones] = useState()
@@ -78,11 +78,10 @@ function Personajes() {
           }}
           transition={{ duration: 0.5 }}
         >
-      <div className='d-flex justify-content-between m-4'>
-       <Volver/>
-       <BarraAvatar/>
-      </div>
-          {' '}
+          <div className='d-flex justify-content-between m-4'>
+            <Volver />
+            <BarraAvatar />
+          </div>{' '}
           <Container className='my-4'>
             <Form.Control
               type='text'
@@ -136,7 +135,7 @@ function Personajes() {
               </Container>
             ))}
           </InfiniteScroll>
-          <BottomBar />
+          <Navbar />
         </m.div>
       </LazyMotion>
     )

@@ -10,9 +10,14 @@
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
-    
+
 }
-.contenedor_scroll{
+
+.contenedor_scroll {
+    padding: 0.8rem;
+}
+
+.contenedor_scroll {
     padding: 0.8rem;
 }
 
@@ -20,8 +25,6 @@
     width: 100%;
     height: 65%;
     border-radius: 30px;
-
-
 
 }
 
@@ -83,8 +86,9 @@
     width: 20%;
 
 }
-@media (min-width: 450px){
-    #contenedor_personajes{
-      height: auto;
+
+@media (min-width: 450px) {
+    #contenedor_personajes {
+        height: auto;
     }
-  }
+}
