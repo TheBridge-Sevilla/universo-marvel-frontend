@@ -96,11 +96,17 @@ button {
 
 button:hover {
   background-color: var(--hover) !important;
+
+}
+button:focus {
+  background-color: green !important;
+
 }
 
-a {
+
+/* a {
   color: var(--secondary) !important;
-}
+} */
 
 h1 {
   font-size: 3rem;
@@ -205,31 +211,26 @@ p {
 }
 
 /* botones de la bottom bar */
-.contenedor_barra_navegación {
-  background-color: var(--background-nav) !important;
 
-}
-
-.contenedor_navegacion {
-  position: fixed;
-  bottom: 0;
+.contenedor_navbar {
+  background: var(--background-nav);
   width: 100%;
-  background-color: var(--background-nav) !important;
-  height: auto !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position:fixed;
+  bottom: 0;
+  padding:  0.8rem;
   border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-
-
 }
-
-.contenedor_boton_navegacion {
-  background-color: var(--background-nav) !important;
-  height: auto;
-
-
+.contenedor_navbar > a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
 }
-
 /* routes css */
 .fadeIn {
   animation: 0.5s fadeIn forwards;
@@ -238,6 +239,9 @@ p {
 .fadeOut {
   animation: 0.5s fadeOut forwards;
 }
+/* .modificarSVG > svg {
+ background-color: #28b728;
+} */
 
 @keyframes fadeIn {
   from {

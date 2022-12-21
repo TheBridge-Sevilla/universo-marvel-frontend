@@ -3,11 +3,13 @@ import './personaje.css'
 import { Image } from 'react-bootstrap'
 import Volver from '../Volver'
 import BarraAvatar from '../Avatar'
+import Navbar from '../navbar/Navbar'
 
 function Personaje(props) {
   const personaje = props.personaje
   return (
     <div className='contenedor_principal'>
+      
       <div className='d-flex flex-row justify-content-center'>
       <Volver/>
       <BarraAvatar/>
@@ -18,6 +20,7 @@ function Personaje(props) {
           src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
           alt={`${personaje.name} imagen`}
         />
+        <Navbar/>
       </div>
     </div>
   )
