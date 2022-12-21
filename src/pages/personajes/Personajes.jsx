@@ -37,6 +37,7 @@ function Personajes() {
   }, [filtro])
 
   function siguientePaginaPersonajes() {
+    console.log('nextentra')
     const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
       pagina + 1
     }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
@@ -45,10 +46,13 @@ function Personajes() {
     fetch(url)
       .then(data => data.json())
       .then(json => {
+        
         console.log(personajes)
-        let nuevosPersonajes = json
-        nuevosPersonajes.docs = personajes.docs.concat(json.docs)
+        let nuevosPersonajes = json.personajes
+        nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
+        console.log(nuevosPersonajes)
         setPersonajes(nuevosPersonajes)
+        setValoraciones(valoraciones.concat(json.valoraciones))
       })
   }
 
