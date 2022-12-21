@@ -9,20 +9,29 @@ import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
 import Personaje from '../components/personaje/Personaje'
 
+import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
+
+import PrivateRoute from '../components/PrivateRoute'
+import PublicRoute from '../components/PublicRoute'
+
+
+
 function RutasAnimadas() {
   const location = useLocation()
+  
 
   return (
     <Container style={{ overflowX: 'hidden', padding: '0' }}>
       <AnimatePresence mode='wait'>
         <Routes location={location} key={location.pathname}>
-          <Route path='/' element={<Inicio />} />
-          <Route path='iniciar-sesion' element={<IniciarSesionEmail />} />
-          <Route path='registro' element={<Registro />} />
-          <Route path='contraseña-olvidada' element={<ContraseñaOlvidada />} />
-          <Route path='dashboard' element={<Personajes />} />
+          <Route path='/' element={<PublicRoute><Inicio /></PublicRoute>} />
+          <Route path='iniciar-sesion' element={<PublicRoute><IniciarSesionEmail /></PublicRoute>} />
+          <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
+          <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
+          <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
           <Route path='personaje' element={<Personaje />} />
-          <Route path='/' element={<ErrorPage />} />
+          <Route path='perfilUsuario' element={<PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
     </Container>
