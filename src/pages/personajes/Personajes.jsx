@@ -53,6 +53,7 @@ function Personajes() {
       })
   }
 
+  console.log(valoraciones)
   if (personajeSeleccionado) {
     return (
       <Personaje
