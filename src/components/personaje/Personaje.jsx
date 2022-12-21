@@ -12,7 +12,6 @@ function Personaje() {
   const { personajeSeleccionado } = useContextoUsuario()
   const personaje = personajeSeleccionado
   const valoracion = personajeSeleccionado.valoracion
-  console.log('personaje', personaje)
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${personaje._id

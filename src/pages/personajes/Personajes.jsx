@@ -43,9 +43,6 @@ function Personajes() {
         setPersonajes(nuevosPersonajes)
       })
   }
-  /*   if (personajeSeleccionado) {
-      return <Personaje personaje={personajeSeleccionado} />
-    } */
   if (!personajes) {
     //Componentizar?
     return (
