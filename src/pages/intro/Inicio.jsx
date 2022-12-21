@@ -4,10 +4,12 @@ import { Button } from '@mui/material'
 import useSignLikeGuest from '../../hooks/useSignLikeGuest'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
 const Inicio = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
+  const {usuario,usuarioActual} = useContextoUsuario()
   const { inicioAnonimo } = useSignLikeGuest()
 
   return (
@@ -29,6 +31,7 @@ const Inicio = () => {
           size='large'
           onClick={inicioAnonimo}
         >
+
           {t('sesion-invitado')}
         </Button>
       </Container>

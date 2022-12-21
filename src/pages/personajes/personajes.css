@@ -12,6 +12,9 @@
     text-align: left;
     
 }
+.contenedor_scroll{
+    padding: 0.8rem;
+}
 
 .imagen_personajes {
     width: 100%;
@@ -27,7 +30,7 @@
     font-size: 10px;
     padding-top: 0.5rem;
     float: left;
-    width: 70%;
+    width: 56%;
     height: 10px;
 }
 
@@ -81,7 +84,7 @@
 
 }
 @media (min-width: 450px){
-    #contenedor_personaje{
+    #contenedor_personajes{
       height: auto;
     }
   }

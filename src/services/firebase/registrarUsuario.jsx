@@ -5,13 +5,23 @@ import {
   linkWithCredential,
 } from 'firebase/auth'
 import { auth } from './firebase'
+import { useTranslation } from 'react-i18next'
 import { useContextoUsuario } from '../../context/contextoUsuario'
-import { useContextoAlert } from '../../context/contextoAlert'
+
+import { useContextoAlert } from './../../context/contextoAlert'
+import { useNavigate } from 'react-router-dom'
+
+
 
 export const RegistrarUsuario = (nombre, email, contraseña) => {
-  console.log('registrarusuario se renderiza')
+  const { t } = useTranslation()
   const { usuario, setUsuario } = useContextoUsuario()
+
+  const { setAlert } = useContextoAlert()
+  const navigate = useNavigate()
+
   const { notificacion } = useContextoAlert()
+
 
   const registrarUsuario = (email, contraseña, nombre) => {
     if (usuario == 'invitado') {
@@ -20,7 +30,14 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
         .then(usercred => {
           const user = usercred.user
           setUsuario(nombre)
+
+          setUsuarioActual(auth.currentUser)
+          navigate('/dashboard')
           console.log('Anonymous account successfully upgraded', user)
+
+          console.log(user)
+          notificacion(`${t('enlace-cuentas')}, ${nombre}`, 'success')
+
         })
         .then(() => {
           updateProfile(auth.currentUser, {
@@ -28,7 +45,7 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
           })
         })
         .catch(error => {
-          console.log('Error upgrading anonymous account', error)
+          notificacion(error, 'error')
         })
     } else {
       createUserWithEmailAndPassword(auth, email, contraseña)
@@ -36,6 +53,11 @@ export const RegistrarUsuario = (nombre, email, contraseña) => {
           return updateProfile(auth.currentUser, {
             displayName: nombre,
           })
+        })
+        .then(() => {
+          setUsuario(nombre)
+          setUsuarioActual(auth.currentUser)
+          navigate('/dashboard')
         })
         .catch(e => {
           console.log(e.message)
