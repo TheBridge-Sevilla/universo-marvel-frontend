@@ -9,6 +9,7 @@ import BottomBar from '../../components/BottomBar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'
+//import Stack from '@mui/material/Stack'
 
 export default function PerfilUsuario() {
   const { usuarioActual } = useContextoUsuario()
@@ -16,7 +17,11 @@ export default function PerfilUsuario() {
 
 
   return (
-    <Container spacing={2} justifyContent='center' alignItems='center'>
+/*     <Container spacing={2} justifyContent='center' alignItems='center'> */
+          <Container
+      className='d-flex flex-column justify-content-around align-items-center'
+      fluid
+    >
       <h6 className='my-5'>{t('Perfil')}</h6>
 <AvatarUsuario />
       <Form className='d-flex flex-column justify-content-center'>

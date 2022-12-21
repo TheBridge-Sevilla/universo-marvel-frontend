@@ -14,7 +14,7 @@ export default function AvatarUsuario() {
   const avatarSinImagen =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
   const [imagenPerfil, setImagenPerfil] = useState(avatarSinImagen)
-  const currentUser = ''
+  const currentUser = auth.currentUser
 
   const [loading, setLoading] = useState(false)
   const [foto, setFoto] = useState()
