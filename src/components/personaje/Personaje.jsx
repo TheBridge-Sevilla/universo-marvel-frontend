@@ -5,13 +5,15 @@ import { Rating, Box, Typography } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
 import Volver from '../Volver'
 import BarraAvatar from '../Avatar'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
 
-function Personaje(props) {
-  const personaje = props.personaje
-  const valoracion = props.valoracion
+function Personaje() {
+  const { personajeSeleccionado } = useContextoUsuario()
+  const personaje = personajeSeleccionado
+  const valoracion = personajeSeleccionado.valoracion
+  console.log('personaje', personaje)
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
-
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${personaje._id
       }&idUsuario=${auth.currentUser.uid}`
@@ -43,9 +45,9 @@ function Personaje(props) {
 
   return (
     <div className='contenedor_principal'>
+      <Volver />
+      <BarraAvatar />
       <div className='d-flex flex-row justify-content-center'>
-      <Volver/>
-      <BarraAvatar/>
       </div>
       <div className='contenedor_imagen'>
         <Image
@@ -69,7 +71,7 @@ function Personaje(props) {
           </Box>
         </div>
         <br />
-        Valoracion global : 
+        Valoracion global :
         {valoracion ? (
           <Rating
             name='half-rating-read'

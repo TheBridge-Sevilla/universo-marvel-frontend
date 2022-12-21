@@ -9,6 +9,7 @@ import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
 import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
+import Personaje from '../components/personaje/Personaje'
 
 
 function RutasAnimadas() {
@@ -24,6 +25,7 @@ function RutasAnimadas() {
           <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
           <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
           <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
+          <Route path='personaje' element={<PrivateRoute ><Personaje /></PrivateRoute>} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
