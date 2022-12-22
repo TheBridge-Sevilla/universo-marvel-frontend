@@ -1,16 +1,19 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import useLocalStorage from 'use-local-storage'
-import FormularioRegistro from './pages/login/FormularioRegistro'
-import Inicio from './pages/intro/Inicio'
+//import useLocalStorage from 'use-local-storage'
+import RutasAnimadas from './services/rutasAnimadas'
 import { useContextoUsuario } from './context/contextoUsuario'
-import NavBar from './components/NavBar'
-import IniciarSesion from './pages/login/IniciarSesion'
-import Intro from './pages/intro/Intro'
-import Personajes from './components/personajes/Personajes'
+import { auth } from "./services/firebase/firebase"
+import { useEffect } from 'react'
+import { useNavigate,useLocation } from 'react-router-dom';
+
 function App() {
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const {usuario,pantalla, setPantalla} = useContextoUsuario()
+  const { setUsuario, setUsuarioActual, isRecordarLocal } = useContextoUsuario()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
+
+  /* const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const [theme, setTheme] = useLocalStorage(
     'theme',
     defaultDark ? 'dark' : 'light'
@@ -19,15 +22,40 @@ function App() {
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
-  }
+  } */
+
+
+
+
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user && isRecordarLocal === 'recordar') {
+        // User is signed in.
+        setUsuario(user.displayName);
+        setUsuarioActual(user);
+        if (pathname === "/" || pathname === "/iniciar-sesion" || pathname === "/registro" || pathname === "/contraseña-olvidada"|| pathname === "/dashboard" )
+        navigate('/dashboard');
+      } else {
+        // User is signed out.
+        setUsuario();
+        setUsuarioActual();
+
+      }
+    });
+    return () => unsubscribe();
+  }, [auth]);
+
+
   return (
-    <div className='App' data-theme={theme}>
-      {usuario ? setPantalla('home') :<></>}
-      {!usuario && pantalla === 'inicio' ? <Inicio />: <></>}
-      {!usuario && pantalla === 'formulario' ? <FormularioRegistro />: <></>}
-      <NavBar />
-      {/*       <button onClick={switchTheme}>Cambia a modo {theme == "light" ? "Noche" : "Día"}</button> */}
-    </div>
+    /*     <div className='App' data-theme={theme}>
+           <button onClick={switchTheme}>
+        Cambia a modo {theme == 'light' ? 'Noche' : 'Día'}
+      </button>
+      </div> */
+    
+    <RutasAnimadas />
+    
   )
 }
 
