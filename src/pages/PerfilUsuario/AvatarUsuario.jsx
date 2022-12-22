@@ -6,15 +6,16 @@ import { updateProfile } from 'firebase/auth'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
 import BarraAvatar from '../../components/Avatar'
 import Stack from '@mui/material/Stack'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
 export default function AvatarUsuario() {
 
   const { t } = useTranslation()
-
+  const {usuarioActual} = useContextoUsuario()
   const avatarSinImagen =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
   const [imagenPerfil, setImagenPerfil] = useState(avatarSinImagen)
-  const currentUser = auth.currentUser
+  const currentUser = usuarioActual
 
   const [loading, setLoading] = useState(false)
   const [foto, setFoto] = useState()
@@ -62,7 +63,7 @@ export default function AvatarUsuario() {
             id='imagenAvatar'
             type='file'
             label={t('subir')}
-            onClick={handleChange}
+            onChange={handleChange}
           ></TextField>
         </Button>
         {loading ? (
