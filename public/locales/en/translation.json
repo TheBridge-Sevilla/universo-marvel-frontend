@@ -16,5 +16,7 @@
     "introduce-email": "Put your email",
     "enlace-cuentas": "accounts linked correctly, welcome back",
     "bienvenido": "welcome",
-    "sesion-cerrada": "Session successfully closed"
+    "sesion-cerrada": "Session successfully closed",
+    "subir": "Upload",
+    "borrar": "Delete"
 }
