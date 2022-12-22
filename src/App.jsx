@@ -18,7 +18,6 @@ function App() {
     'theme',
     defaultDark ? 'dark' : 'light'
   )
-
   const switchTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
