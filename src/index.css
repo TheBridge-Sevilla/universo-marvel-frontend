@@ -1,5 +1,6 @@
 :root {
   --background: #F7F7F7;
+  --background-nav: rgba(21, 18, 30, 0.8);
   --text: #212121;
   --primary: #FF0100;
   --secondary: #F6F6F6;
@@ -95,11 +96,17 @@ button {
 
 button:hover {
   background-color: var(--hover) !important;
+
+}
+button:focus {
+  background-color: green !important;
+
 }
 
-a {
+
+/* a {
   color: var(--secondary) !important;
-}
+} */
 
 h1 {
   font-size: 3rem;
@@ -204,13 +211,26 @@ p {
 }
 
 /* botones de la bottom bar */
-.MuiBottomNavigation-root {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--primary) !important;
-}
 
+.contenedor_navbar {
+  background: var(--background-nav);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position:fixed;
+  bottom: 0;
+  padding:  0.8rem;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+.contenedor_navbar > a{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+}
 /* routes css */
 .fadeIn {
   animation: 0.5s fadeIn forwards;
@@ -219,6 +239,9 @@ p {
 .fadeOut {
   animation: 0.5s fadeOut forwards;
 }
+/* .modificarSVG > svg {
+ background-color: #28b728;
+} */
 
 @keyframes fadeIn {
   from {
@@ -247,10 +270,11 @@ p {
 .ocupar-pantalla {
   height: 100vh;
 }
+
 :-webkit-autofill,
-:-webkit-autofill:hover, 
+:-webkit-autofill:hover,
 :-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--primary) ;
+  -webkit-text-fill-color: var(--primary);
   transition: background-color 5000s ease-in-out 0s;
 }
 #placeholder{

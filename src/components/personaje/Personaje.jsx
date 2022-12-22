@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import './personaje.css'
 import { Image } from 'react-bootstrap'
 import { Rating, Box, Typography } from '@mui/material'
@@ -48,6 +48,7 @@ function Personaje() {
     <div className='contenedor_principal'>
       <Volver />
       <BarraAvatar />
+      
       <div className='d-flex flex-row justify-content-center'>
       </div>
       <div className='contenedor_imagen'>

@@ -1,15 +1,10 @@
-import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FormGroup, TextField } from '@mui/material' //Link?
+import { FormGroup, TextField } from '@mui/material' 
 import { Container, Form } from 'react-bootstrap'
-import { auth, storage } from '../../services/firebase/firebase'
-import { updateProfile } from 'firebase/auth'
-import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
-import BottomBar from '../../components/BottomBar'
+import Navbar from '../../components/navbar/Navbar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'
-//import Stack from '@mui/material/Stack'
 import { useSignOut } from "../../hooks/useSignOut"
 import { Button } from '@mui/material'
 export default function PerfilUsuario() {
@@ -19,7 +14,6 @@ export default function PerfilUsuario() {
 
 
   return (
-    /*     <Container spacing={2} justifyContent='center' alignItems='center'> */
     <Container
       className='d-flex flex-column justify-content-around align-items-center'
       fluid
@@ -50,8 +44,7 @@ export default function PerfilUsuario() {
         </FormGroup>
       </Form>
       <PasswordUsuario />
-      <BottomBar />
+      <Navbar />
     </Container>
   )
 }
-

@@ -8,6 +8,7 @@ import { RegistrarUsuario } from '../../services/firebase/registrarUsuario'
 import { Link as RouterLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { animacionLogin } from '../../services/animacionLogin'
+import Navbar from '../../components/navbar/Navbar'
 
 export default function Registro() {
   const { t } = useTranslation()
@@ -27,6 +28,7 @@ export default function Registro() {
       variants={animacion}
       transition={transicion}
     >
+      <Navbar/>
       <Form
         className='ocupar-pantalla d-flex flex-column justify-content-center'
         onSubmit={onSubmit}

@@ -4,46 +4,66 @@ import { Container, Image, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { useContextoUsuario } from '../../context/contextoUsuario'
-import { Button } from '@mui/material'
 import { Link } from 'react-router-dom';
+import Navbar from '../../components/navbar/Navbar'
 
 
 function Personajes() {
   const [personajes, setPersonajes] = useState()
+  const [valoraciones, setValoraciones] = useState()
   const [pagina, setPagina] = useState(1)
+
   const [filtro, setFiltro] = useState('')
   const { setPersonajeSeleccionado, PersonajeSeleccionado } = useContextoUsuario()
-
+  const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
 
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL
-      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
-      }&filter=${filtro}`
+    console.log(personajes)
+    const url = `${
+      import.meta.env.VITE_BASE_URL
+    }/personajes?page=${pagina}&limit=${
+      import.meta.env.VITE_PAGINATION_LIMIT
+    }&filter=${filtro}`
+
     fetch(url)
       .then(data => data.json())
-      .then(json => setPersonajes(json))
+      .then(json => {
+        setPersonajes(json.personajes)
+        setValoraciones(json.valoraciones)
+      })
     setPagina(1)
   }, [filtro])
   function siguientePaginaPersonajes() {
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
-      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
+    console.log('nextentra')
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
+      pagina + 1
+    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
       .then(json => {
         console.log(personajes)
-        let nuevosPersonajes = json
-        nuevosPersonajes.docs = personajes.docs.concat(json.docs)
+        let nuevosPersonajes = json.personajes
+        nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
+        console.log(nuevosPersonajes)
         setPersonajes(nuevosPersonajes)
+        setValoraciones(valoraciones.concat(json.valoraciones))
       })
     console.log('personajes.docs', personajes.docs)
   }
+/*   if (personajeSeleccionado) {
+    return (
+      <Personaje
+        personaje={personajeSeleccionado}
+        valoracion={valoracionSeleccionado}
+      />
+    )
+  } */
   if (!personajes) {
     //Componentizar?
     return (
@@ -68,8 +88,7 @@ function Personajes() {
           <div className='d-flex justify-content-between m-4'>
             <Volver />
             <BarraAvatar />
-          </div>
-          {' '}
+          </div>{' '}
           <Container className='my-4'>
             <Form.Control
               type='text'
@@ -100,6 +119,7 @@ function Personajes() {
                 key={i}
                 onClick={() => {
                   setPersonajeSeleccionado(personaje)
+                  setValoracionSeleccionado(valoraciones[i])
                 }}
               >
                 <Link to={`/personaje/${personaje.name.split(' ')[0].toLowerCase() }`} >
@@ -113,19 +133,19 @@ function Personajes() {
                       <p>{personaje.name}</p>
                     </div>
                     <div className='contenedor_valoracion'>
-                      <p>
-                        <span>
-                          <AiFillStar />
-                        </span>{' '}
-                        4.9
-                      </p>
-                    </div>
+                    <p>
+                      <span>
+                        <AiFillStar />
+                      </span>{' '}
+                      {valoraciones[i] ? valoraciones[i] : 'Non rated'}
+                    </p>
                   </div>
+                </div>
                 </Link>
               </Container>
             ))}
           </InfiniteScroll>
-          <BottomBar />
+          <Navbar />
         </m.div>
       </LazyMotion>
     )
