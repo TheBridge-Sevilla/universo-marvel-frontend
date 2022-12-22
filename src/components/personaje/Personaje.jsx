@@ -8,6 +8,7 @@ import BarraAvatar from '../Avatar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 
 
+
 function Personaje() {
   const { personajeSeleccionado } = useContextoUsuario()
   const personaje = personajeSeleccionado
@@ -43,6 +44,7 @@ function Personaje() {
   }
 
   return (
+
     <div className='contenedor_principal'>
       <Volver />
       <BarraAvatar />

@@ -25,7 +25,7 @@ function RutasAnimadas() {
           <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
           <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
           <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
-          <Route path='personaje' element={<PrivateRoute ><Personaje /></PrivateRoute>} />
+          <Route path='personaje/:name'  element={<PrivateRoute ><Personaje /></PrivateRoute>} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>

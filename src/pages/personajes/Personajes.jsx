@@ -4,7 +4,6 @@ import { Container, Image, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Personaje from '../../components/personaje/Personaje'
 import BottomBar from '../../components/BottomBar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
@@ -13,11 +12,12 @@ import { useContextoUsuario } from '../../context/contextoUsuario'
 import { Button } from '@mui/material'
 import { Link } from 'react-router-dom';
 
+
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
-  const { setPersonajeSeleccionado } = useContextoUsuario()
+  const { setPersonajeSeleccionado, PersonajeSeleccionado } = useContextoUsuario()
 
 
 
@@ -42,6 +42,7 @@ function Personajes() {
         nuevosPersonajes.docs = personajes.docs.concat(json.docs)
         setPersonajes(nuevosPersonajes)
       })
+    console.log('personajes.docs', personajes.docs)
   }
   if (!personajes) {
     //Componentizar?
@@ -79,29 +80,29 @@ function Personajes() {
               }}
             />
           </Container>
-          <Link to='/personaje' >
-            <InfiniteScroll
-              className='contenedor_scroll d-flex flex-wrap mt-4'
-              dataLength={personajes.docs.length}
-              hasMore={pagina < personajes.totalPages}
+          <InfiniteScroll
+            className='contenedor_scroll d-flex flex-wrap mt-4'
+            dataLength={personajes.docs.length}
+            hasMore={pagina < personajes.totalPages}
 
-              next={siguientePaginaPersonajes}
-              loader={
-                <span>
-                  <Spinner animation='border' />
-                  Cargando personajes
-                </span>
-              }
-            >
-              {personajes.docs.map((personaje, i) => (
-                <Container
-                  id='contenedor_personajes'
-                  className='d-flex flex-column justify-content-center text-white'
-                  key={i}
-                  onClick={() => {
-                    setPersonajeSeleccionado(personaje)
-                  }}
-                >
+            next={siguientePaginaPersonajes}
+            loader={
+              <span>
+                <Spinner animation='border' />
+                Cargando personajes
+              </span>
+            }
+          >
+            {personajes.docs.map((personaje, i) => (
+              <Container
+                id='contenedor_personajes'
+                className='d-flex flex-column justify-content-center text-white'
+                key={i}
+                onClick={() => {
+                  setPersonajeSeleccionado(personaje)
+                }}
+              >
+                <Link to={`/personaje/${personaje.name.split(' ')[0].toLowerCase() }`} >
                   <Image
                     className='imagen_personajes'
                     src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
@@ -120,10 +121,10 @@ function Personajes() {
                       </p>
                     </div>
                   </div>
-                </Container>
-              ))}
-            </InfiniteScroll>
-          </Link>
+                </Link>
+              </Container>
+            ))}
+          </InfiniteScroll>
           <BottomBar />
         </m.div>
       </LazyMotion>

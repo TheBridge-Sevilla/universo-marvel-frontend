@@ -5,7 +5,7 @@ import RutasAnimadas from './services/rutasAnimadas'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { auth } from "./services/firebase/firebase"
 import { useEffect } from 'react'
-import { useNavigate,useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
   const { setUsuario, setUsuarioActual, isRecordarLocal } = useContextoUsuario()
@@ -34,8 +34,7 @@ function App() {
         // User is signed in.
         setUsuario(user.displayName);
         setUsuarioActual(user);
-        if (pathname === "/" || pathname === "/iniciar-sesion" || pathname === "/registro" || pathname === "/contraseña-olvidada"|| pathname === "/dashboard" )
-        navigate('/dashboard');
+        navigate(window.location.pathname)
       } else {
         // User is signed out.
         setUsuario();
@@ -53,9 +52,9 @@ function App() {
         Cambia a modo {theme == 'light' ? 'Noche' : 'Día'}
       </button>
       </div> */
-    
+
     <RutasAnimadas />
-    
+
   )
 }
 
