@@ -7,8 +7,9 @@ import Navbar from '../../components/navbar/Navbar'
 export default function Destacados() {
   const { t } = useTranslation()
   return (
+    <>
     <Container className='d-flex-column'>
-      <Nav className="justify-content-end">
+      <Nav className='justify-content-end'>
         <Avatar />
       </Nav>
       <p>{t('Tu personaje favorito')}</p>
@@ -16,7 +17,8 @@ export default function Destacados() {
 
       <p>{t('Tu personaje más votado')}</p>
       <Image src='../../public/votado.svg'></Image>
-      <Navbar />
     </Container>
+    <Navbar />
+    </>
   )
 }
