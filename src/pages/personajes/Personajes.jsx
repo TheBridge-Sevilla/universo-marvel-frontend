@@ -9,7 +9,7 @@ import Navbar from '../../components/navbar/Navbar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
-
+import Carga from '../intro/Carga'
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [valoraciones, setValoraciones] = useState()
@@ -17,26 +17,38 @@ function Personajes() {
   const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
   const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
+
+
+
+
   useEffect(() => {
-    console.log(personajes)
-    const url = `${
-      import.meta.env.VITE_BASE_URL
-    }/personajes?page=${pagina}&limit=${
-      import.meta.env.VITE_PAGINATION_LIMIT
-    }&filter=${filtro}`
-    fetch(url)
+    const url = `${import.meta.env.VITE_BASE_URL
+      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
+      }&filter=${filtro}`
+
+    if (window.localStorage.getItem("personajes")) {
+      setPersonajes(JSON.parse(window.localStorage.getItem("personajes")))
+      setValoraciones(JSON.parse(window.localStorage.getItem("valoraciones")))
+
+    }
+    else{
+      fetch(url)
       .then(data => data.json())
       .then(json => {
         setPersonajes(json.personajes)
         setValoraciones(json.valoraciones)
+        window.localStorage.setItem("personajes", JSON.stringify(json.personajes))
+        window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
+    }
+
     setPagina(1)
   }, [filtro])
+
   function siguientePaginaPersonajes() {
     console.log('nextentra')
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
-      pagina + 1
-    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
+      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
@@ -47,6 +59,8 @@ function Personajes() {
         console.log(nuevosPersonajes)
         setPersonajes(nuevosPersonajes)
         setValoraciones(valoraciones.concat(json.valoraciones))
+        window.localStorage.setItem("personajes", JSON.stringify(json.personajes))
+        window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
   }
   if (personajeSeleccionado) {
@@ -60,10 +74,11 @@ function Personajes() {
   if (!personajes) {
     //Componentizar?
     return (
-      <span className='h-100 d-flex justify-content-center align-items-center'>
+/*       <span className='h-100 d-flex justify-content-center align-items-center'>
         <Spinner animation='border' />
         Cargando personajes
-      </span>
+      </span> */
+      <Carga/>
     )
   } else {
     return (
