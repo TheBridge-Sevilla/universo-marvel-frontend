@@ -13,7 +13,7 @@ export default function PerfilUsuario() {
   return (
     <>
       <Container className='d-flex flex-column justify-center align-items-center m-2'>
-        <h6 className='my-4'>{t('Perfil')}</h6>
+        <h6 className='my-4'>{t('perfil')}</h6>
         <AvatarUsuario />
         <Form className='d-flex flex-column justify-content-center mt-2'>
           <FormGroup className='d-flex flex-column justify-content-center mx-4'>

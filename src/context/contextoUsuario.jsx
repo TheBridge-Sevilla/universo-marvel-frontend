@@ -10,6 +10,8 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState('')
   const [usuarioActual, setUsuarioActual] = useState('')
   const [pantalla, setPantalla] = useState('')
+  const [personajeSeleccionado, setPersonajeSeleccionado] = useState('')
+  const [valoracionSeleccionado, setValoracionSeleccionado] = useState('')
   const defaultRecordar = window.matchMedia('(recordar-usuario: no-recordar)').matches
   const [isRecordarLocal, setIsRecordarLocal] = useLocalStorage(
     'isRecordar',
@@ -34,7 +36,11 @@ export const ContextoUsuarioProvider = ({ children }) => {
     setIsRecordarLocal,
     switchRecordar,
     imagenPerfil,
-    setImagenPerfil
+    setImagenPerfil,
+    personajeSeleccionado,
+    setPersonajeSeleccionado,
+    valoracionSeleccionado,
+    setValoracionSeleccionado
   }
 
   return (

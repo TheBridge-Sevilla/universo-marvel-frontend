@@ -10,13 +10,15 @@ import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import Carga from '../intro/Carga'
+import { Link } from 'react-router-dom'
+import { useContextoUsuario } from '../../context/contextoUsuario'
+
 function Personajes() {
   const [personajes, setPersonajes] = useState()
   const [valoraciones, setValoraciones] = useState()
   const [pagina, setPagina] = useState(1)
-  const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
-  const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
+  const {setPersonajeSeleccionado,setValoracionSeleccionado} = useContextoUsuario()
 
 
 
@@ -63,14 +65,14 @@ function Personajes() {
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
   }
-  if (personajeSeleccionado) {
+  /* if (personajeSeleccionado) {
     return (
       <Personaje
         personaje={personajeSeleccionado}
         valoracion={valoracionSeleccionado}
       />
     )
-  }
+  } */
   if (!personajes) {
     //Componentizar?
     return (
@@ -129,6 +131,7 @@ function Personajes() {
                   setValoracionSeleccionado(valoraciones[i])
                 }}
               >
+                <Link to={`/personaje/${personaje.name.split(' ')[0].toLowerCase() }`} >
                 <Image
                   className='imagen_personajes'
                   src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
@@ -147,6 +150,7 @@ function Personajes() {
                     </p>
                   </div>
                 </div>
+                </Link>
               </Container>
             ))}
           </InfiniteScroll>

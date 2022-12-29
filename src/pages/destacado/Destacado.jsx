@@ -12,10 +12,10 @@ export default function Destacados() {
       <Nav className='justify-content-end'>
         <Avatar />
       </Nav>
-      <p>{t('Tu personaje favorito')}</p>
+      <p>{t('personaje-favorito')}</p>
       <Image type='image/svg+xml' src='../../public/favorito.svg'></Image>
 
-      <p>{t('Tu personaje más votado')}</p>
+      <p>{t('personaje-votado')}</p>
       <Image src='../../public/votado.svg'></Image>
     </Container>
     <Navbar />

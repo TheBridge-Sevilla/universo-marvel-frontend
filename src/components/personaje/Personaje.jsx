@@ -5,11 +5,12 @@ import { Rating, Box, Typography } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
 import Volver from '../Volver'
 import BarraAvatar from '../Avatar'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
-
-function Personaje(props) {
-  const personaje = props.personaje
-  const valoracion = props.valoracion
+function Personaje() {
+  const {personajeSeleccionado,valoracionSeleccionado} = useContextoUsuario()
+  const personaje = personajeSeleccionado
+  const valoracion = valoracionSeleccionado
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
 
   useEffect(() => {
