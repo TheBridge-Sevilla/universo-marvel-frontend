@@ -14,11 +14,10 @@ import { Link } from 'react-router-dom'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 
 function Personajes() {
-  const [personajes, setPersonajes] = useState()
-  const [valoraciones, setValoraciones] = useState()
+
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
-  const {setPersonajeSeleccionado,setValoracionSeleccionado} = useContextoUsuario()
+  const {isIndice,setIsIndice,personajes,setPersonajes,valoraciones,setValoraciones} = useContextoUsuario()
 
 
 
@@ -43,7 +42,7 @@ function Personajes() {
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
     }
-
+    console.log(personajes)
     setPagina(1)
   }, [filtro])
 
@@ -127,8 +126,8 @@ function Personajes() {
                 className='d-flex flex-column justify-content-center text-white'
                 key={i}
                 onClick={() => {
-                  setPersonajeSeleccionado(personaje)
-                  setValoracionSeleccionado(valoraciones[i])
+                  setIsIndice(i)
+                  console.log(isIndice)
                 }}
               >
                 <Link to={`/personaje/${personaje.name.split(' ')[0].toLowerCase() }`} >
