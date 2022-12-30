@@ -55,16 +55,15 @@ export default function PasswordUsuario() {
   }
 
   return (
-    <Container className='d-flex flex-column justify-content-around align-items-center'>
+    <Container className='mt-4 '>
       <Button
-        className='flex align-items-center justify-content-center m-auto mb-1 font-bold w-9'
         label={t('cambiar-contraseña')}
         onClick={() => handleContraseña()}
       >
         {t('Cambiar contraseña')}
       </Button>
       {CambioContraseña ? (
-        <FormControl className='d-flex justify-content-center mx-4'>
+        <FormControl className='mt-3'>
           <FormGroup>
             <InputLabel htmlFor='outlined-adornment-password'>
               {t('Password')}
@@ -88,7 +87,7 @@ export default function PasswordUsuario() {
               label='Password'
             />
             <Button
-              className='flex align-items-center justify-content-center  my-2 font-bold p-button-outlined  w-9'
+              className='my-2'
               type='submit'
               label={t('actualizar-contraseña')}
               onClick={onSubmitContraseña}
