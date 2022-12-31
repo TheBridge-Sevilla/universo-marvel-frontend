@@ -11,6 +11,9 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { MD5 } from 'crypto-js';
 
 function Personaje() {
   const { personajes, valoraciones, isIndice, setIsIndice } = useContextoUsuario()
@@ -21,9 +24,19 @@ function Personaje() {
   const indiceSiguiente = isIndice + 1;
   const personajeAnterior = personajes.docs[indiceAnterior]
   const personajeSiguiente = personajes.docs[indiceSiguiente]
+  const apikey = import.meta.env.VITE_MARVEL_KEY
+  const timestamp = Date.now();
+  const privateKey = import.meta.env.VITE_PRIVATE_KEY
+  const publicKey = import.meta.env.VITE_PUBLIC_KEY
+  const hash = MD5(`${timestamp}${privateKey}${publicKey}`);
+  const personajeID = personaje.Id
   const navigate = useNavigate();
 
+  const [comics, setComics] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    console.log(personaje.Id)
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${personaje._id
       }&idUsuario=${auth.currentUser.uid}`
     fetch(url, { cache: "no-store" })
@@ -52,6 +65,28 @@ function Personaje() {
       })
   }
 
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://gateway.marvel.com:443/v1/public/characters/${personajeID}/comics?apikey=${apikey}&ts=${timestamp}&hash=${hash}`
+        );
+        const data = await response.json();
+        setComics(data.data.results);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
+
+
+
+
   const siguientePersonaje = () => {
     setIsIndice(isIndice + 1)
   }
@@ -60,7 +95,25 @@ function Personaje() {
     setIsIndice(isIndice - 1);
 
   }
-
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 6
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2
+    }
+  }
   return (
     <>
       <div className='d-flex flex-row justify-content-between m-4'>
@@ -116,8 +169,24 @@ function Personaje() {
           window.open(`${personaje.urls[0].url}`);
         }}
       > DESCÚBRELO</button>
-
-
+      <h2 className='m-3'>Comics:</h2>
+      <Carousel responsive={responsive} showDots={false} swipeable={true} className="m-2">
+        {comics.map((comic) => (
+          <a
+            key={comic.id}
+            href={comic.urls[0].url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+              alt={comic.title}
+              className="imagen-comic"
+            />
+            <p>{comic.title}</p>
+          </a>
+        ))}
+      </Carousel>
 
     </>
   )

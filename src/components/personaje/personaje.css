@@ -44,3 +44,7 @@
 .flecha{
   color: var(--primary);
 }
+.imagen-comic{
+  max-width: 150px;
+  max-height: auto;
+}
