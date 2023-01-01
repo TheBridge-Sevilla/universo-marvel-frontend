@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper'
 function Favorito() {
   //const { i18n } = useTranslation();
   const url = 'http://localhost:3050/valoraciones/favoritos' //`${import.meta.env.VITE_BASE_URL}/valoraciones/favoritos`
-  const [clasificacion, setClasificacion] = useState([])
+  const [favoritos, setFavoritos] = useState([])
   let idUsuario = 'y6dtb1y23oMn00AAFcgjdhSbbhi2' //prueba
   useEffect(() => {
     console.log('clasificacion dentro del useeffect')
@@ -23,9 +23,9 @@ function Favorito() {
     }
     fetch(url, requestOptions)
       .then(response => response.json())
-      .then(json => setClasificacion(json))
+      .then(json => setFavoritos(json))
   }, [])
-  console.log(clasificacion, 'clasificacion')
+  console.log(favoritos, 'clasificacion')
 
   return (
     <TableContainer component={Paper}>
@@ -38,11 +38,11 @@ function Favorito() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {clasificacion.map(row => (
+          {favoritos.map(row => (
             <TableRow
               key={row.personaje}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >    {clasificacion.indexOf(row)+1}
+            >    {favoritos.indexOf(row)+1}
               <TableCell align='center'>{row.personaje}</TableCell>
               <TableCell align='center'>{row.valoracion}</TableCell>
             </TableRow>

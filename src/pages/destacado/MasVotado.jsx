@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper'
 function MasVotado() {
   //const { i18n } = useTranslation();
   const url = 'http://localhost:3050/valoraciones/destacado' //`${import.meta.env.VITE_BASE_URL}/valoraciones/favoritos`
-  const [masVotado, setMasVotado] = useState([])
+  const [masVotados, setMasVotados] = useState([])
 
   useEffect(() => {
     console.log('clasificacion dentro del useeffect')
@@ -22,9 +22,9 @@ function MasVotado() {
     }
     fetch(url, requestOptions)
       .then(response => response.json())
-      .then(json => setMasVotado(json))
+      .then(json => setMasVotados(json))
   }, [])
-  console.log(masVotado, 'masVotado')
+  console.log(masVotados, 'masVotado')
 
   return (
     <TableContainer component={Paper}>
@@ -37,13 +37,13 @@ function MasVotado() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {masVotado.map(row => (
+          {masVotados.map(row => (
             <TableRow
               key={row.personaje}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               {' '}
-              {masVotado.indexOf(row) + 1}
+              {masVotados.indexOf(row) + 1}
               <TableCell align='center'>{row.personaje}</TableCell>
               <TableCell align='center'>{row.valoracion}</TableCell>
             </TableRow>
