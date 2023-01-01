@@ -41,7 +41,7 @@ export default function PasswordUsuario() {
   function onSubmitContraseña(e) {
     e.preventDefault()
     if (!contraseña) {
-      return console.log('Introduzca contraseña')
+      return console.log('introduzca-contraseña')
     }
     if (contraseña) {
       cambiarContraseña(contraseña)
@@ -61,13 +61,13 @@ export default function PasswordUsuario() {
         label={t('cambiar-contraseña')}
         onClick={() => handleContraseña()}
       >
-        {t('Cambiar contraseña')}
+        {t('cambiar-contraseña')}
       </Button>
       {CambioContraseña ? (
         <FormControl className='d-flex justify-content-center mx-4'>
           <FormGroup>
             <InputLabel htmlFor='outlined-adornment-password'>
-              {t('Password')}
+              {t('contraseña')}
             </InputLabel>
             <OutlinedInput
               onChange={obtenerContraseña}
@@ -93,7 +93,7 @@ export default function PasswordUsuario() {
               label={t('actualizar-contraseña')}
               onClick={onSubmitContraseña}
             >
-              {t('Actualizar')}
+              {t('actualizar')}
             </Button>{' '}
           </FormGroup>
         </FormControl>
