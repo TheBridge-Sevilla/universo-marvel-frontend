@@ -42,10 +42,12 @@ function MasVotado() {
               key={row.personaje}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {' '}
               {masVotados.indexOf(row) + 1}
               <TableCell align='center'>{row.personaje}</TableCell>
               <TableCell align='center'>{row.valoracion}</TableCell>
+              <TableCell align='center'>
+                <img width={20} src={row.imagen}></img>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
