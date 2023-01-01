@@ -98,6 +98,7 @@ button:hover {
   background-color: var(--hover) !important;
 
 }
+
 button:focus {
   background-color: green !important;
 
@@ -218,19 +219,21 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  position:fixed;
+  position: fixed;
   bottom: 0;
-  padding:  0.8rem;
+  padding: 0.8rem;
   border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
 }
-.contenedor_navbar > a{
+
+.contenedor_navbar>a {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 33%;
 }
+
 /* routes css */
 .fadeIn {
   animation: 0.5s fadeIn forwards;
@@ -239,6 +242,7 @@ p {
 .fadeOut {
   animation: 0.5s fadeOut forwards;
 }
+
 /* .modificarSVG > svg {
  background-color: #28b728;
 } */
@@ -276,4 +280,8 @@ p {
 :-webkit-autofill:focus {
   -webkit-text-fill-color: var(--primary);
   transition: background-color 5000s ease-in-out 0s;
+}
+
+.css-1c99szj-MuiRating-icon svg {
+  color: #faaf00;
 }
