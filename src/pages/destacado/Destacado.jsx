@@ -16,11 +16,11 @@ export default function Destacados() {
         </Nav>
         <Favorito />
         <p>{t('Tu personaje favorito')}</p>
-        <Image type='image/svg+xml' src='../../public/favorito.svg'></Image>
+        <Image type='image/svg+xml' src='favorito.svg'></Image>
 
         <p>{t('Tu personaje más votado')}</p>
         <MasVotado />
-        <Image src='../../public/votado.svg'></Image>
+        <Image src='/votado.svg'></Image>
       </Container>
       <Navbar />
     </>
