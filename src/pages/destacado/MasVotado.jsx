@@ -29,13 +29,13 @@ function MasVotado() {
 
   return (
     <Container className='d-flex-column mt-5 mb-5'>
-      <p>{t('Tu personaje favorito')}</p>
+      <p>{t('Tu personaje mas votado')}</p>
       <TableContainer className='mt-2 mb-5' component={Paper}>
-        <Image alt='favoritos' class='img-thumbnail' src={imagen}></Image>
+        <Image alt='mas-votado' className='img-thumbnail' src={imagen}></Image>
         <Table sx={{ maxWidth: 650 }} size='small' aria-label='a dense table'>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell></TableCell>
               <TableCell align='center'>{t('Personaje')}</TableCell>
               <TableCell align='center'>{t('Valoración')}</TableCell>
             </TableRow>

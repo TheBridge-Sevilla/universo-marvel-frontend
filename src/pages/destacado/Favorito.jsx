@@ -30,14 +30,14 @@ function Favorito() {
   }, [])
 
   return (
-    <Container className='d-flex-column'>
+    <Container className='d-flex flex-column'>
       <p>{t('Tu personaje favorito')}</p>
-      <TableContainer component={Paper} mt-2>
-        <Image alt='favorito' class='img-thumbnail' src={imagen}></Image>
+      <TableContainer component={Paper} className='mt-2'>
+        <Image alt='favorito' className='img-thumbnail' src={imagen}></Image>
         <Table sx={{ maxWidth: 650 }} size='small' aria-label='a dense table'>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell></TableCell>
               <TableCell align='center'>{t('Personaje')}</TableCell>
               <TableCell align='center'>{t('Valoración')}</TableCell>
             </TableRow>
