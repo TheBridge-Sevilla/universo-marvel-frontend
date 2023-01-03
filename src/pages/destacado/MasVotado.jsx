@@ -24,7 +24,7 @@ function MasVotado() {
 
   return (
     <>
-      <Container className='d-flex flex-column'>
+      <Container className='d-flex flex-column mb-5'>
         <p>{t('personaje-mas-votado')}</p>
         <Tabla imagen={imagen} destacados={masVotados} />
       </Container>

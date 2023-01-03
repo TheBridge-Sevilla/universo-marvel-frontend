@@ -24,7 +24,7 @@ function Favorito() {
   }, [])
 
   return (
-    <Container className='d-flex flex-column'>
+    <Container className='d-flex flex-column mb-3'>
       <p>{t('personaje-favorito')}</p>
       <Tabla imagen={imagen} destacados={favoritos} />
     </Container>
