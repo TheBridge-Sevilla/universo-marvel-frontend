@@ -28,7 +28,7 @@ function RutasAnimadas() {
           <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
           <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
           <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
-          <Route path='personaje' element={<Personaje />} />
+          <Route path='personaje/*' element={<PrivateRoute ><Personaje /></PrivateRoute>} />
           <Route path='destacado' element={<PrivateRoute ><Destacados /></PrivateRoute>} />
           <Route path='perfilUsuario' element={<PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
           <Route path='*' element={<ErrorPage />} />

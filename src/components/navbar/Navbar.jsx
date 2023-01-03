@@ -15,9 +15,9 @@ function Navbar() {
     }
     return (
         <nav className='contenedor_navbar'>
-            <NavLink style={navLinkStyles} to='/destacado'><AiOutlineHome/>{t('Inicio')}</NavLink>
-            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('Personajes')}</NavLink>
-            <NavLink style={navLinkStyles} to='/perfilUsuario'><FiSettings/><span>{t('Settings')}</span></NavLink>
+            <NavLink style={navLinkStyles} to='/destacado'><AiOutlineHome/>{t('inicio')}</NavLink>
+            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('personajes')}</NavLink>
+            <NavLink style={navLinkStyles} to='/perfilUsuario'><FiSettings/><span>{t('settings')}</span></NavLink>
         </nav>
     )
 }

@@ -58,7 +58,7 @@ export default function AvatarUsuario() {
       <BarraAvatar sizes={139} imagenPerfil={imagenPerfil} />
       <Stack spacing={2}>
         <Button component='label'>
-          {t('Cambiar imagen')}
+          {t('cambiar-imagen')}
           <TextField
             hidden
             id='imagenAvatar'
@@ -75,7 +75,7 @@ export default function AvatarUsuario() {
           <></>
         )}
         <Button label={t('borrar')} onClick={borrarFoto}>
-        {t('Borrar')}
+        {t('borrar')}
         </Button>
       </Stack>
     </Stack>

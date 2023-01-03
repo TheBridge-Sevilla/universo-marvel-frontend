@@ -4,19 +4,19 @@ import { Container, Image, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Personaje from '../../components/personaje/Personaje'
 import Navbar from '../../components/navbar/Navbar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import Carga from '../intro/Carga'
+import { Link } from 'react-router-dom'
+import { useContextoUsuario } from '../../context/contextoUsuario'
+
 function Personajes() {
-  const [personajes, setPersonajes] = useState()
-  const [valoraciones, setValoraciones] = useState()
+
   const [pagina, setPagina] = useState(1)
-  const [personajeSeleccionado, setPersonajeSeleccionado] = useState(false)
-  const [valoracionSeleccionado, setValoracionSeleccionado] = useState(false)
   const [filtro, setFiltro] = useState('')
+  const {isIndice,setIsIndice,personajes,setPersonajes,valoraciones,setValoraciones} = useContextoUsuario()
 
 
 
@@ -41,7 +41,7 @@ function Personajes() {
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
     }
-
+    console.log(personajes)
     setPagina(1)
   }, [filtro])
 
@@ -63,14 +63,14 @@ function Personajes() {
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
   }
-  if (personajeSeleccionado) {
+  /* if (personajeSeleccionado) {
     return (
       <Personaje
         personaje={personajeSeleccionado}
         valoracion={valoracionSeleccionado}
       />
     )
-  }
+  } */
   if (!personajes) {
     //Componentizar?
     return (
@@ -125,10 +125,11 @@ function Personajes() {
                 className='d-flex flex-column justify-content-center text-white'
                 key={i}
                 onClick={() => {
-                  setPersonajeSeleccionado(personaje)
-                  setValoracionSeleccionado(valoraciones[i])
+                  setIsIndice(i)
+                  console.log(isIndice)
                 }}
               >
+                <Link to={`/personaje/${personaje.name.split(' ')[0].toLowerCase() }`} >
                 <Image
                   className='imagen_personajes'
                   src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
@@ -147,6 +148,7 @@ function Personajes() {
                     </p>
                   </div>
                 </div>
+                </Link>
               </Container>
             ))}
           </InfiniteScroll>
