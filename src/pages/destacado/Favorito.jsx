@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Paper from '@mui/material/Paper'
 import { useTranslation } from 'react-i18next'
-import { Container, Image } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+import { Tabla } from '../../services/Tabla'
 
 function Favorito() {
   const { t } = useTranslation()
@@ -31,35 +25,8 @@ function Favorito() {
 
   return (
     <Container className='d-flex flex-column'>
-      <p>{t('Tu personaje favorito')}</p>
-      <TableContainer component={Paper} className='mt-2'>
-        <Image alt='favorito' className='img-thumbnail' src={imagen}></Image>
-        <Table sx={{ maxWidth: 650 }} size='small' aria-label='a dense table'>
-          <TableHead>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell align='center'>{t('Personaje')}</TableCell>
-              <TableCell align='center'>{t('Valoración')}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {favoritos.map(row => (
-              <TableRow
-                key={row.personaje}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                {' '}
-                {favoritos.indexOf(row) + 1}
-                <TableCell align='center'>{row.personaje}</TableCell>
-                <TableCell align='center'>{row.valoracion}</TableCell>
-                <TableCell align='center'>
-                  <img width={20} src={row.imagen}></img>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <p>{t('personaje-favorito')}</p>
+      <Tabla imagen={imagen} destacados={favoritos} />
     </Container>
   )
 }

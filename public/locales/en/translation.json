@@ -19,6 +19,7 @@
     "sesion-cerrada": "Session successfully closed",
     "settings": "Settings",
     "inicio": "Home",
+    "personaje": "Character",
     "personajes" : "characters",
     "cambiar-imagen" : "Change Image",
     "introduzca-contraseña": "Insert Password",
@@ -28,6 +29,6 @@
     "perfil": "Profile",
     "borrar" : "Delete",
     "subir" : "Upload",
-    "personaje-favorito" : "Your Favorite Characters",
+    "personaje-favorito" : "Favorite Character",
     "personaje-votado" : "Most Voted Characters"
 }
