@@ -99,6 +99,7 @@ button:hover {
 
 }
 
+
 button:focus {
   background-color: green !important;
 
@@ -220,7 +221,9 @@ p {
   flex-direction: row;
   justify-content: center;
   position: fixed;
+  position: fixed;
   bottom: 0;
+  padding: 0.8rem;
   padding: 0.8rem;
   border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
   border-top-left-radius: 25px;
@@ -228,11 +231,14 @@ p {
 }
 
 .contenedor_navbar>a {
+
+.contenedor_navbar>a {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 33%;
 }
+
 
 /* routes css */
 .fadeIn {
@@ -242,6 +248,7 @@ p {
 .fadeOut {
   animation: 0.5s fadeOut forwards;
 }
+
 
 /* .modificarSVG > svg {
  background-color: #28b728;
@@ -285,6 +292,10 @@ p {
 .flecha-volver>path {
   color: var(--hover);
 
+}
+
+.css-1c99szj-MuiRating-icon svg {
+  color: #faaf00;
 }
 
 .flecha-subir {
