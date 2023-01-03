@@ -20,7 +20,7 @@ export const ContextoUsuarioProvider = ({ children }) => {
     'isRecordar',
     defaultRecordar ? 'no-recordar' : 'recordar'
   )
-  const [imagenPerfil, setImagenPerfil] = useState()
+  const [imagenPerfil, setImagenPerfil] = useState('')
 
   const switchRecordar = () => {
     const newRecodar = isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'

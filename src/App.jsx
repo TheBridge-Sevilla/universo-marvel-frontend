@@ -8,11 +8,11 @@ import { useEffect } from 'react'
 import { useNavigate,useLocation } from 'react-router-dom';
 
 function App() {
-  const { setUsuario, setUsuarioActual, isRecordarLocal } = useContextoUsuario()
+  const { setUsuario, setUsuarioActual, isRecordarLocal ,setImagenPerfil,usuarioActual,imagenPerfil} = useContextoUsuario()
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
-
+  const currentUser = auth.currentUser
   /* const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
   const [theme, setTheme] = useLocalStorage(
     'theme',
@@ -24,10 +24,8 @@ function App() {
     setTheme(newTheme)
   } */
 
-
-
-
-
+  
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user && isRecordarLocal === 'recordar') {
@@ -40,11 +38,18 @@ function App() {
         // User is signed out.
         setUsuario();
         setUsuarioActual();
-
+        
       }
     });
     return () => unsubscribe();
   }, [auth]);
+  
+    useEffect(() => {
+      if (usuarioActual.photoURL) {
+        setImagenPerfil(usuarioActual.photoURL)
+        console.log(imagenPerfil)
+      }
+    }, [usuarioActual])
 
 
   return (

@@ -14,7 +14,7 @@ export default function AvatarUsuario() {
   const avatarSinImagen =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
  
-  const currentUser = usuarioActual.auth.currentUser
+  const currentUser = auth.currentUser
 
   const [loading, setLoading] = useState(false)
   const [foto, setFoto] = useState()
@@ -29,11 +29,7 @@ export default function AvatarUsuario() {
     updateProfile(currentUser, { photoURL: fotoURL })
     setImagenPerfil(fotoURL)
   }
-  useEffect(() => {
-    if (currentUser && currentUser.photoURL) {
-      setImagenPerfil(currentUser.photoURL)
-    }
-  }, [auth])
+
 
   const handleChange = e => {
     setFoto(e.target.files[0])
