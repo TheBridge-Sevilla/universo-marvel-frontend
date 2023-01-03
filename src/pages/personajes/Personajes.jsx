@@ -4,7 +4,6 @@ import { Container, Image, Form } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Personaje from '../../components/personaje/Personaje'
 import Navbar from '../../components/navbar/Navbar'
 import Volver from '../../components/Volver'
 import BarraAvatar from '../../components/Avatar'
@@ -12,27 +11,28 @@ import { LazyMotion, domAnimation, m } from 'framer-motion'
 import Carga from '../intro/Carga'
 import { Link } from 'react-router-dom'
 import { useContextoUsuario } from '../../context/contextoUsuario'
+import Subir from '../../components/Subir'
 
 function Personajes() {
-
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
   const {isIndice,setIsIndice,personajes,setPersonajes,valoraciones,setValoraciones} = useContextoUsuario()
 
 
+  useEffect(()=>{
+    if (window.localStorage.getItem("personajes")) {
+      setPersonajes(JSON.parse(window.localStorage.getItem("personajes")))
+      setValoraciones(JSON.parse(window.localStorage.getItem("valoraciones")))
 
+    }
+  },[])
 
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL
       }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
       }&filter=${filtro}`
 
-    if (window.localStorage.getItem("personajes")) {
-      setPersonajes(JSON.parse(window.localStorage.getItem("personajes")))
-      setValoraciones(JSON.parse(window.localStorage.getItem("valoraciones")))
 
-    }
-    else{
       fetch(url)
       .then(data => data.json())
       .then(json => {
@@ -41,7 +41,7 @@ function Personajes() {
         window.localStorage.setItem("personajes", JSON.stringify(json.personajes))
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
-    }
+    
     console.log(personajes)
     setPagina(1)
   }, [filtro])
@@ -63,22 +63,19 @@ function Personajes() {
         window.localStorage.setItem("personajes", JSON.stringify(json.personajes))
         window.localStorage.setItem("valoraciones", JSON.stringify(json.valoraciones))
       })
-  }
-  /* if (personajeSeleccionado) {
-    return (
-      <Personaje
-        personaje={personajeSeleccionado}
-        valoracion={valoracionSeleccionado}
-      />
-    )
-  } */
+
+    }
+    function onFilter (e) {
+      window.localStorage.removeItem("personajes")
+      window.localStorage.removeItem("valoraciones")
+      console.log("e",e.target.value)
+      setFiltro(e.target.value)
+    }
+
   if (!personajes) {
     //Componentizar?
     return (
-/*       <span className='h-100 d-flex justify-content-center align-items-center'>
-        <Spinner animation='border' />
-        Cargando personajes
-      </span> */
+
       <Carga/>
     )
   } else {
@@ -94,17 +91,20 @@ function Personajes() {
           }}
           transition={{ duration: 0.5 }}
         >
-          <div className='d-flex justify-content-between m-4'>
+{/*           <Topbar/> */}
+          <div className='mt-5 pt-1'>
+          <div className='d-flex justify-content-between   m-4 fixed-top ' >
             <Volver />
-            <BarraAvatar />
+            <BarraAvatar  />
           </div>{' '}
-          <Container className='my-4'>
+          <Container className='my-4  '>
             <Form.Control
+              id='filtro'
               type='text'
               size='lg'
               placeholder='Filtro'
-              onChange={event => {
-                setFiltro(event.target.value)
+              onChange={(e) => {
+                onFilter(e)
               }}
             />
           </Container>
@@ -153,6 +153,8 @@ function Personajes() {
               </Container>
             ))}
           </InfiniteScroll>
+            <Subir/>
+            </div>
           <Navbar />
         </m.div>
       </LazyMotion>
