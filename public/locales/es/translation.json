@@ -19,6 +19,7 @@
     "sesion-cerrada": "Sesión cerrada correctamente",
     "settings": "Settings",
     "inicio": "Inicio",
+    "personaje": "Personaje",
     "personajes" : "Personajes",
     "cambiar-imagen" : "Cambiar Imagen",
     "cambiar-contraseña" : "Cambiar Contraseña",
@@ -27,7 +28,7 @@
     "perfil" : "Perfil",
     "borrar" : "Borrar",
     "subir" : "Subir",
-    "personaje-favorito" : "Tu Perosnaje Favorito",
-    "personaje-votado" : "Personaje Más Votado"
+    "personaje-favorito" : "Personaje Favorito",
+    "personaje-mas-votado" : "Personaje Más Votado"
 
 }
