@@ -1,0 +1,50 @@
+.contenedor_principal {
+   background-color: var(--background-personajes);
+   height: 100vh;
+   width: 100%;
+   color: white;
+
+
+}
+
+.contenedor_imagen {
+  width: 80%;
+  height: 80%;
+  
+
+}
+
+.MuiSvgIcon-fontSizeInherit > path{
+    color: yellow ;
+}
+
+.imagen_personaje {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  background-blend-mode: overlay;
+  border: 10.70156px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(51.0469px);
+  border-radius: 51.0469px;
+  
+}
+
+.boton_personaje {
+   border: none;
+   border-radius: 25px;
+   width: 85%;
+   margin-top: 15px;
+}
+
+.contenedor_nombre_personaje {
+   margin-top: 30px;
+}
+.flecha{
+  color: var(--primary);
+}
+.imagen-comic{
+  max-width: 150px;
+  max-height: auto;
+}

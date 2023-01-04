@@ -1,0 +1,93 @@
+.unio-text {
+  font-family: 'Rajdhani';
+  letter-spacing: 0.435em;
+  font-size: 22px;
+
+  -webkit-animation: fade 3s infinite;
+  -moz-animation: fade 3s infinite;
+  -o-animation: fade 3s infinite;
+  animation: fade 3s infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+ *::before, *::after {
+  box-sizing: border-box;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+/*   position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -25px 0 0 -25px; */
+  height: 50px;
+  width: 50px;
+  border: 6px solid transparent;
+  border-top-color: var(--primary);
+  border-bottom-color: var(--primary);
+  border-radius: 100%;
+  animation: loading 1.5s infinite linear;
+}

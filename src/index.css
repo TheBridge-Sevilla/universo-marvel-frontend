@@ -1,0 +1,342 @@
+:root {
+  --background: #F7F7F7;
+  --background-nav: rgba(21, 18, 30, 0.8);
+  --text: #212121;
+  --primary: #FF0100;
+  --secondary: #F6F6F6;
+  --terciary: #313131;
+  --valid: #3CCF4E;
+  --invalid: #E30815;
+  --accent: #E7E7E7;
+  --hover: #D00000;
+  --box-shadow: inset 3.77687px 11.3306px 37.7687px rgba(151, 71, 255, 0.4);
+  margin: 0 auto;
+  text-align: center;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  margin: 0;
+  background-color: #15121E;
+  color: var(--primary);
+}
+
+.App {
+  height: 100vh;
+}
+
+[data-theme='dark'] {
+  --text: #F7F7F7;
+  --background: #212121;
+}
+
+.btn-danger {
+  background-color: var(--primary);
+}
+
+.btn-danger:hover {
+  background-color: var(--hover);
+}
+
+.zoom-animation {
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.zoom-animation:hover {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+input {
+  color: var(--secondary);
+}
+
+span>.css-i4bv87-MuiSvgIcon-root {
+  color: var(--primary) !important;
+}
+
+.MuiFormControlLabel-root {
+  color: var(--secondary);
+}
+
+.MuiFormLabel-root {
+  color: var(--primary) !important;
+}
+
+.MuiInputBase-input {
+  height: 2em !important;
+}
+
+fieldset {
+  border-radius: 16px !important;
+  border-color: var(--primary) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+.MuiTypography-root,
+.MuiFormLabel-root {
+  font-weight: bold !important;
+  letter-spacing: 2% !important;
+}
+
+button {
+  background-color: var(--primary) !important;
+  color: var(--secondary) !important;
+}
+
+button:hover {
+  background-color: var(--hover) !important;
+}
+
+/* a {
+  color: var(--secondary) !important;
+} */
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 36px;
+}
+
+h4 {
+  font-size: 24px;
+}
+
+h5 {
+  font-weight: medium;
+  font-size: 24px;
+  letter-spacing: 2%;
+}
+
+p {
+  font-weight: normal;
+  font-size: 16px;
+  letter-spacing: 2%;
+}
+
+.small-text {
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 2%;
+}
+
+.pre-text {
+  font-weight: normal;
+  font-size: 10px;
+  letter-spacing: 2%;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.aparecer-animacion {
+  visibility: hidden;
+  -webkit-animation: cssAnimation 4s forwards;
+  animation: cssAnimation 4s forwards;
+
+}
+
+@keyframes cssAnimation {
+  0% {
+    visibility: hidden;
+    opacity: 0
+  }
+
+  95% {
+    visibility: visible;
+    opacity: 0.95
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1
+  }
+}
+
+@-webkit-keyframes cssAnimation {
+  0% {
+    visibility: hidden;
+    opacity: 0
+  }
+
+  95% {
+    visibility: visible;
+    opacity: 0.95
+  }
+
+  100% {
+    visibility: visible;
+    opacity: 1
+  }
+}
+
+/* botones de la pantalla de inicio */
+.navigation-button {
+  text-decoration: none;
+}
+
+/* botones de la bottom bar */
+
+.contenedor_navbar {
+  background: var(--background-nav);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  position: fixed;
+  bottom: 0;
+  padding: 0.8rem;
+  padding: 0.8rem;
+  border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+
+
+.contenedor_navbar>a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33%;
+}
+
+
+/* routes css */
+.fadeIn {
+  animation: 0.5s fadeIn forwards;
+}
+
+.fadeOut {
+  animation: 0.5s fadeOut forwards;
+}
+
+
+/* .modificarSVG > svg {
+ background-color: #28b728;
+} */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+
+  to {
+    transform: translate(-20px, 0);
+    opacity: 0;
+  }
+}
+
+.ocupar-pantalla {
+  height: 100vh;
+}
+
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--primary);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.flecha-volver>path {
+  color: var(--hover);
+
+}
+
+.css-1c99szj-MuiRating-icon svg {
+  color: #faaf00;
+}
+
+.flecha-subir {
+  position: fixed;
+  bottom: 8%;
+  right: 4%;
+  cursor: pointer;
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
