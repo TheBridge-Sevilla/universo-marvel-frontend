@@ -54,10 +54,8 @@ function App() {
 
   useEffect(() => {
     if (usuarioActual) {
-      if (usuarioActual.photoURL) {
-        setImagenPerfil(usuarioActual.photoURL)
-      } else setImagenPerfil('perfil-invitado.png')
-    }
+      setImagenPerfil(usuarioActual.photoURL)
+    } else setImagenPerfil('perfil-invitado.png')
   }, [usuarioActual])
 
   return (

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import { FormGroup, TextField } from '@mui/material'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, FormGroup, TextField } from '@mui/material'
+import { Container, Form } from 'react-bootstrap'
 import Navbar from '../../components/navbar/Navbar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
@@ -40,7 +40,7 @@ export default function PerfilUsuario() {
           </FormGroup>
         </Form>
         <PasswordUsuario />
-        <Button onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
+        <Button className='my-5' onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
       </Container>
       <Navbar />
     </>

@@ -64,7 +64,7 @@ export default function PasswordUsuario() {
         {t('cambiar-contraseña')}
       </Button>
       {CambioContraseña ? (
-        <FormControl className='d-flex justify-content-center mx-4'>
+        <FormControl className='d-flex justify-content-center mx-4 my-2'>
           <FormGroup>
             <InputLabel htmlFor='outlined-adornment-password'>
               {t('contraseña')}
