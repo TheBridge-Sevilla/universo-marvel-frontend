@@ -64,7 +64,7 @@ export default function PasswordUsuario() {
         {t('cambiar-contraseña')}
       </Button>
       {CambioContraseña ? (
-        <FormControl className='d-flex justify-content-center mx-4'>
+        <FormControl className='d-flex justify-content-center mx-4 my-2'>
           <FormGroup>
             <InputLabel htmlFor='outlined-adornment-password'>
               {t('contraseña')}
@@ -80,6 +80,7 @@ export default function PasswordUsuario() {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge='end'
+                    size='small'
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -88,7 +89,7 @@ export default function PasswordUsuario() {
               label='Password'
             />
             <Button
-              className='flex align-items-center justify-content-center  my-2 font-bold p-button-outlined  w-9'
+              className='flex align-items-center justify-content-center my-2 font-bold p-button-outlined w-9'
               type='submit'
               label={t('actualizar-contraseña')}
               onClick={onSubmitContraseña}

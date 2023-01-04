@@ -53,7 +53,7 @@ body {
 }
 
 input {
-  color: var(--secondary) ;
+  color: var(--secondary);
 }
 
 span>.css-i4bv87-MuiSvgIcon-root {
@@ -91,20 +91,11 @@ button,
 button {
   background-color: var(--primary) !important;
   color: var(--secondary) !important;
-  height: 3.2em !important;
 }
 
 button:hover {
   background-color: var(--hover) !important;
-
 }
-
-
-button:focus {
-  background-color: green !important;
-
-}
-
 
 /* a {
   color: var(--secondary) !important;

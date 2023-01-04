@@ -1,13 +1,15 @@
 import { useTranslation } from 'react-i18next'
-import { FormGroup, TextField } from '@mui/material'
+import { Button, FormGroup, TextField } from '@mui/material'
 import { Container, Form } from 'react-bootstrap'
 import Navbar from '../../components/navbar/Navbar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'
+import { useSignOut } from '../../hooks/useSignOut'
 
 export default function PerfilUsuario() {
   const { usuarioActual } = useContextoUsuario()
+  const { cerrarSesion } = useSignOut()
   const { t } = useTranslation()
 
   return (
@@ -38,6 +40,7 @@ export default function PerfilUsuario() {
           </FormGroup>
         </Form>
         <PasswordUsuario />
+        <Button className='my-5' onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
       </Container>
       <Navbar />
     </>
