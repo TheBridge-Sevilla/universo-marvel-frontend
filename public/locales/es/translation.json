@@ -1,5 +1,6 @@
 {
     "iniciar-sesion": "Iniciar sesión",
+    "cerrar-sesion": "Cerrar sesión",
     "contraseña-olvidada": "¿Contraseña olvidada?",
     "continuar": "Continuar",
     "crear-cuenta": "Crear cuenta",
@@ -16,5 +17,19 @@
     "introduce-email": "Introduce tu email",
     "enlace-cuentas": "Cuentas enlazadas correctamente, bienvenido de nuevo",
     "bienvenido": "bienvenido",
-    "sesion-cerrada": "Sesión cerrada correctamente"
+    "sesion-cerrada": "Sesión cerrada correctamente",
+    "settings": "Settings",
+    "inicio": "Inicio",
+    "personaje": "Personaje",
+    "personajes" : "Personajes",
+    "cambiar-imagen" : "Cambiar Imagen",
+    "cambiar-contraseña" : "Cambiar Contraseña",
+    "actualizar" : "Actualizar",
+    "actualizar-contraseña" : " Actualizar Contraseña",
+    "perfil" : "Perfil",
+    "borrar" : "Borrar",
+    "subir" : "Subir",
+    "personaje-favorito" : "Personaje Favorito",
+    "personaje-mas-votado" : "Personaje Más Votado"
+
 }

@@ -8,17 +8,16 @@ import { AnimatePresence } from 'framer-motion'
 import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from "./firebase/contraseñaOlvidada"
 import Personaje from '../components/personaje/Personaje'
-
 import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
-
 import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
-
+import Destacados from '../pages/destacado/Destacado'
+import { useContextoUsuario } from '../context/contextoUsuario'
 
 
 function RutasAnimadas() {
   const location = useLocation()
-  
+  const { usuario } = useContextoUsuario()
 
   return (
     <Container style={{ overflowX: 'hidden', padding: '0' }}>
@@ -29,8 +28,11 @@ function RutasAnimadas() {
           <Route path='registro' element={<PublicRoute><Registro /></PublicRoute>} />
           <Route path='contraseña-olvidada' element={<PublicRoute><ContraseñaOlvidada /></PublicRoute>} />
           <Route path='dashboard' element={<PrivateRoute ><Personajes /></PrivateRoute>} />
-          <Route path='personaje' element={<Personaje />} />
-          <Route path='perfilUsuario' element={<PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
+          <Route path='personaje/*' element={<PrivateRoute ><Personaje /></PrivateRoute>} />
+          <Route path='destacado' element={<PrivateRoute ><Destacados /></PrivateRoute>} />
+          <Route path='perfilUsuario' element={(usuario==='invitado')?
+            <PrivateRoute><Registro /></PrivateRoute>:
+            <PrivateRoute ><PerfilUsuario /></PrivateRoute>} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>

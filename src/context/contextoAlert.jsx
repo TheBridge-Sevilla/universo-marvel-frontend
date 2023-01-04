@@ -31,7 +31,7 @@ export const ContextoAlertProvider = ({ children }) => {
   const contextValue = {
     notificacion,
   }
-  console.log(alertaVisible, claseAlert)
+
   return (
     <ContextoAlert.Provider value={contextValue}>
       <>
