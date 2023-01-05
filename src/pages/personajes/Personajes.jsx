@@ -23,7 +23,6 @@ function Personajes() {
     if (window.localStorage.getItem("personajes")) {
       setPersonajes(JSON.parse(window.localStorage.getItem("personajes")))
       setValoraciones(JSON.parse(window.localStorage.getItem("valoraciones")))
-
     }
   },[])
 
