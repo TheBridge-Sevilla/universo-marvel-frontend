@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
 import './personaje.css'
-import { Image } from 'react-bootstrap'
-import { Rating, Box, Typography } from '@mui/material'
+import { Image, Alert, Container, Modal } from 'react-bootstrap'
+import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
-import BarraAvatar from '../Avatar'
+import TopBar from '../../components/TopBar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import { MD5 } from 'crypto-js'
+import { useContextoAlert } from '../../context/contextoAlert'
+import { useTranslation } from 'react-i18next'
+import DescripcionPersonaje from './descripcionPersonaje'
 
 function Personaje() {
+  const { t } = useTranslation()
   const { personajes, valoraciones, isIndice, setIsIndice } =
     useContextoUsuario()
   const personaje = personajes.docs[isIndice]
@@ -31,10 +31,10 @@ function Personaje() {
   const publicKey = import.meta.env.VITE_PUBLIC_KEY
   const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
   const personajeID = personaje.Id
-  const navigate = useNavigate()
+  const { notificacion } = useContextoAlert()
 
   const [comics, setComics] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [mostrarInfo, setMostrarInfo] = useState(false)
 
   useEffect(() => {
     console.log(personaje.Id)
@@ -74,9 +74,8 @@ function Personaje() {
         )
         const data = await response.json()
         setComics(data.data.results)
-        setLoading(false)
       } catch (error) {
-        setLoading(false)
+        notificacion(error, 'error')
       }
     }
     fetchData()
@@ -108,18 +107,11 @@ function Personaje() {
       items: 2,
     },
   }
+
   return (
     <>
-      <div className='d-flex flex-row justify-content-between m-4'>
-        <Nav>
-          <ArrowBackIcon
-            className='flecha-volver'
-            onClick={() => navigate('/dashboard')}
-          />
-        </Nav>
-        <BarraAvatar />
-      </div>
-      <div className='d-flex flex-row align-items-center justify-content-between '>
+      <TopBar />
+      <Container className='d-flex flex-row align-items-center justify-content-between '>
         {isIndice > 0 ? (
           <Link
             to={`/personaje/${personajeAnterior.name
@@ -149,69 +141,59 @@ function Personaje() {
             onClick={() => siguientePersonaje()}
           />
         </Link>
-      </div>
-      <div className='contenedor_nombre_personaje'>
+      </Container>
+      <Container className='contenedor_nombre_personaje'>
         <h5>{personaje.name}</h5>
-      </div>
-      <div>
-        <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Typography component='legend'>Tu valoración</Typography>
-          <Rating
-            name='simple-controlled'
-            value={valoracionPersonal}
-            onChange={(event, newValue) => {
-              emitirValoracion(newValue)
-            }}
-          />
-        </Box>
-      </div>
-      <br />
-      Valoracion global :
-      {valoracion ? (
+      </Container>
+      <Container>
+        <Typography component='legend'>{t('valoracion-personal')}</Typography>
         <Rating
-          name='half-rating-read'
-          defaultValue={valoracion}
-          precision={0.5}
-          readOnly
-          key={valoracion}
+          name='simple-controlled'
+          value={valoracionPersonal}
+          onChange={(event, newValue) => {
+            emitirValoracion(newValue)
+            notificacion(`${t('voto-realizado')}`, 'success')
+          }}
         />
-      ) : (
-        ' por valorar'
-      )}
-      <button
-        type='button'
-        className='boton_personaje'
-        onClick={e => {
-          e.preventDefault()
-          window.open(`${personaje.urls[0].url}`)
-        }}
+      </Container>
+      <br />
+      <Typography>{t('valoracion-global')}</Typography>
+      <Container className='d-flex flex-column justify-content-center align-items-center'>
+        {valoracion ? (
+          <Rating
+            name='half-rating-read'
+            defaultValue={valoracion}
+            precision={0.5}
+            readOnly
+            key={valoracion}
+          />
+        ) : (
+          <Container className='my-2'>
+            <Alert key='error' severity='info'>
+              {t('por-valorar')}
+            </Alert>
+          </Container>
+        )}
+        <Button
+          onClick={() => setMostrarInfo(true)}
+          className='mt-5'
+          size='large'
+        >
+          {t('mostrar-info')}
+        </Button>
+      </Container>
+      <Modal
+        fullscreen={true}
+        show={mostrarInfo}
+        onHide={() => setMostrarInfo(false)}
       >
-        {' '}
-        DESCÚBRELO
-      </button>
-      <h2 className='m-3'>Comics:</h2>
-      <Carousel
-        responsive={responsive}
-        showDots={false}
-        swipeable={true}
-        className='m-2'
-      >
-        {comics.map(comic => (
-          <a
-            key={comic.id}
-            href={comic.urls[0].url}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <img
-              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-              alt={comic.title}
-              className='imagen-comic'
-            />
-            <p>{comic.title}</p>
-          </a>
-        ))}
-      </Carousel>
+        <Modal.Header closeButton />
+        <DescripcionPersonaje
+          responsive={responsive}
+          comics={comics}
+          personaje={personaje}
+        />
+      </Modal>
     </>
   )
 }

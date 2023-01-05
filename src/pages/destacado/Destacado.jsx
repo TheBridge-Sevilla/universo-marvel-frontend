@@ -1,4 +1,4 @@
-import Avatar from '../../components/Avatar'
+import TopBar from '../../components/TopBar'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from '../../components/navbar/Navbar'
 import Favorito from './Favorito'
@@ -8,7 +8,7 @@ export default function Destacados() {
   return (
     <>
       <Nav className='justify-content-end'>
-        <Avatar />
+        <TopBar />
       </Nav>
       <Favorito />
       <MasVotado/>
