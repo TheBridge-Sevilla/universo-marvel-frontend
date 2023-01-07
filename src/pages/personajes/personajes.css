@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
-#contenedor_personajes {
-    width: 48%;
-    height: 230px;
+.contenedor_personajes {
     border-radius: 40px;
     border: solid 0.1rem;
     border-color: #48405c48;
@@ -10,11 +8,20 @@
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     text-align: left;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
 
 }
 
+
 .contenedor_scroll {
     padding: 0.8rem;
+    gap:0.5rem;
+    display: grid;
+    grid-auto-rows: 13rem;
+    grid-template-columns: repeat(auto-fill, minmax(11rem,1fr));
+
 }
 
 .contenedor_scroll {
@@ -23,8 +30,10 @@
 
 .imagen_personajes {
     width: 100%;
-    height: 65%;
+    height: 75%;
     border-radius: 30px;
+    margin-top: 2px;
+
 
 }
 
@@ -35,6 +44,7 @@
     float: left;
     width: 56%;
     height: 10px;
+    
 }
 
 
@@ -87,8 +97,8 @@
 
 }
 
-@media (min-width: 450px) {
-    #contenedor_personajes {
+/* @media (min-width: 450px) {
+    .contenedor_personajes {
         height: auto;
     }
-}
+} */
