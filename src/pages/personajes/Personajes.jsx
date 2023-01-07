@@ -97,7 +97,7 @@ function Personajes() {
             <Volver />
             <BarraAvatar  />
           </div>{' '}
-          <Container className='my-4  '>
+          <Container className='my-4'>
             <Form.Control
               id='filtro'
               type='text'
@@ -109,7 +109,7 @@ function Personajes() {
             />
           </Container>
           <InfiniteScroll
-            className='contenedor_scroll d-flex flex-wrap mt-4'
+            className='contenedor_scroll'
             dataLength={personajes.docs.length}
             hasMore={pagina < personajes.totalPages}
             next={siguientePaginaPersonajes}
@@ -122,8 +122,8 @@ function Personajes() {
           >
             {personajes.docs.map((personaje, i) => (
               <Container
-                id='contenedor_personajes'
-                className='d-flex flex-column justify-content-center text-white'
+                id=''
+                className='contenedor_personajes'
                 key={i}
                 onClick={() => {
                   setIsIndice(i)
