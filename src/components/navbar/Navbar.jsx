@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import { FiSettings } from 'react-icons/fi'
-import {AiOutlineHome} from 'react-icons/ai'
+import {GiTrophyCup} from 'react-icons/gi'
 import {FaUserAstronaut} from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 
@@ -15,9 +15,9 @@ function Navbar() {
     }
     return (
         <nav className='contenedor_navbar'>
-            <NavLink style={navLinkStyles} to='/destacado'><AiOutlineHome/>{t('inicio')}</NavLink>
-            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('personajes')}</NavLink>
-            <NavLink style={navLinkStyles} to='/perfilUsuario'><FiSettings/><span>{t('settings')}</span></NavLink>
+            <NavLink style={navLinkStyles} to='/destacado'><GiTrophyCup/>{t('Ranking')}</NavLink>
+            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('Personajes')}</NavLink>
+            <NavLink style={navLinkStyles} to='/perfilUsuario'><FiSettings/><span>{t('Settings')}</span></NavLink>
         </nav>
     )
 }
