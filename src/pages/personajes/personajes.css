@@ -2,6 +2,7 @@
 
 .contenedor_personajes {
     border-radius: 40px;
+    height: 220px;
     border: solid 0.1rem;
     border-color: #48405c48;
     background: #27213857;
@@ -19,7 +20,7 @@
     padding: 0.8rem;
     gap:0.5rem;
     display: grid;
-    grid-auto-rows: 13rem;
+    grid-auto-rows: 14rem;
     grid-template-columns: repeat(auto-fill, minmax(11rem,1fr));
 
 }
@@ -32,7 +33,7 @@
     width: 100%;
     height: 75%;
     border-radius: 30px;
-    margin-top: 2px;
+    margin-top: 12px;
 
 
 }
@@ -44,6 +45,7 @@
     float: left;
     width: 56%;
     height: 10px;
+    color: #FFFFFF;
     
 }
 
@@ -53,6 +55,7 @@
     padding: 1px;
     font-size: 10px;
     padding-top: 0.5rem;
+    color: #FFFFFF;
 
 }
 
