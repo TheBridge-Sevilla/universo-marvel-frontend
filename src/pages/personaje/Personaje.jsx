@@ -3,16 +3,17 @@ import './personaje.css'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
-import TopBar from '../../components/TopBar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Link } from 'react-router-dom'
 import 'react-multi-carousel/lib/styles.css'
 import { MD5 } from 'crypto-js'
+import Carousel from 'react-multi-carousel'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
-import DescripcionPersonaje from './descripcionPersonaje'
+import Navbar from '../../components/navbar/Navbar'
+import Comentarios from '../../components/comentarios/Comentarios'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -32,12 +33,10 @@ function Personaje() {
   const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
   const personajeID = personaje.Id
   const { notificacion } = useContextoAlert()
-
   const [comics, setComics] = useState([])
-  const [mostrarInfo, setMostrarInfo] = useState(false)
+  const [mostrarComentarios, setMostrarComentarios] = useState(false)
 
   useEffect(() => {
-    console.log(personaje.Id)
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
       personaje._id
     }&idUsuario=${auth.currentUser.uid}`
@@ -110,8 +109,7 @@ function Personaje() {
 
   return (
     <>
-      <TopBar />
-      <Container className='d-flex flex-row align-items-center justify-content-between '>
+      <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
         {isIndice > 0 ? (
           <Link
             to={`/personaje/${personajeAnterior.name
@@ -145,55 +143,83 @@ function Personaje() {
       <Container className='contenedor_nombre_personaje'>
         <h5>{personaje.name}</h5>
       </Container>
-      <Container>
-        <Typography component='legend'>{t('valoracion-personal')}</Typography>
-        <Rating
-          name='simple-controlled'
-          value={valoracionPersonal}
-          onChange={(event, newValue) => {
-            emitirValoracion(newValue)
-            notificacion(`${t('voto-realizado')}`, 'success')
-          }}
-        />
-      </Container>
-      <br />
-      <Typography>{t('valoracion-global')}</Typography>
-      <Container className='d-flex flex-column justify-content-center align-items-center'>
-        {valoracion ? (
+      <Container className='d-flex'>
+        <Container>
+          <Typography component='legend'>{t('valoracion-personal')}</Typography>
           <Rating
-            name='half-rating-read'
-            defaultValue={valoracion}
-            precision={0.5}
-            readOnly
-            key={valoracion}
+            name='simple-controlled'
+            value={valoracionPersonal}
+            onChange={(event, newValue) => {
+              emitirValoracion(newValue)
+              notificacion(`${t('voto-realizado')}`, 'success')
+            }}
           />
-        ) : (
-          <Container className='my-2'>
-            <Alert key='error' severity='info'>
-              {t('por-valorar')}
-            </Alert>
-          </Container>
-        )}
+        </Container>
+        <Container>
+          <Typography>{t('valoracion-global')}</Typography>
+          {valoracion ? (
+            <Rating
+              name='half-rating-read'
+              defaultValue={valoracion}
+              precision={0.5}
+              readOnly
+              key={valoracion}
+            />
+          ) : (
+            <Container className='my-2'>
+              <Alert key='error' severity='info'>
+                {t('por-valorar')}
+              </Alert>
+            </Container>
+          )}
+        </Container>
+      </Container>
+      <Container className='d-flex justify-content-center align-items-center'>
         <Button
-          onClick={() => setMostrarInfo(true)}
-          className='mt-5'
-          size='large'
+          onClick={e => {
+            e.preventDefault()
+            window.open(`${personaje.urls[0].url}`)
+          }}
+          className=''
         >
-          {t('mostrar-info')}
+          {t('ver-mas')}
+        </Button>
+        <Button onClick={() => setMostrarComentarios(true)} className='mx-1'>
+          {t('comentarios')}
         </Button>
       </Container>
+      <Carousel
+        responsive={responsive}
+        showDots={false}
+        swipeable={true}
+        className='mt-3'
+      >
+        {comics.map(comic => (
+          <a
+            key={comic.id}
+            href={comic.urls[0].url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img
+              src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+              alt={comic.title}
+              className='imagen-comic'
+            />
+            <p>{comic.title}</p>
+          </a>
+        ))}
+      </Carousel>
+
       <Modal
         fullscreen={true}
-        show={mostrarInfo}
-        onHide={() => setMostrarInfo(false)}
+        show={mostrarComentarios}
+        onHide={() => setMostrarComentarios(false)}
       >
         <Modal.Header closeButton />
-        <DescripcionPersonaje
-          responsive={responsive}
-          comics={comics}
-          personaje={personaje}
-        />
+        <Comentarios />
       </Modal>
+      <Navbar />
     </>
   )
 }

@@ -11,7 +11,7 @@ export default function PerfilUsuario() {
   const { usuarioActual } = useContextoUsuario()
   const { cerrarSesion } = useSignOut()
   const { t } = useTranslation()
-
+ 
   return (
     <>
       <Container className='d-flex flex-column justify-center align-items-center m-2'>
@@ -40,7 +40,9 @@ export default function PerfilUsuario() {
           </FormGroup>
         </Form>
         <PasswordUsuario />
-        <Button className='my-5' onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
+        <Button className='my-5' onClick={cerrarSesion}>
+          {t('cerrar-sesion')}
+        </Button>
       </Container>
       <Navbar />
     </>
