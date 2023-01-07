@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, TextField } from '@mui/material'
 import { auth, storage } from '../../services/firebase/firebase'
 import { updateProfile } from 'firebase/auth'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
-import BarraAvatar from '../../components/Avatar'
+import TopBar from '../../components/TopBar'
 import Stack from '@mui/material/Stack'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 
 export default function AvatarUsuario() {
   const { t } = useTranslation()
-  const { usuarioActual, imagenPerfil , setImagenPerfil } = useContextoUsuario()
+  const { imagenPerfil , setImagenPerfil } = useContextoUsuario()
   const avatarSinImagen =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
  
@@ -51,7 +51,7 @@ export default function AvatarUsuario() {
       justifyContent='space-around'
       alignItems='center'
     >
-      <BarraAvatar sizes={139} imagenPerfil={imagenPerfil} />
+      <TopBar sizes={139} imagenPerfil={imagenPerfil} />
       <Stack spacing={2}>
         <Button component='label'>
           {t('cambiar-imagen')}

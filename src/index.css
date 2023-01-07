@@ -340,3 +340,16 @@ p {
     opacity: 1;
   }
 }
+
+.comentarista {
+  color: grey;
+}
+
+.modal-content {
+  background-color: #15121E;
+}
+
+.MuiListItemText-root p {
+  color: white;
+  font-weight: normal !important;
+}
