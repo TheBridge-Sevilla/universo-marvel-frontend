@@ -8,13 +8,17 @@ import {useContextoUsuario} from '../../context/contextoUsuario'
 function Favorito(props) {
   const { t } = useTranslation()
   const { usuarioActual } = useContextoUsuario()
+  let idUsuario = "y6dtb1y23oMn00AAFcgjdhSbbhi2"
+  if(usuarioActual){
+  idUsuario = usuarioActual.auth.currentUser.uid
+}
 
-  let idUsuario = usuarioActual.auth.currentUser.uid
   const { json } = getDestacados(
     'favoritos',
     'post',
     JSON.stringify({ idUsuario: idUsuario })
   )
+
   return (
     <Container className='d-flex flex-column mb-3'>
       <p>{t('personaje-favorito')}</p>

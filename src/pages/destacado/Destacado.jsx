@@ -3,8 +3,10 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from '../../components/navbar/Navbar'
 import Favorito from './Favorito'
 import MasVotado from './MasVotado'
+import {useContextoUsuario} from '../../context/contextoUsuario'
 
 export default function Destacados() {
+  const { usuario } = useContextoUsuario()
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -24,6 +26,7 @@ export default function Destacados() {
       items: 1,
     },
   }
+  if(usuario) {
   return (
     <>
       <Nav className='justify-content-end'>
@@ -34,4 +37,12 @@ export default function Destacados() {
       <Navbar />
     </>
   )
+}
+else {    <>
+  <Nav className='justify-content-end'>
+    <TopBar />
+  </Nav>
+  <MasVotado responsive={responsive}/>
+  <Navbar />
+</>}
 }
