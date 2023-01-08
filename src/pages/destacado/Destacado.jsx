@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from '../../components/navbar/Navbar'
 import Favorito from './Favorito'
 import MasVotado from './MasVotado'
-import { useContextoUsuario } from '../../context/contextoUsuario'
+import {useContextoUsuario} from '../../context/contextoUsuario'
 
 export default function Destacados() {
   const { usuario } = useContextoUsuario()
@@ -26,14 +26,23 @@ export default function Destacados() {
       items: 1,
     },
   }
+  if(usuario) {
   return (
     <>
       <Nav className='justify-content-end'>
         <TopBar />
       </Nav>
-      <Favorito responsive={responsive} />
-      <MasVotado responsive={responsive} />
+      <Favorito responsive={responsive}/>
+      <MasVotado responsive={responsive}/>
       <Navbar />
     </>
   )
+}
+else {    <>
+  <Nav className='justify-content-end'>
+    <TopBar />
+  </Nav>
+  <MasVotado responsive={responsive}/>
+  <Navbar />
+</>}
 }
