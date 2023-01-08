@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-export default function TopBar() {
+export default function TopBar(props) {
   const { imagenPerfil } = useContextoUsuario()
   const navigate = useNavigate()
 
@@ -19,6 +19,7 @@ export default function TopBar() {
         />
       </Nav>
       <Avatar
+       sx={{ width: props.sizes, height: props.sizes }}
         color='action'
         alt='Google Photo/Initial'
         src={imagenPerfil}

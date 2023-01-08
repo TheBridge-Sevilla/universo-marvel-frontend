@@ -17,6 +17,7 @@ function Personajes() {
   const { t } = useTranslation()
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState('')
+
   const {
     isIndice,
     setIsIndice,
@@ -25,7 +26,6 @@ function Personajes() {
     valoraciones,
     setValoraciones,
   } = useContextoUsuario()
-
   useEffect(() => {
     if (window.localStorage.getItem('personajes')) {
       setPersonajes(JSON.parse(window.localStorage.getItem('personajes')))
@@ -34,11 +34,9 @@ function Personajes() {
   }, [])
 
   useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_BASE_URL
-    }/personajes?page=${pagina}&limit=${
-      import.meta.env.VITE_PAGINATION_LIMIT
-    }&filter=${filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL
+      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
+      }&filter=${filtro}`
 
     fetch(url)
       .then(data => data.json())
@@ -61,9 +59,8 @@ function Personajes() {
 
   function siguientePaginaPersonajes() {
     console.log('nextentra')
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
-      pagina + 1
-    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
+      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
@@ -160,7 +157,7 @@ function Personajes() {
                         <span>
                           <AiFillStar />
                         </span>{' '}
-                        {valoraciones[i] ? valoraciones[i] : 'Non rated'}
+                        {valoraciones[i] ? valoraciones[i].toFixed(1) : 'Non rated'}
                       </p>
                     </div>
                   </div>
