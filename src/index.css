@@ -14,6 +14,17 @@
   text-align: center;
 }
 
+[data-theme='false'] {
+  --text: #F7F7F7;
+  --background: #212121;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+[data-theme='true'] {
+  --text: #212121;
+  --background: #F7F7F7;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
@@ -22,14 +33,6 @@ body {
   color: var(--primary);
 }
 
-.App {
-  height: 100vh;
-}
-
-[data-theme='dark'] {
-  --text: #F7F7F7;
-  --background: #212121;
-}
 
 .btn-danger {
   background-color: var(--primary);
@@ -263,9 +266,9 @@ p {
   }
 }
 
-.ocupar-pantalla {
+ .ocupar-pantalla {
   height: 100vh;
-}
+} 
 
 :-webkit-autofill,
 :-webkit-autofill:hover,
@@ -370,4 +373,7 @@ p {
 }
 input[type="text"],[type="email"],[type="password"] {
   color: var(--primary) !important;
+}
+.switch{
+  color : var(--text)
 }

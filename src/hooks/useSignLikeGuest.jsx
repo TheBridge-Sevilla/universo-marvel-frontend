@@ -13,7 +13,6 @@ export default function useSignLikeGuest() {
   const inicioAnonimo = () => {
     signInAnonymously(auth)
       .then(resultado => {
-        console.log(resultado)
         setUsuario('invitado')
         navigate('/dashboard')
         notificacion('disfruta de la experiencia' , 'info')

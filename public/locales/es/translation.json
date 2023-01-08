@@ -43,6 +43,10 @@
     "mostrar-info": "Mostrar información",
     "cargando": "Cargando personajes",
     "ranking" : "Ranking",
-    "perfil-invitado" : "Perfil de Invitado"
+    "perfil-invitado" : "Perfil de Invitado",
+    "español": "Español",
+    "ingles": "Ingles",
+    "modo-claro" : "Modo Claro",
+    "modo-oscuro" : "Modo Oscuro"
 
 }

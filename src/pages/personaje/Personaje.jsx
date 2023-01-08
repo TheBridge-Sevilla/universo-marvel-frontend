@@ -109,9 +109,9 @@ function Personaje() {
   }
 
   return (
-    <>
+    <div className='ocupar-pantalla'>
       <TopBar />
-      <Container className='d-flex flex-row align-items-center justify-content-between '>
+      <Container className=' d-flex flex-row align-items-center justify-content-between '>
         {isIndice > 0 ? (
           <Link
             to={`/personaje/${personajeAnterior.name
@@ -194,7 +194,7 @@ function Personaje() {
           personaje={personaje}
         />
       </Modal>
-    </>
+    </div>
   )
 }
 
