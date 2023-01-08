@@ -214,7 +214,7 @@ p {
   position: fixed;
   position: fixed;
   bottom: 0;
-  left:0;
+  left: 0;
   padding: 0.8rem;
   padding: 0.8rem;
   border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
@@ -346,11 +346,25 @@ p {
   color: grey;
 }
 
-.modal-content {
+/* .modal-content {
   background-color: #15121E;
-}
+} */
 
 .MuiListItemText-root p {
-  color: white;
+  color: var(--accent);
   font-weight: normal !important;
+}
+
+.blur-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 2%;
+}
+
+.background-personaje {
+  background-image: url(${personaje.thumbnail.path}.${personaje.thumbnail.extension});
+}
+
+.descripcion-text {
+  color: var(--accent);
 }

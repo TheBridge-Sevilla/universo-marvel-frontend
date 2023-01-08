@@ -1,6 +1,6 @@
 import TopBar from '../../components/TopBar'
 import Nav from 'react-bootstrap/Nav'
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from '../../components/Navbar'
 import Favorito from './Favorito'
 import MasVotado from './MasVotado'
 import { useContextoUsuario } from '../../context/contextoUsuario'
