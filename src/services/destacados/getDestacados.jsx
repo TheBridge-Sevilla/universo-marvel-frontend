@@ -11,12 +11,16 @@ export function getDestacados(aDestacar, tipo, body) {
       headers: { 'Content-Type': 'application/json' },
       body: body,
     }
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(json => {
-        setJson(json)
-        setImagen(json[0].imagen)
-      })
+    try {
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(json => {
+          setJson(json)
+          setImagen(json[0].imagen)
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }, [])
 
   return { json, imagen }
