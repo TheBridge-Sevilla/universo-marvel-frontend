@@ -345,11 +345,25 @@ p {
   color: grey;
 }
 
-.modal-content {
+/* .modal-content {
   background-color: #15121E;
-}
+} */
 
 .MuiListItemText-root p {
-  color: white;
+  color: var(--accent);
   font-weight: normal !important;
+}
+
+.blur-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10%;
+  backdrop-filter: blur(8px);
+}
+
+.background-personaje {
+  background-image: url(${personaje.thumbnail.path}.${personaje.thumbnail.extension});
+}
+
+.descripcion-text {
+  color: var(--accent);
 }

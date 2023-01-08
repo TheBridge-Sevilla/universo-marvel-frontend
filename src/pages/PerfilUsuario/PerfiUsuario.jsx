@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Button, FormGroup, TextField } from '@mui/material'
 import { Container, Form } from 'react-bootstrap'
-import Navbar from '../../components/navbar/Navbar'
+import Navbar from '../../components/Navbar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'

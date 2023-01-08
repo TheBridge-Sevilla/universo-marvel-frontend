@@ -3,7 +3,6 @@ import './personaje.css'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
-import TopBar from '../../components/TopBar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
@@ -13,6 +12,7 @@ import { MD5 } from 'crypto-js'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
+import Navbar from '../../components/Navbar'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -32,12 +32,11 @@ function Personaje() {
   const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
   const personajeID = personaje.Id
   const { notificacion } = useContextoAlert()
-
   const [comics, setComics] = useState([])
   const [mostrarInfo, setMostrarInfo] = useState(false)
+  const [modalBackground, setModalBackground] = useState()
 
   useEffect(() => {
-    console.log(personaje.Id)
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
       personaje._id
     }&idUsuario=${auth.currentUser.uid}`
@@ -47,7 +46,6 @@ function Personaje() {
         setValoracionPersonal(json)
       })
   }, [])
-
   function emitirValoracion(valoracion) {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
       personaje.name
@@ -77,6 +75,7 @@ function Personaje() {
       } catch (error) {
         notificacion(error, 'error')
       }
+      document.body.style.background = modalBackground
     }
     fetchData()
   }, [])
@@ -110,7 +109,6 @@ function Personaje() {
 
   return (
     <>
-      <TopBar />
       <Container className='d-flex flex-row align-items-center justify-content-between '>
         {isIndice > 0 ? (
           <Link
@@ -175,7 +173,12 @@ function Personaje() {
           </Container>
         )}
         <Button
-          onClick={() => setMostrarInfo(true)}
+          onClick={() => {
+            setMostrarInfo(true)
+            setModalBackground(
+              `${personaje.path}.${personaje.thumbnail.extension}`
+            )
+          }}
           className='mt-5'
           size='large'
         >
@@ -187,13 +190,13 @@ function Personaje() {
         show={mostrarInfo}
         onHide={() => setMostrarInfo(false)}
       >
-        <Modal.Header closeButton />
         <DescripcionPersonaje
           responsive={responsive}
           comics={comics}
           personaje={personaje}
         />
       </Modal>
+      <Navbar />
     </>
   )
 }

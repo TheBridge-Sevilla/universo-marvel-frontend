@@ -11,7 +11,6 @@ export default function TopBar() {
 
   return (
     <Container className='d-flex justify-content-between mt-3'>
-      {' '}
       <Nav>
         <ArrowBackIcon
           className='flecha-volver'
