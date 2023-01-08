@@ -41,5 +41,8 @@
     "valoracion-personal": "Tú valoración",
     "valoracion-global": "Valoración global",
     "mostrar-info": "Mostrar información",
-    "cargando": "Cargando personajes"
+    "cargando": "Cargando personajes",
+    "ranking" : "Ranking",
+    "perfil-invitado" : "Perfil de Invitado"
+
 }

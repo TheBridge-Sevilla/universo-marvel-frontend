@@ -15,9 +15,9 @@ function Navbar() {
     }
     return (
         <nav className='contenedor_navbar'>
-            <NavLink style={navLinkStyles} to='/destacado'><GiTrophyCup/>{t('Ranking')}</NavLink>
-            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('Personajes')}</NavLink>
-            <NavLink style={navLinkStyles} to='/perfilUsuario'><FiSettings/><span>{t('Settings')}</span></NavLink>
+            <NavLink style={navLinkStyles} to='/destacado'><GiTrophyCup/>{t('ranking')}</NavLink>
+            <NavLink style={navLinkStyles} to='/dashboard'><FaUserAstronaut/>{t('personajes')}</NavLink>
+            <NavLink style={navLinkStyles} to='/perfil-usuario'><FiSettings/><span>{t('settings')}</span></NavLink>
         </nav>
     )
 }

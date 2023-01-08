@@ -52,9 +52,7 @@ body {
   cursor: pointer;
 }
 
-input {
-  color: var(--secondary);
-}
+
 
 span>.css-i4bv87-MuiSvgIcon-root {
   color: var(--primary) !important;
@@ -97,9 +95,6 @@ button:hover {
   background-color: var(--hover) !important;
 }
 
-/* a {
-  color: var(--secondary) !important;
-} */
 
 h1 {
   font-size: 3rem;
@@ -242,9 +237,7 @@ p {
 }
 
 
-/* .modificarSVG > svg {
- background-color: #28b728;
-} */
+
 
 @keyframes fadeIn {
   from {
@@ -283,7 +276,7 @@ p {
 
 .flecha-volver>path {
   color: var(--hover);
-
+  cursor: pointer;
 }
 
 .css-1c99szj-MuiRating-icon svg {
@@ -291,6 +284,21 @@ p {
 }
 
 .flecha-subir {
+  cursor: pointer;
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
+}
+.circulo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--terciary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   bottom: 8%;
   right: 4%;
@@ -353,4 +361,13 @@ p {
 .MuiListItemText-root p {
   color: white;
   font-weight: normal !important;
+}
+.avatar{
+  cursor: pointer;
+}
+.Mui-disabled {
+  -webkit-text-fill-color: var(--primary) !important
+}
+input[type="text"],[type="email"],[type="password"] {
+  color: var(--primary) !important;
 }

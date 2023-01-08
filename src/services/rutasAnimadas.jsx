@@ -78,7 +78,7 @@ function RutasAnimadas() {
             }
           />
           <Route
-            path='perfilUsuario'
+            path='perfil-usuario'
             element={
               <PrivateRoute>
                 <PerfilUsuario />
