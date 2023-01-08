@@ -12,11 +12,13 @@ import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
 import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
 import Destacados from '../pages/destacado/Destacado'
+import { useContextoUsuario } from '../context/contextoUsuario'
 
 
 function RutasAnimadas() {
   const location = useLocation()
-
+  const { usuario } = useContextoUsuario()
+  
   return (
     <Container style={{ overflowX: 'hidden', padding: '0' }}>
       <AnimatePresence mode='wait'>
@@ -77,6 +79,7 @@ function RutasAnimadas() {
               </PrivateRoute>
             }
           />
+
           <Route
             path='perfil-usuario'
             element={
@@ -85,6 +88,7 @@ function RutasAnimadas() {
               </PrivateRoute>
             }
           />
+
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>

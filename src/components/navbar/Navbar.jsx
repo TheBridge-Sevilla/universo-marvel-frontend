@@ -3,8 +3,9 @@ import { FiSettings } from 'react-icons/fi'
 import {GiTrophyCup} from 'react-icons/gi'
 import {FaUserAstronaut} from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
-
+import { useContextoUsuario } from '../../context/contextoUsuario'
 function Navbar() {
+    const { usuario } = useContextoUsuario()
     const { t } = useTranslation()
     const navLinkStyles = ({ isActive }) => {
         return {
