@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../../components/TopBar'
 import { useEffect, useState } from 'react'
@@ -36,8 +36,12 @@ export default function DescripcionPersonaje(props) {
       <Container className='fixed-top'>
         <TopBar />
       </Container>
-      <Container className='blur-container py-5'>
-        {descripcion ? <p className='descripcion-text'>{descripcion}</p> : <></>}
+      <Container className='blur-container py-4'>
+        {descripcion ? (
+          <Typography className='descripcion-text'>{descripcion}</Typography>
+        ) : (
+          <></>
+        )}
         <Carousel
           responsive={responsive}
           showDots={false}
@@ -46,7 +50,7 @@ export default function DescripcionPersonaje(props) {
         >
           {comics.map(comic => (
             <a
-            className='descripcion-text'
+              className='descripcion-text'
               key={comic.id}
               href={comic.urls[0].url}
               target='_blank'
