@@ -368,3 +368,8 @@ p {
 .descripcion-text {
   color: var(--accent);
 }
+
+/* modificar para el modo oscuro a var background color */
+.sin-favorito {
+  background-color: #15121E;
+}
