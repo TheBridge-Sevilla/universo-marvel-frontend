@@ -11,8 +11,6 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [usuarioActual, setUsuarioActual] = useState('')
   const [pantalla, setPantalla] = useState('')
   const [isIndice, setIsIndice] = useState('')
-/*   const [personajeSeleccionado, setPersonajeSeleccionado] = useState('')
-  const [valoracionSeleccionado, setValoracionSeleccionado] = useState('') */
   const [personajes, setPersonajes] = useState('')
   const [valoraciones, setValoraciones] = useState('')
   const defaultRecordar = window.matchMedia('(recordar-usuario: no-recordar)').matches
@@ -26,7 +24,16 @@ export const ContextoUsuarioProvider = ({ children }) => {
     const newRecodar = isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'
     setIsRecordarLocal(newRecodar)
   }
+  const defaultDark = window.matchMedia('(prefers-color-scheme: true)').matches
+  const [theme, setTheme] = useLocalStorage(
+    'theme',
+    defaultDark ? 'true' : 'false'
+  )
 
+  const switchTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+  } 
 
   const contextValue = {
     usuario,
@@ -40,16 +47,15 @@ export const ContextoUsuarioProvider = ({ children }) => {
     switchRecordar,
     imagenPerfil,
     setImagenPerfil,
-/*     personajeSeleccionado,
-    setPersonajeSeleccionado,
-    valoracionSeleccionado,
-    setValoracionSeleccionado, */
     personajes,
     setPersonajes,
     valoraciones,
     setValoraciones,
     isIndice,
-    setIsIndice
+    setIsIndice,
+    theme,
+    setTheme,
+    switchTheme
   }
 
   return (

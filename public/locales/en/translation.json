@@ -44,5 +44,9 @@
     "mostrar-info": "Show information",
     "cargando": "Loading characters",
     "ranking" : "Ranking",
-    "perfil-invitado" : "Guest Profile"
+    "perfil-invitado" : "Guest Profile",
+    "español": "Spanish",
+    "ingles": "English",
+    "modo-claro" : "Light Mode",
+    "modo-oscuro" : "Dark Mode"
 }

@@ -15,7 +15,6 @@ export default function TopBar(props) {
 
   const volverAtras=()=>{
     if (UrlPersonaje ){
-      console.log(UrlPersonaje)
       navigate('/dashboard')
     }
     else{

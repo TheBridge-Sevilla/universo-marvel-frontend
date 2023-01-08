@@ -7,7 +7,7 @@ import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'
 import { useSignOut } from '../../hooks/useSignOut'
 import { useSignWithG } from '../../hooks/useSignWithG'
-
+import Interruptor from '../../components/Interruptor'
 export default function PerfilUsuario() {
   const { usuarioActual, usuario } = useContextoUsuario()
   const { cerrarSesion } = useSignOut()
@@ -22,6 +22,7 @@ export default function PerfilUsuario() {
           fluid
         >
           <h2 className='mx-4'>{t('perfil-invitado')}</h2>
+          <Interruptor />
           <Container className='-flex flex-column justify-center align-items-center mt-5'>
             <Button className='my-2' onClick={iniciarSesionConG}>
               Iniciar sesion con Google
@@ -37,8 +38,8 @@ export default function PerfilUsuario() {
   } else {
     return (
       <>
-        <Container className='d-flex flex-column justify-center align-items-center m-2'>
-          <h6 className='my-4'>{t('perfil')}</h6>
+        <Container className='ocupar-pantalla d-flex flex-column justify-center align-items-center m-2'>
+          <h2 className='my-4'>{t('perfil')}</h2>
           <AvatarUsuario />
           <Form className='d-flex flex-column justify-content-center mt-2'>
             <FormGroup className='d-flex flex-column justify-content-center mx-4'>
@@ -66,6 +67,7 @@ export default function PerfilUsuario() {
           <Button className='my-5' onClick={cerrarSesion}>
             {t('cerrar-sesion')}
           </Button>
+          <Interruptor />
         </Container>
         <Navbar />
       </>
