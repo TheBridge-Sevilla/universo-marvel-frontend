@@ -7,16 +7,21 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next'
 
-
 export default function Interruptor() {
     const { t } = useTranslation()
 
-    const { theme, setTheme } = useContextoUsuario()
+    const { theme, setTheme,idioma,setIdioma } = useContextoUsuario()
     const toggle = (e) => {
         setTheme(e.target.checked)
-        console.log(e.target.checked)
     };
 
+
+    
+    const handleClick = () => {
+        setIdioma(idioma === 'es' ? 'en' : 'es')
+    }
+
+    
 
     const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         width: 62,
@@ -67,15 +72,15 @@ export default function Interruptor() {
 
 
     return (
-        <FormGroup>
+        <FormGroup className='d-flex flex-row m-3 gap-4'>
             <FormControlLabel
-                control={<MaterialUISwitch checked={theme} onChange={toggle} defaultChecked />}
+                control={<MaterialUISwitch checked={theme == true} onChange={toggle}  />}
                 className="switch" label={theme ? t('modo-oscuro') : t('modo-claro')}
             />
             <Stack direction="row" spacing={1} alignItems="center">
-                <Typography>{t('español')}</Typography>
-                <Switch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
                 <Typography>{t('ingles')}</Typography>
+                <Switch checked={idioma == 'es'}  onChange={handleClick}  />
+                <Typography>{t('español')}</Typography>
             </Stack>
         </FormGroup>
     );

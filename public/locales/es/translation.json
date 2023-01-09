@@ -30,7 +30,7 @@
     "borrar": "Borrar",
     "subir": "Subir",
     "personaje-favorito": "Personaje Favorito",
-    "personaje-mas-votado": "Personaje Más Votado",
+    "personaje-votado": "Personaje Más Votado",
     "ver-mas": "Ver más",
     "comentarios": "Comentarios",
     "comentar": "Comentar",
@@ -50,5 +50,6 @@
     "modo-oscuro" : "Modo Oscuro",
     "ver-comentarios": "Mostrar comentarios",
     "configuracion" : "Configuración",
-    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados",
+    "filtro" : "Filtro"
 }

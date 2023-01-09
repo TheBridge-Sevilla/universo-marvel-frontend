@@ -51,5 +51,6 @@
     "ver-comentarios": "Show comments",
     "cargando": "Loading characters",
     "configuracion" : "Settings",
-    "solo-usuarios-registrados": "Exclusive feature for register members"
+    "solo-usuarios-registrados": "Exclusive feature for register members",
+    "filtro" : "Filter"
 }

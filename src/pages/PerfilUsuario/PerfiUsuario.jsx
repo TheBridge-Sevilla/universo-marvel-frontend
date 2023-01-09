@@ -23,7 +23,7 @@ export default function PerfilUsuario() {
         >
           <h2 className='mx-4'>{t('perfil-invitado')}</h2>
           <Interruptor />
-          <Container className='-flex flex-column justify-center align-items-center mt-5'>
+          <Container className='d-flex flex-column justify-center align-items-center mt-5'>
             <Button className='my-2' onClick={iniciarSesionConG}>
               Iniciar sesion con Google
             </Button>
@@ -41,6 +41,7 @@ export default function PerfilUsuario() {
         <Container className='ocupar-pantalla d-flex flex-column justify-center align-items-center m-2'>
           <h2 className='my-4'>{t('perfil')}</h2>
           <AvatarUsuario />
+          <Interruptor />
           <Form className='d-flex flex-column justify-content-center mt-2'>
             <FormGroup className='d-flex flex-column justify-content-center mx-4'>
               <TextField
@@ -67,7 +68,6 @@ export default function PerfilUsuario() {
           <Button className='my-5' onClick={cerrarSesion}>
             {t('cerrar-sesion')}
           </Button>
-          <Interruptor />
         </Container>
         <Navbar />
       </>

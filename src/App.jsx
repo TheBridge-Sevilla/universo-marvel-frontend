@@ -5,15 +5,18 @@ import { useContextoUsuario } from './context/contextoUsuario'
 import { auth } from './services/firebase/firebase'
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 function App() {
+  const { i18n } = useTranslation();
   const {
     setUsuario,
     setUsuarioActual,
     isRecordarLocal,
     setImagenPerfil,
     usuarioActual,
-    theme
+    theme,
+    idioma
   } = useContextoUsuario()
   const navigate = useNavigate()
   const location = useLocation()
@@ -48,6 +51,10 @@ function App() {
       setImagenPerfil(usuarioActual.photoURL)
     } else setImagenPerfil('perfil-invitado.png')
   }, [usuarioActual])
+
+  useEffect(() => {
+    i18n.changeLanguage(idioma)
+}, [idioma])
 
   return (
          <div className='App' data-theme={theme}>

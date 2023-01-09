@@ -29,11 +29,13 @@ export const ContextoUsuarioProvider = ({ children }) => {
     'theme',
     defaultDark ? 'true' : 'false'
   )
+  const defaultIdioma = window.matchMedia('(idioma: es)').matches
+  const [idioma, setIdioma] = useLocalStorage(
+    'idioma',
+    defaultIdioma ? 'es' : 'en'
+  )
 
-  const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-  } 
+
 
   const contextValue = {
     usuario,
@@ -55,7 +57,9 @@ export const ContextoUsuarioProvider = ({ children }) => {
     setIsIndice,
     theme,
     setTheme,
-    switchTheme
+    idioma,
+    setIdioma
+
   }
 
   return (

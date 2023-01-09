@@ -384,7 +384,7 @@ p {
 
 /* modificar para el modo oscuro a var background color */
 .sin-favorito {
-  background-color: #15121E;
+  background-color: var(--background);
 }
 
 .comentarios {
@@ -422,4 +422,7 @@ input[type="text"],[type="email"],[type="password"] {
 }
 .switch{
   color : var(--text)
+}
+.cambiar-imagen{
+  border: 1px solid var(--primary) !important;
 }

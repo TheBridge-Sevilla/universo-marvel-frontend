@@ -9,7 +9,7 @@ function MasVotado() {
 
   return (
     <>
-      <p>{t('personaje-mas-votado')}</p>
+      <p>{t('personaje-votado')}</p>
       <Carrusel  json={json} />
     </>
   )
