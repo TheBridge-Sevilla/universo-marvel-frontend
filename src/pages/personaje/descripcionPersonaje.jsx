@@ -22,7 +22,7 @@ export default function DescripcionPersonaje(props) {
 
   return (
     <Container
-      className='background-personaje d-flex flex-column justify-content-center align-items-center h-100'
+      className=' background-personaje d-flex flex-column justify-content-center align-items-center h-100'
       style={{
         backgroundImage: `url(${personaje.thumbnail.path}.${personaje.thumbnail.extension})`,
         backgroundSize: 'cover',

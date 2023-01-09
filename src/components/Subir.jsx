@@ -24,11 +24,12 @@ export default function Subir() {
   return (
     <>
       {showButton ? (
+        <div className='circulo'>
         <ArrowUpwardIcon
           className='flecha-subir show'
           fontSize='large'
           onClick={handleClick}
-        ></ArrowUpwardIcon>
+        ></ArrowUpwardIcon></div>
       ) : (
         <></>
       )}

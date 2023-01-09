@@ -48,7 +48,7 @@ export default function PasswordUsuario() {
       setCambioContraseña(!CambioContraseña)
     }
   }
-  console.log(contraseña, 'submitContraseña')
+
 
   const handleContraseña = () => {
     setCambioContraseña(!CambioContraseña)

@@ -102,7 +102,7 @@ function Personaje() {
     setIsIndice(isIndice - 1)
   }
   return (
-    <>
+    <div className='ocupar-pantalla'>
       <TopBar />
       <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
         {isIndice > 0 ? (
@@ -196,7 +196,7 @@ function Personaje() {
       >
         <Comentarios personaje={personaje} />
       </Modal>
-    </>
+    </div>
   )
 }
 

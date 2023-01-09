@@ -23,7 +23,7 @@ function Navbar() {
         <FaUserAstronaut />
         {t('personajes')}
       </NavLink>
-      <NavLink style={navLinkStyles} to='/perfilUsuario'>
+      <NavLink style={navLinkStyles} to='/perfil-usuario'>
         <FiSettings />
         <span>{t('configuracion')}</span>
       </NavLink>

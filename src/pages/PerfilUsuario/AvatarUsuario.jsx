@@ -53,7 +53,7 @@ export default function AvatarUsuario() {
     >
       <TopBar sizes={139} imagenPerfil={imagenPerfil} />
       <Stack spacing={2}>
-        <Button component='label'>
+        <Button className='cambiar-imagen' component='label'>
           {t('cambiar-imagen')}
           <TextField
             hidden
