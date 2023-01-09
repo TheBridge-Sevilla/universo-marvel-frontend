@@ -158,17 +158,21 @@ function Personaje() {
             </Alert>
           </Container>
         )}
-        <Button
+      </Container>
+      <Container className='d-flex flex-column justify-content-center mt-5'>
+        <Button className='m-2'
           onClick={() => {
             setMostrarInfo(true)
             setModalBackground(
               `${personaje.path}.${personaje.thumbnail.extension}`
             )
           }}
-          className='mt-5'
           size='large'
         >
           {t('mostrar-info')}
+        </Button>
+        <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
+          {t('ver-comentarios')}
         </Button>
       </Container>
       <Modal
@@ -178,9 +182,6 @@ function Personaje() {
       >
         <DescripcionPersonaje comics={comics} personaje={personaje} />
       </Modal>
-      <Button onClick={() => setMostrarComentarios(true)}>
-        Mostrar comentarios
-      </Button>
       <Modal
         fullscreen={true}
         show={mostrarComentarios}
