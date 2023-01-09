@@ -287,7 +287,7 @@ p {
 }
 
 .css-1c99szj-MuiRating-icon svg {
-  color: #faaf00;
+  color: #FFA30C;
 }
 
 .flecha-subir {
@@ -372,4 +372,12 @@ p {
 /* modificar para el modo oscuro a var background color */
 .sin-favorito {
   background-color: #15121E;
+}
+
+.comentarios {
+  background-color: #15121E;
+}
+
+.titulo {
+  color: var(--secondary)
 }

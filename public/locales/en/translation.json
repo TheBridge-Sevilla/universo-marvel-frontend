@@ -43,5 +43,6 @@
     "valoracion-global": "Global valoration",
     "mostrar-info": "Show information",
     "cargando": "Loading characters",
-    "configuracion" : "Settings"
+    "configuracion" : "Settings",
+    "solo-usuarios-registrados": "Exclusive feature for register members"
 }

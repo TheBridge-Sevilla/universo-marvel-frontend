@@ -4,7 +4,6 @@ import { useContextoUsuario } from '../context/contextoUsuario'
 import { useNavigate } from 'react-router-dom'
 import { useContextoAlert } from '../context/contextoAlert'
 
-
 export default function useSignLikeGuest() {
   const { setUsuario } = useContextoUsuario()
   const { notificacion } = useContextoAlert()
@@ -12,15 +11,13 @@ export default function useSignLikeGuest() {
 
   const inicioAnonimo = () => {
     signInAnonymously(auth)
-      .then(resultado => {
-        console.log(resultado)
+      .then(() => {
         setUsuario('invitado')
         navigate('/dashboard')
-        notificacion('disfruta de la experiencia' , 'info')
+        notificacion('disfruta de la experiencia', 'info')
       })
       .catch(error => {
         notificacion(error, 'error')
-        // ...
       })
   }
 

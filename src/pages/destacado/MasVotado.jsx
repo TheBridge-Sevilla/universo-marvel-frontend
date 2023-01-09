@@ -12,7 +12,6 @@ function MasVotado(props) {
     <>
       <Container className='d-flex flex-column mb-5'>
         <p>{t('personaje-mas-votado')}</p>
-
         <Carousel
         responsive={props.responsive}
         showDots={false}

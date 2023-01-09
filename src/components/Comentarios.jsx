@@ -7,13 +7,20 @@ import {
 } from '@mui/material'
 import { Container } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
+import Comentar from '../services/formComentario'
+import TopBar from './TopBar'
 
-export default function Comentarios() {
+export default function Comentarios(props) {
   const { t } = useTranslation()
+  const personaje = props.personaje
 
+  
   return (
-    <Container className='mt-4 mb-5'>
-      <p>{t('comentarios')}</p>
+    <Container className='comentarios h-100'>
+      <Container className='mb-4'>
+        <TopBar personaje={personaje} />
+      </Container>
+      <h4 className='d-flex align-self-start'>{t('comentarios')}</h4>
       <List sx={{ width: '100%' }}>
         <ListItem alignItems='flex-start'>
           <ListItemAvatar>
@@ -36,6 +43,7 @@ export default function Comentarios() {
           />
         </ListItem>
       </List>
+      <Comentar personaje={personaje} />
     </Container>
   )
 }

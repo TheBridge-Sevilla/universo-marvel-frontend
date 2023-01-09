@@ -42,5 +42,6 @@
     "valoracion-global": "Valoración global",
     "mostrar-info": "Mostrar información",
     "cargando": "Cargando personajes",
-    "configuracion" : "Configuración"
+    "configuracion" : "Configuración",
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
 }

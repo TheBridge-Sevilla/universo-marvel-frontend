@@ -54,9 +54,7 @@ function Favorito(props) {
         <Card.Header>{t('personaje-favorito')}</Card.Header>
         <Card.Body>
           <Card.Title></Card.Title>
-          <Card.Text>
-            Esta funcion solo esta disponible para usuarios registrados
-          </Card.Text>
+          <Card.Text>{t('solo-usuarios-registrados')}</Card.Text>
         </Card.Body>
       </Card>
     )
