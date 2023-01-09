@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
+import { fetchPost } from '../../services/fetchPost'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -38,6 +39,7 @@ function Personaje() {
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
+  const { postValoracion } = fetchPost()
 
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
@@ -50,7 +52,7 @@ function Personaje() {
       })
   }, [])
 
-  function emitirValoracion(valoracion) {
+  /*   function emitirValoracion(valoracion) {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
       personaje.name
     }`
@@ -62,10 +64,18 @@ function Personaje() {
       },
       body: JSON.stringify({
         idUsuario: auth.currentUser != null ? auth.currentUser.uid : undefined,
-        valoracion: valoracion,
+        valoracion: valoracion, //id del usuario Firebase
         idPersonaje: personaje._id,
       }),
-    }).then(setValoracionPersonal(valoracion))
+    }).then(
+      setValoracionPersonal(valoracion),
+      notificacion(`${t('voto-realizado')}`, 'success')
+    )
+  } */
+  const handleValoracion = valoracion => {
+    postValoracion(personaje, valoracion)
+    setValoracionPersonal(valoracion)
+    notificacion(`${t('voto-realizado')}`, 'success')
   }
 
   useEffect(() => {
@@ -91,7 +101,6 @@ function Personaje() {
   const anteriorPersonaje = () => {
     setIsIndice(isIndice - 1)
   }
-
   return (
     <>
       <TopBar />
@@ -134,10 +143,7 @@ function Personaje() {
         <Rating
           name='simple-controlled'
           value={valoracionPersonal}
-          onChange={newValue => {
-            emitirValoracion(newValue)
-            notificacion(`${t('voto-realizado')}`, 'success')
-          }}
+          onChange={(event, newValue) => handleValoracion(newValue)}
         />
       </Container>
       <br />
@@ -160,7 +166,8 @@ function Personaje() {
         )}
       </Container>
       <Container className='d-flex flex-column justify-content-center mt-5'>
-        <Button className='m-2'
+        <Button
+          className='m-2'
           onClick={() => {
             setMostrarInfo(true)
             setModalBackground(

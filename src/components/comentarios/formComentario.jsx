@@ -5,13 +5,14 @@ import { Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { auth } from '../../services/firebase/firebase'
 import { useContextoAlert } from '../../context/contextoAlert'
-import { postComentario } from '../../services/comentarios/postComentario'
+import { fetchPost } from '../../services/fetchPost'
 
 export default function Comentar(props) {
   const { t } = useTranslation()
   const [comentario, setComentario] = useState('')
   const personaje = props.personaje
   const { notificacion } = useContextoAlert()
+  const { postComentario } = fetchPost()
 
   const onSubmit = e => {
     e.preventDefault()
@@ -31,7 +32,10 @@ export default function Comentar(props) {
   }
 
   return (
-    <Form onSubmit={onSubmit} className='d-flex flex-column justify-content-center mt-4'>
+    <Form
+      onSubmit={onSubmit}
+      className='d-flex flex-column justify-content-center mt-4'
+    >
       <Textarea
         label='Outlined'
         placeholder={t('escribir-comentario')}
