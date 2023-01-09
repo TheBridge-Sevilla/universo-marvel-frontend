@@ -212,7 +212,7 @@ p {
   position: fixed;
   position: fixed;
   bottom: 0;
-  left:0;
+  left: 0;
   padding: 0.8rem;
   padding: 0.8rem;
   border-top: solid 0.1rem rgba(255, 255, 255, 0.25);
@@ -283,7 +283,7 @@ p {
 }
 
 .css-1c99szj-MuiRating-icon svg {
-  color: #faaf00;
+  color: #FFA30C;
 }
 
 .flecha-subir {
@@ -357,13 +357,59 @@ p {
   color: grey;
 }
 
-.modal-content {
+ .modal-content {
+  background: black;
+} 
+
+.MuiListItemText-root p {
+  color: var(--accent);
+  font-weight: normal !important;
+}
+
+.blur-container {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 2%;
+}
+
+.background-personaje {
+  background-image: url(${personaje.thumbnail.path}.${personaje.thumbnail.extension});
+  max-width: none !important;
+  
+}
+
+.descripcion-text {
+  color: var(--accent);
+}
+
+/* modificar para el modo oscuro a var background color */
+.sin-favorito {
   background-color: #15121E;
 }
 
-.MuiListItemText-root p {
-  color: white;
-  font-weight: normal !important;
+.comentarios {
+  background-color: #15121E;
+}
+
+.titulo {
+  color: var(--secondary)
+}
+
+.card-comentario {
+  background-color: rgba(24, 22, 36, 0.3);
+  border-color: var(--primary);
+}
+
+.texto-comentario {
+  color: var(--accent);
+}
+
+.boton-comentar.MuiButtonBase-root {
+  width: 33%;
+}
+
+.comentar-area.JoyTextarea-root {
+  border-color: var(--accent);
 }
 .avatar{
   cursor: pointer;

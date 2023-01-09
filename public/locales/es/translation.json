@@ -35,7 +35,7 @@
     "comentarios": "Comentarios",
     "comentar": "Comentar",
     "escribir-comentario": "Escribe un comentario...",
-    "publicar": "Publicar comentario",
+    "publicar": "Enviar",
     "por-valorar": "Personaje sin valoración",
     "voto-realizado": "valoración guardada correctamente",
     "valoracion-personal": "Tú valoración",
@@ -47,6 +47,8 @@
     "español": "Español",
     "ingles": "Ingles",
     "modo-claro" : "Modo Claro",
-    "modo-oscuro" : "Modo Oscuro"
-
+    "modo-oscuro" : "Modo Oscuro",
+    "ver-comentarios": "Mostrar comentarios",
+    "configuracion" : "Configuración",
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
 }

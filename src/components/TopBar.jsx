@@ -6,9 +6,10 @@ import Nav from 'react-bootstrap/Nav'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useLocation } from 'react-router-dom'
 
-export default function TopBar() {
+export default function TopBar(props) {
   const { imagenPerfil } = useContextoUsuario()
   const navigate = useNavigate()
+  const personaje = props.personaje
   const location = useLocation()
   const currentURL = location.pathname
   const UrlPersonaje = currentURL.includes('/personaje')
@@ -24,7 +25,6 @@ export default function TopBar() {
 
   return (
     <Container className='d-flex justify-content-between mt-3'>
-      {' '}
       <Nav>
         <ArrowBackIcon
           className='flecha-volver'
@@ -32,7 +32,9 @@ export default function TopBar() {
           onClick={() => volverAtras()}
         />
       </Nav>
+      {personaje ? <h5>{personaje.name}</h5> : <></>}
       <Avatar
+        sx={{ width: props.sizes, height: props.sizes }}
         color='action'
         className='avatar'
         alt='Google Photo/Initial'

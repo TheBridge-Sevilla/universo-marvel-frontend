@@ -1,41 +1,45 @@
-import { Container, Modal } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel'
-import Comentarios from '../../components/Comentarios'
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
-import Comentar from '../../services/formComentario'
+import TopBar from '../../components/TopBar'
+import { useEffect, useState } from 'react'
+import { responsive } from '../../services/responsive'
 
 export default function DescripcionPersonaje(props) {
   const { t } = useTranslation()
-  const responsive = props.responsive
   const comics = props.comics
   const personaje = props.personaje
-  const [comicsVisibles, setComicsVisibles] = useState(false)
-  const [comentarVisible, setComentarVisible] = useState(false)
+  const [descripcion, setDescripcion] = useState('')
+
+  useEffect(() => {
+    if (personaje) {
+      if (personaje.description.es != 'Sin descripción') {
+        setDescripcion(personaje.description.es)
+      }
+    }
+  }, [])
 
   return (
-    <Container>
-      <Comentarios />
-      <Button onClick={() => setComentarVisible(true)}>{t('comentar')}</Button>
-      <Modal
-        show={comentarVisible}
-        onHide={() => setComentarVisible(false)}
-        centered
-      >
-        <Comentar />
-      </Modal>
-      <Button onClick={() => setComicsVisibles(true)} className='mx-1'>
-        Mostrar comics
-      </Button>
-      <Modal
-        show={comicsVisibles}
-        onHide={() => setComicsVisibles(false)}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Comics</Modal.Title>
-        </Modal.Header>
+    <Container
+      className=' background-personaje d-flex flex-column justify-content-center align-items-center h-100'
+      style={{
+        backgroundImage: `url(${personaje.thumbnail.path}.${personaje.thumbnail.extension})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        width: '100vw',
+      }}
+    >
+      <Container className='fixed-top'>
+        <TopBar />
+      </Container>
+      <Container className='blur-container py-4'>
+        {descripcion ? (
+          <Typography className='descripcion-text'>{descripcion}</Typography>
+        ) : (
+          <></>
+        )}
         <Carousel
           responsive={responsive}
           showDots={false}
@@ -44,6 +48,7 @@ export default function DescripcionPersonaje(props) {
         >
           {comics.map(comic => (
             <a
+              className='descripcion-text'
               key={comic.id}
               href={comic.urls[0].url}
               target='_blank'
@@ -58,16 +63,15 @@ export default function DescripcionPersonaje(props) {
             </a>
           ))}
         </Carousel>
-      </Modal>
-      <Button
-        onClick={e => {
-          e.preventDefault()
-          window.open(`${personaje.urls[0].url}`)
-        }}
-        className=''
-      >
-        {t('ver-mas')}
-      </Button>
+        <Button
+          onClick={e => {
+            e.preventDefault()
+            window.open(`${personaje.urls[0].url}`)
+          }}
+        >
+          {t('ver-mas')}
+        </Button>
+      </Container>
     </Container>
   )
 }
