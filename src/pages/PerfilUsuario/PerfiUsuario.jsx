@@ -9,30 +9,33 @@ import { useSignOut } from '../../hooks/useSignOut'
 import { useSignWithG } from '../../hooks/useSignWithG'
 import Interruptor from '../../components/Interruptor'
 export default function PerfilUsuario() {
-  const { usuarioActual, usuario, switchTheme,theme } = useContextoUsuario()
+  const { usuarioActual, usuario } = useContextoUsuario()
   const { cerrarSesion } = useSignOut()
   const { iniciarSesionConG } = useSignWithG()
   const { t } = useTranslation()
 
-
-
-  if (usuario == "invitado") {
+  if (usuario == 'invitado') {
     return (
       <>
-        <Container className='ocupar-pantalla d-flex flex-column justify-content-around align-items-center'
-          fluid>
+        <Container
+          className='ocupar-pantalla d-flex flex-column justify-content-around align-items-center'
+          fluid
+        >
           <h2 className='mx-4'>{t('perfil-invitado')}</h2>
-          <Interruptor/>  
+          <Interruptor />
           <Container className='-flex flex-column justify-center align-items-center mt-5'>
-            <Button className='my-2' onClick={iniciarSesionConG}>Iniciar sesion con Google</Button>
-            <Button className='my-2' onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
+            <Button className='my-2' onClick={iniciarSesionConG}>
+              Iniciar sesion con Google
+            </Button>
+            <Button className='my-2' onClick={cerrarSesion}>
+              {t('cerrar-sesion')}
+            </Button>
           </Container>
         </Container>
         <Navbar />
       </>
     )
-  }
-  else {
+  } else {
     return (
       <>
         <Container className='ocupar-pantalla d-flex flex-column justify-center align-items-center m-2'>
@@ -61,9 +64,10 @@ export default function PerfilUsuario() {
             </FormGroup>
           </Form>
           <PasswordUsuario />
-          <Button className='my-5' onClick={cerrarSesion}>{t('cerrar-sesion')}</Button>
-          <Interruptor/>  
-          
+          <Button className='my-5' onClick={cerrarSesion}>
+            {t('cerrar-sesion')}
+          </Button>
+          <Interruptor />
         </Container>
         <Navbar />
       </>
