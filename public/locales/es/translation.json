@@ -43,6 +43,7 @@
     "mostrar-info": "Mostrar información",
     "ver-comentarios": "Mostrar comentarios",
     "cargando": "Cargando personajes",
-    "configuracion" : "Configuración",
-    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
+    "configuracion": "Configuración",
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados",
+    "primer-comentario": "Sé el primero en comentar!"
 }
