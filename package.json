@@ -43,8 +43,12 @@
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "esbuild": "^0.16.8",
-    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
+    "babel-eslint": "*",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
     "prettier": "^2.8.1",
     "vite": "^3.2.3"

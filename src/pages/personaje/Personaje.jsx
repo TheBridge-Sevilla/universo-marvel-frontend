@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
+import Navbar from './../../components/Navbar'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -158,17 +159,25 @@ function Personaje() {
             </Alert>
           </Container>
         )}
+      </Container>
+      <Container className='d-flex flex-column justify-content-center mt-5'>
         <Button
+          className='my-1 mx-3'
           onClick={() => {
             setMostrarInfo(true)
             setModalBackground(
               `${personaje.path}.${personaje.thumbnail.extension}`
             )
           }}
-          className='mt-5'
           size='large'
         >
           {t('mostrar-info')}
+        </Button>
+        <Button
+          className='my-2 mx-3'
+          onClick={() => setMostrarComentarios(true)}
+        >
+          {t('mostrar-comentarios')}
         </Button>
       </Container>
       <Modal
@@ -178,9 +187,6 @@ function Personaje() {
       >
         <DescripcionPersonaje comics={comics} personaje={personaje} />
       </Modal>
-      <Button onClick={() => setMostrarComentarios(true)}>
-        Mostrar comentarios
-      </Button>
       <Modal
         fullscreen={true}
         show={mostrarComentarios}
@@ -188,6 +194,7 @@ function Personaje() {
       >
         <Comentarios personaje={personaje} />
       </Modal>
+      <Navbar />
     </>
   )
 }
