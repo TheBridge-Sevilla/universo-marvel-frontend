@@ -17,7 +17,7 @@ export function Carrusel({ json }) {
             <img
               src={`${comic.imagen}`}
               alt={comic.personaje}
-              className='imagen-comic'
+              className='imagen-ranking'
               key={comic.personaje}
             />
             <p>{comic.personaje}</p>

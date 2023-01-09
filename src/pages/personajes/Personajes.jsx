@@ -106,7 +106,7 @@ function Personajes() {
               id='filtro'
               type='text'
               size='lg'
-              placeholder='Filtro'
+              placeholder={t('filtro')}
               onChange={e => {
                 onFilter(e)
               }}

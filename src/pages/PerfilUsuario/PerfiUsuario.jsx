@@ -7,7 +7,6 @@ import { useContextoUsuario } from '../../context/contextoUsuario'
 import PasswordUsuario from './PasswordUsuario'
 import AvatarUsuario from './AvatarUsuario'
 import { useSignOut } from '../../hooks/useSignOut'
-
 export default function PerfilUsuario() {
   const { usuarioActual } = useContextoUsuario()
   const { cerrarSesion } = useSignOut()
@@ -46,7 +45,7 @@ export default function PerfilUsuario() {
                 type='email'
                 defaultValue={usuarioActual.email}
                 className='my-3'
-                id='placeholder'
+                id='placeholder usuario-input'
               />
             </FormGroup>
           </Form>
