@@ -1,11 +1,11 @@
 import Textarea from '@mui/joy/Textarea'
 import { Button } from '@mui/material'
 import { useState } from 'react'
-import { Form, FormLabel } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { auth } from '../services/firebase/firebase'
-import { useContextoAlert } from './../context/contextoAlert'
-import { postComentario } from './../services/comentarios/postComentario'
+import { auth } from '../../services/firebase/firebase'
+import { useContextoAlert } from '../../context/contextoAlert'
+import { postComentario } from '../../services/comentarios/postComentario'
 
 export default function Comentar(props) {
   const { t } = useTranslation()
@@ -30,21 +30,18 @@ export default function Comentar(props) {
     setComentario(e.target.value)
   }
 
-  console.log(personaje)
   return (
-    <Form
-      onSubmit={onSubmit}
-      className='d-flex flex-column justify-content-center align-items-center'
-    >
-      <FormLabel>{t('comentar')}</FormLabel>
+    <Form onSubmit={onSubmit} className='d-flex flex-column justify-content-center mt-4'>
       <Textarea
         label='Outlined'
         placeholder={t('escribir-comentario')}
         variant='outlined'
         onChange={handleChange}
-        style={{ width: 300 }}
+        className='comentar-area align-self-center'
+        style={{ width: 320 }}
+        minRows={3}
       />
-      <Button className='my-3' size='large' type='submit'>
+      <Button className='boton-comentar my-4 mx-4 align-self-end' type='submit'>
         {t('publicar')}
       </Button>
     </Form>

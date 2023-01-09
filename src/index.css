@@ -381,3 +381,20 @@ p {
 .titulo {
   color: var(--secondary)
 }
+
+.card-comentario {
+  background-color: rgba(24, 22, 36, 0.3);
+  border-color: var(--primary);
+}
+
+.texto-comentario {
+  color: var(--accent);
+}
+
+.boton-comentar.MuiButtonBase-root {
+  width: 33%;
+}
+
+.comentar-area.JoyTextarea-root {
+  border-color: var(--accent);
+}

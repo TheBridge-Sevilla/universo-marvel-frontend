@@ -13,7 +13,7 @@ import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
-import Comentarios from './../../components/Comentarios'
+import Comentarios from './Comentarios'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -176,10 +176,7 @@ function Personaje() {
         show={mostrarInfo}
         onHide={() => setMostrarInfo(false)}
       >
-        <DescripcionPersonaje
-          comics={comics}
-          personaje={personaje}
-        />
+        <DescripcionPersonaje comics={comics} personaje={personaje} />
       </Modal>
       <Button onClick={() => setMostrarComentarios(true)}>
         Mostrar comentarios

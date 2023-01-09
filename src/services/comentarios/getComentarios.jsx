@@ -1,33 +1,20 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from 'react'
 
-function getComentarios() {
-    const [comentarios, setComentarios] = useState([])
+export function getComentarios(personaje) {
+  const url = `${import.meta.env.VITE_BASE_URL}/comentarios?personaje=${
+    personaje._id
+  }`
+
+  const [json, setJson] = useState([])
+
   useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_BASE_URL
-    }/personajes?page=${pagina}&limit=${
-      import.meta.env.VITE_PAGINATION_LIMIT
-    }&filter=${filtro}`
-
-    fetch(url)
-      .then(data => data.json())
-      .then(json => {
-
-        setValoraciones(json.valoraciones)
-        window.localStorage.setItem(
-          'personajes',
-          JSON.stringify(json.personajes)
-        )
-        window.localStorage.setItem(
-          'valoraciones',
-          JSON.stringify(json.valoraciones)
-        )
-      })
-
-
-    setPagina(1)
-  }, [filtro])
-  return <div>getComentarios</div>
+    try {
+      fetch(url)
+        .then(response => response.json())
+        .then(json => setJson(json))
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+  return { json }
 }
-
-export default getComentarios

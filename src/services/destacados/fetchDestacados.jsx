@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function getDestacados(aDestacar, tipo, body) {
+export function fetchDestacados(aDestacar, tipo, body) {
   const url = `${import.meta.env.VITE_BASE_URL}/valoraciones/${aDestacar}`
   const [imagen, setImagen] = useState()
   const [json, setJson] = useState([])

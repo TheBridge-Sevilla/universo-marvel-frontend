@@ -12,8 +12,8 @@ export function postComentario(comentario, personaje) {
     },
     body: JSON.stringify({
       autor: auth.currentUser.displayName,
-      comentario: comentario,
       personaje: personaje._id,
+      comentario: comentario,
     }),
   })
 }

@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Card } from 'react-bootstrap'
-import { getDestacados } from '../../services/destacados/getDestacados'
+import { fetchDestacados } from '../../services/destacados/fetchDestacados'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { Carrusel } from '../../services/destacados/Carrusel'
 
@@ -10,7 +10,7 @@ function Favorito() {
 
   let idUsuario = usuarioActual.auth.currentUser.uid
 
-  const { json } = getDestacados(
+  const { json } = fetchDestacados(
     'favoritos',
     'post',
     JSON.stringify({ idUsuario: idUsuario })
@@ -29,7 +29,6 @@ function Favorito() {
       <Card className='sin-favorito my-5'>
         <Card.Header>{t('personaje-favorito')}</Card.Header>
         <Card.Body>
-          <Card.Title></Card.Title>
           <Card.Text>{t('solo-usuarios-registrados')}</Card.Text>
         </Card.Body>
       </Card>
