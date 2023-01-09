@@ -4,10 +4,10 @@ import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../../components/TopBar'
 import { useEffect, useState } from 'react'
+import { responsive } from '../../services/responsive'
 
 export default function DescripcionPersonaje(props) {
   const { t } = useTranslation()
-  const responsive = props.responsive
   const comics = props.comics
   const personaje = props.personaje
   const [descripcion, setDescripcion] = useState('')
@@ -19,8 +19,6 @@ export default function DescripcionPersonaje(props) {
       }
     }
   }, [])
-
-  console.log(personaje.description.es)
 
   return (
     <Container

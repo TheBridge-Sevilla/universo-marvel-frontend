@@ -8,6 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 export default function TopBar(props) {
   const { imagenPerfil } = useContextoUsuario()
   const navigate = useNavigate()
+  const personaje = props.personaje
 
   return (
     <Container className='d-flex justify-content-between mt-3'>
@@ -18,8 +19,9 @@ export default function TopBar(props) {
           onClick={() => navigate(-1)}
         />
       </Nav>
+      {personaje ? <h5>{personaje.name}</h5> : <></>}
       <Avatar
-       sx={{ width: props.sizes, height: props.sizes }}
+        sx={{ width: props.sizes, height: props.sizes }}
         color='action'
         alt='Google Photo/Initial'
         src={imagenPerfil}

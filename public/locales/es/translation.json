@@ -35,12 +35,13 @@
     "comentarios": "Comentarios",
     "comentar": "Comentar",
     "escribir-comentario": "Escribe un comentario...",
-    "publicar": "Publicar comentario",
+    "publicar": "Enviar",
     "por-valorar": "Personaje sin valoración",
     "voto-realizado": "valoración guardada correctamente",
     "valoracion-personal": "Tú valoración",
     "valoracion-global": "Valoración global",
     "mostrar-info": "Mostrar información",
     "cargando": "Cargando personajes",
-    "configuracion" : "Configuración"
+    "configuracion" : "Configuración",
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
 }

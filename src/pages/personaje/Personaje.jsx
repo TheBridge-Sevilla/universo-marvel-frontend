@@ -12,7 +12,8 @@ import { MD5 } from 'crypto-js'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
-import Navbar from '../../components/Navbar'
+import TopBar from '../../components/TopBar'
+import Comentarios from './Comentarios'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -33,8 +34,10 @@ function Personaje() {
   const personajeID = personaje.Id
   const { notificacion } = useContextoAlert()
   const [comics, setComics] = useState([])
+
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
+  const [mostrarComentarios, setMostrarComentarios] = useState(false)
 
   useEffect(() => {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
@@ -46,6 +49,7 @@ function Personaje() {
         setValoracionPersonal(json)
       })
   }, [])
+
   function emitirValoracion(valoracion) {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
       personaje.name
@@ -58,7 +62,7 @@ function Personaje() {
       },
       body: JSON.stringify({
         idUsuario: auth.currentUser != null ? auth.currentUser.uid : undefined,
-        valoracion: valoracion, //id del usuario Firebase
+        valoracion: valoracion,
         idPersonaje: personaje._id,
       }),
     }).then(setValoracionPersonal(valoracion))
@@ -87,29 +91,11 @@ function Personaje() {
   const anteriorPersonaje = () => {
     setIsIndice(isIndice - 1)
   }
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-    },
-  }
 
   return (
     <>
-      <Container className='d-flex flex-row align-items-center justify-content-between '>
+      <TopBar />
+      <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
         {isIndice > 0 ? (
           <Link
             to={`/personaje/${personajeAnterior.name
@@ -141,14 +127,14 @@ function Personaje() {
         </Link>
       </Container>
       <Container className='contenedor_nombre_personaje'>
-        <h5>{personaje.name}</h5>
+        <h4 className='titulo mb-3'>{personaje.name}</h4>
       </Container>
       <Container>
         <Typography component='legend'>{t('valoracion-personal')}</Typography>
         <Rating
           name='simple-controlled'
           value={valoracionPersonal}
-          onChange={(event, newValue) => {
+          onChange={newValue => {
             emitirValoracion(newValue)
             notificacion(`${t('voto-realizado')}`, 'success')
           }}
@@ -190,13 +176,18 @@ function Personaje() {
         show={mostrarInfo}
         onHide={() => setMostrarInfo(false)}
       >
-        <DescripcionPersonaje
-          responsive={responsive}
-          comics={comics}
-          personaje={personaje}
-        />
+        <DescripcionPersonaje comics={comics} personaje={personaje} />
       </Modal>
-      <Navbar />
+      <Button onClick={() => setMostrarComentarios(true)}>
+        Mostrar comentarios
+      </Button>
+      <Modal
+        fullscreen={true}
+        show={mostrarComentarios}
+        onHide={() => setMostrarComentarios(false)}
+      >
+        <Comentarios personaje={personaje} />
+      </Modal>
     </>
   )
 }
