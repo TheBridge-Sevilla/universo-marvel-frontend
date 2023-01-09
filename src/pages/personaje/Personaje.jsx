@@ -3,7 +3,6 @@ import './personaje.css'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
-import TopBar from '../../components/TopBar'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
@@ -13,6 +12,9 @@ import { MD5 } from 'crypto-js'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
+import TopBar from '../../components/TopBar'
+import Comentarios from './Comentarios'
+import { fetchPost } from '../../services/fetchPost'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -32,12 +34,14 @@ function Personaje() {
   const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
   const personajeID = personaje.Id
   const { notificacion } = useContextoAlert()
-
   const [comics, setComics] = useState([])
+
   const [mostrarInfo, setMostrarInfo] = useState(false)
+  const [modalBackground, setModalBackground] = useState()
+  const [mostrarComentarios, setMostrarComentarios] = useState(false)
+  const { postValoracion } = fetchPost()
 
   useEffect(() => {
-    console.log(personaje.Id)
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
       personaje._id
     }&idUsuario=${auth.currentUser.uid}`
@@ -48,7 +52,7 @@ function Personaje() {
       })
   }, [])
 
-  function emitirValoracion(valoracion) {
+  /*   function emitirValoracion(valoracion) {
     const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
       personaje.name
     }`
@@ -63,7 +67,15 @@ function Personaje() {
         valoracion: valoracion, //id del usuario Firebase
         idPersonaje: personaje._id,
       }),
-    }).then(setValoracionPersonal(valoracion))
+    }).then(
+      setValoracionPersonal(valoracion),
+      notificacion(`${t('voto-realizado')}`, 'success')
+    )
+  } */
+  const handleValoracion = valoracion => {
+    postValoracion(personaje, valoracion)
+    setValoracionPersonal(valoracion)
+    notificacion(`${t('voto-realizado')}`, 'success')
   }
 
   useEffect(() => {
@@ -77,6 +89,7 @@ function Personaje() {
       } catch (error) {
         notificacion(error, 'error')
       }
+      document.body.style.background = modalBackground
     }
     fetchData()
   }, [])
@@ -88,30 +101,10 @@ function Personaje() {
   const anteriorPersonaje = () => {
     setIsIndice(isIndice - 1)
   }
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-    },
-  }
-
   return (
     <>
       <TopBar />
-      <Container className='d-flex flex-row align-items-center justify-content-between '>
+      <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
         {isIndice > 0 ? (
           <Link
             to={`/personaje/${personajeAnterior.name
@@ -143,17 +136,14 @@ function Personaje() {
         </Link>
       </Container>
       <Container className='contenedor_nombre_personaje'>
-        <h5>{personaje.name}</h5>
+        <h4 className='titulo mb-3'>{personaje.name}</h4>
       </Container>
       <Container>
         <Typography component='legend'>{t('valoracion-personal')}</Typography>
         <Rating
           name='simple-controlled'
           value={valoracionPersonal}
-          onChange={(event, newValue) => {
-            emitirValoracion(newValue)
-            notificacion(`${t('voto-realizado')}`, 'success')
-          }}
+          onChange={(event, newValue) => handleValoracion(newValue)}
         />
       </Container>
       <br />
@@ -174,12 +164,22 @@ function Personaje() {
             </Alert>
           </Container>
         )}
+      </Container>
+      <Container className='d-flex flex-column justify-content-center mt-5'>
         <Button
-          onClick={() => setMostrarInfo(true)}
-          className='mt-5'
+          className='m-2'
+          onClick={() => {
+            setMostrarInfo(true)
+            setModalBackground(
+              `${personaje.path}.${personaje.thumbnail.extension}`
+            )
+          }}
           size='large'
         >
           {t('mostrar-info')}
+        </Button>
+        <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
+          {t('ver-comentarios')}
         </Button>
       </Container>
       <Modal
@@ -187,12 +187,14 @@ function Personaje() {
         show={mostrarInfo}
         onHide={() => setMostrarInfo(false)}
       >
-        <Modal.Header closeButton />
-        <DescripcionPersonaje
-          responsive={responsive}
-          comics={comics}
-          personaje={personaje}
-        />
+        <DescripcionPersonaje comics={comics} personaje={personaje} />
+      </Modal>
+      <Modal
+        fullscreen={true}
+        show={mostrarComentarios}
+        onHide={() => setMostrarComentarios(false)}
+      >
+        <Comentarios personaje={personaje} />
       </Modal>
     </>
   )

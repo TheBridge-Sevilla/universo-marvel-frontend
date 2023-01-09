@@ -36,11 +36,14 @@
     "comentarios": "Comments",
     "comentar": "Write a comment",
     "introducir-comentario": "Write a comment...",
-    "publicar": "Post comment",
+    "publicar": "Post",
     "por-valorar": "Character without valoration",
     "voto-realizado": "Your valoration has been saved",
     "valoracion-personal": "You valoration",
     "valoracion-global": "Global valoration",
     "mostrar-info": "Show information",
-    "cargando": "Loading characters"
+    "ver-comentarios": "Show comments",
+    "cargando": "Loading characters",
+    "configuracion" : "Settings",
+    "solo-usuarios-registrados": "Exclusive feature for register members"
 }
