@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { auth } from '../../services/firebase/firebase'
 import { useContextoAlert } from '../../context/contextoAlert'
-import { fetchPost } from '../../services/fetchPost'
+import { fetchPost } from '../../services/personaje/fetchPost'
 
 export default function Comentar(props) {
   const { t } = useTranslation()

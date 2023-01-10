@@ -2,15 +2,15 @@ import { useTranslation } from 'react-i18next'
 import { Container, Card } from 'react-bootstrap'
 import Comentar from '../../components/comentarios/FormComentario'
 import TopBar from '../../components/TopBar'
-import { getComentarios } from '../../services/comentarios/getComentarios'
+import { getComentarios } from '../../services/personaje/getComentarios'
 
 export default function Comentarios(props) {
   const { t } = useTranslation()
   const personaje = props.personaje
   const { json } = getComentarios(personaje)
-  console.log(json)
+
   return (
-    <Container className='comentarios'>
+    <Container>
       <Container className='mb-4'>
         <TopBar personaje={personaje} />
       </Container>

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
-import { fetchPost } from '../../services/fetchPost'
+import { fetchPost } from '../../services/personaje/fetchPost'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -186,6 +186,7 @@ function Personaje() {
           fullscreen={true}
           show={mostrarComentarios}
           onHide={() => setMostrarComentarios(false)}
+          className='modal-comentarios'
         >
           <Comentarios personaje={personaje} />
         </Modal>

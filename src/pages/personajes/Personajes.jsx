@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './personajes.css'
-import { Container, Image, Form } from 'react-bootstrap'
+import { Container, Image } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import Subir from '../../components/Subir'
 import { useTranslation } from 'react-i18next'
+import { TextField } from '@mui/material'
+import { Search } from 'react-bootstrap-icons'
 
 function Personajes() {
   const { t } = useTranslation()
@@ -99,17 +101,17 @@ function Personajes() {
             delay: 1,
           }}
           transition={{ duration: 0.5 }}
+          className='min-vh-100'
         >
           <TopBar />
-          <Container className='my-4  '>
-            <Form.Control
-              id='filtro'
-              type='text'
-              size='lg'
-              placeholder={t('filtro')}
+          <Container className='my-4'>
+            <TextField
               onChange={e => {
                 onFilter(e)
               }}
+              fullWidth='true'
+              label={<Search />}
+              placeholder={t('busqueda')}
             />
           </Container>
           <InfiniteScroll

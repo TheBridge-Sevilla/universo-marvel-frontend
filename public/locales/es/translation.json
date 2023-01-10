@@ -1,5 +1,6 @@
 {
     "iniciar-sesion": "Iniciar sesión",
+    "iniciar-sesion-google": "Sign in with Google",
     "cerrar-sesion": "Cerrar sesión",
     "contraseña-olvidada": "¿Contraseña olvidada?",
     "continuar": "Continuar",
@@ -47,10 +48,10 @@
     "perfil-invitado": "Perfil de Invitado",
     "español": "Español",
     "ingles": "Ingles",
-    "modo-claro" : "Modo Claro",
-    "modo-oscuro" : "Modo Oscuro",
+    "modo-claro": "Modo Claro",
+    "modo-oscuro": "Modo Oscuro",
     "ver-comentarios": "Mostrar comentarios",
-    "configuracion" : "Configuración",
+    "configuracion": "Configuración",
     "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados",
-    "filtro" : "Filtro"
+    "busqueda": "Busca algo..."
 }

@@ -9,6 +9,7 @@ import AvatarUsuario from './AvatarUsuario'
 import { useSignOut } from '../../hooks/useSignOut'
 import { useSignWithG } from '../../hooks/useSignWithG'
 import Interruptor from '../../components/Interruptor'
+
 export default function PerfilUsuario() {
   const { usuarioActual, usuario } = useContextoUsuario()
   const { cerrarSesion } = useSignOut()
@@ -26,7 +27,7 @@ export default function PerfilUsuario() {
           <Interruptor />
           <Container className='d-flex flex-column justify-center align-items-center mt-5'>
             <Button className='my-2' onClick={iniciarSesionConG}>
-              Iniciar sesion con Google
+              {t('iniciar-sesion')}
             </Button>
             <Button className='my-2' onClick={cerrarSesion}>
               {t('cerrar-sesion')}

@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 function App() {
-  const { i18n } = useTranslation();
+  const { i18n } = useTranslation()
   const {
     setUsuario,
     setUsuarioActual,
@@ -16,12 +16,11 @@ function App() {
     setImagenPerfil,
     usuarioActual,
     theme,
-    idioma
+    idioma,
   } = useContextoUsuario()
   const navigate = useNavigate()
   const location = useLocation()
   const pathname = location.pathname
-
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -54,13 +53,12 @@ function App() {
 
   useEffect(() => {
     i18n.changeLanguage(idioma)
-}, [idioma])
+  }, [idioma])
 
   return (
-         <div className='App' data-theme={theme}>
+    <div className='App' data-theme={theme}>
       <RutasAnimadas />
-      </div> 
-
+    </div>
   )
 }
 
