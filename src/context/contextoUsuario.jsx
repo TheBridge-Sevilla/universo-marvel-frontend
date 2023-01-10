@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import useLocalStorage from 'use-local-storage'
 
-
 const ContextoUsuario = createContext({})
 
 export const useContextoUsuario = () => useContext(ContextoUsuario)
@@ -13,7 +12,9 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [isIndice, setIsIndice] = useState('')
   const [personajes, setPersonajes] = useState('')
   const [valoraciones, setValoraciones] = useState('')
-  const defaultRecordar = window.matchMedia('(recordar-usuario: no-recordar)').matches
+  const defaultRecordar = window.matchMedia(
+    '(recordar-usuario: no-recordar)'
+  ).matches
   const [isRecordarLocal, setIsRecordarLocal] = useLocalStorage(
     'isRecordar',
     defaultRecordar ? 'no-recordar' : 'recordar'
@@ -21,7 +22,8 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [imagenPerfil, setImagenPerfil] = useState('')
 
   const switchRecordar = () => {
-    const newRecodar = isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'
+    const newRecodar =
+      isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'
     setIsRecordarLocal(newRecodar)
   }
   const defaultDark = window.matchMedia('(prefers-color-scheme: true)').matches
@@ -34,8 +36,6 @@ export const ContextoUsuarioProvider = ({ children }) => {
     'idioma',
     defaultIdioma ? 'es' : 'en'
   )
-
-
 
   const contextValue = {
     usuario,
@@ -58,9 +58,9 @@ export const ContextoUsuarioProvider = ({ children }) => {
     theme,
     setTheme,
     idioma,
-    setIdioma
-
+    setIdioma,
   }
+
 
   return (
     <ContextoUsuario.Provider value={contextValue}>

@@ -15,7 +15,7 @@ i18n
             "ES-es": ["es"]
         },
         lng:"es",
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false
         }

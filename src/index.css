@@ -14,11 +14,17 @@
   text-align: center;
 }
 
+.App {
+  background-color: var(--background);
+  color: var(--primary);
+}
+
 [data-theme='false'] {
   --text: #F7F7F7;
   --background: #212121;
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
+
 [data-theme='true'] {
   --text: #212121;
   --background: #F7F7F7;
@@ -29,7 +35,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   margin: 0;
-  background-color: #15121E;
+  background-color: var(--background);
   color: var(--primary);
 }
 
@@ -266,9 +272,9 @@ p {
   }
 }
 
- .ocupar-pantalla {
+.ocupar-pantalla {
   height: 100vh;
-} 
+}
 
 :-webkit-autofill,
 :-webkit-autofill:hover,
@@ -294,7 +300,8 @@ p {
   -o-animation: fadein 1s;
   animation: fadein 1s;
 }
-.circulo{
+
+.circulo {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -357,9 +364,9 @@ p {
   color: grey;
 }
 
- .modal-content {
-  background: black;
-} 
+.modal-content {
+  background: var(--background);
+}
 
 .MuiListItemText-root p {
   color: var(--accent);
@@ -375,24 +382,23 @@ p {
 .background-personaje {
   background-image: url(${personaje.thumbnail.path}.${personaje.thumbnail.extension});
   max-width: none !important;
-  
+
 }
 
 .descripcion-text {
   color: var(--accent);
 }
 
-/* modificar para el modo oscuro a var background color */
 .sin-favorito {
   background-color: var(--background);
 }
 
 .modal-content {
-  background-color: #15121E;
+  background-color: var(--background);
 }
 
 .comentarios {
-  background-color: #15121E;
+  background-color: var(--background);
 }
 
 .titulo {
@@ -400,7 +406,7 @@ p {
 }
 
 .card-comentario {
-  background-color: rgba(24, 22, 36, 0.3);
+  background-color: var(--background);
   border-color: var(--primary);
 }
 
@@ -415,18 +421,25 @@ p {
 .comentar-area.JoyTextarea-root {
   border-color: var(--accent);
 }
-.avatar{
+
+.avatar {
   cursor: pointer;
 }
+
 .Mui-disabled {
   -webkit-text-fill-color: var(--primary) !important
 }
-input[type="text"],[type="email"],[type="password"] {
+
+input[type="text"],
+[type="email"],
+[type="password"] {
   color: var(--primary) !important;
 }
-.switch{
-  color : var(--text)
+
+.switch {
+  color: var(--text)
 }
-.cambiar-imagen{
+
+.cambiar-imagen {
   border: 1px solid var(--primary) !important;
 }

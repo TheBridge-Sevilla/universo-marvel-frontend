@@ -17,6 +17,7 @@ export default function Destacados() {
           width: '100%',
         }}
         exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+        className='min-vh-100'
       >
         <Nav className='justify-content-end'>
           <TopBar />

@@ -94,6 +94,7 @@ function Personaje() {
         animate='animate'
         exit='exit'
         transition={{ duration: 0.1 }}
+        className='min-vh-100'
       >
         <TopBar />
         <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>

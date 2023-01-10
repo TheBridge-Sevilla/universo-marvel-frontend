@@ -17,7 +17,6 @@ function Favorito() {
     JSON.stringify({ idUsuario: idUsuario })
   )
 
-  console.log(json)
   if (usuarioActual.displayName != null) {
     return (
       <>
