@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 
 export function fetchDestacados(aDestacar, tipo, body) {
   const url = `${import.meta.env.VITE_BASE_URL}/valoraciones/${aDestacar}`
-  const [imagen, setImagen] = useState()
   const [json, setJson] = useState([])
 
   useEffect(() => {
@@ -16,12 +15,11 @@ export function fetchDestacados(aDestacar, tipo, body) {
         .then(response => response.json())
         .then(json => {
           setJson(json)
-          setImagen(json[0].imagen)
         })
     } catch (error) {
       console.log(error)
     }
   }, [])
 
-  return { json, imagen }
+  return { json }
 }

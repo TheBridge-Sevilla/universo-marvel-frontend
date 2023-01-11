@@ -109,7 +109,7 @@ function Personajes() {
               onChange={e => {
                 onFilter(e)
               }}
-              fullWidth='true'
+              fullWidth={true}
               label={<Search />}
               placeholder={t('busqueda')}
             />
