@@ -1,19 +1,19 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, TextField } from '@mui/material'
-import { auth, storage } from '../../services/firebase/firebase'
+import { auth, storage } from '../services/firebase/firebase'
 import { updateProfile } from 'firebase/auth'
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage'
-import TopBar from '../../components/TopBar'
+import TopBar from './TopBar'
 import Stack from '@mui/material/Stack'
-import { useContextoUsuario } from '../../context/contextoUsuario'
+import { useContextoUsuario } from '../context/contextoUsuario'
 
 export default function AvatarUsuario() {
   const { t } = useTranslation()
-  const { imagenPerfil , setImagenPerfil } = useContextoUsuario()
+  const { imagenPerfil, setImagenPerfil } = useContextoUsuario()
   const avatarSinImagen =
     'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
- 
+
   const currentUser = auth.currentUser
 
   const [loading, setLoading] = useState(false)
@@ -29,7 +29,6 @@ export default function AvatarUsuario() {
     updateProfile(currentUser, { photoURL: fotoURL })
     setImagenPerfil(fotoURL)
   }
-
 
   const handleChange = e => {
     setFoto(e.target.files[0])
@@ -65,13 +64,13 @@ export default function AvatarUsuario() {
         </Button>
         {loading ? (
           <Button label={t('subir')} onClick={subirFoto}>
-            Actualizar
+            {t('actualizar')}
           </Button>
         ) : (
           <></>
         )}
         <Button label={t('borrar')} onClick={borrarFoto}>
-        {t('borrar')}
+          {t('borrar')}
         </Button>
       </Stack>
     </Stack>

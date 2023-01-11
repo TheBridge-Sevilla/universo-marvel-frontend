@@ -28,7 +28,6 @@ function IniciarSesionEmail() {
   const { animacion, transicion } = animacionLogin()
   const { switchRecordar } = useContextoUsuario()
 
-
   return (
     <motion.div
       className='h-100'
@@ -59,7 +58,10 @@ function IniciarSesionEmail() {
             onChange={e => setContraseña(e.target.value)}
           />
           <Container className='d-flex justify-content-between align-items-center mb-5 pointer'>
-            <FormControlLabel control={<Checkbox  onChange={() => switchRecordar()} />} label={t('recordar')} />
+            <FormControlLabel
+              control={<Checkbox onChange={() => switchRecordar()} />}
+              label={t('recordar')}
+            />
             <Link component={RouterLink} to='/contraseña-olvidada'>
               {t('contraseña-olvidada')}
             </Link>

@@ -8,7 +8,7 @@ import { AnimatePresence } from 'framer-motion'
 import { Container } from 'react-bootstrap'
 import ContraseñaOlvidada from './firebase/contraseñaOlvidada'
 import Personaje from '../pages/personaje/Personaje'
-import PerfilUsuario from '../pages/PerfilUsuario/PerfiUsuario'
+import Configuracion from '../pages/configuracion/Configuracion'
 import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
 import Destacados from '../pages/destacado/Destacado'
@@ -80,7 +80,7 @@ function RutasAnimadas() {
             path='perfil-usuario'
             element={
               <PrivateRoute>
-                <PerfilUsuario />
+                <Configuracion />
               </PrivateRoute>
             }
           />
