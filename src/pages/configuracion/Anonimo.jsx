@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
 import Navbar from '../../components/Navbar'
 import { Container } from 'react-bootstrap'
 import Interruptor from '../../components/Interruptor'
@@ -13,15 +13,18 @@ export default function Anonimo() {
   const { iniciarSesionConG } = useSignWithG()
 
   return (
-      <motion.div
+    <LazyMotion features={domAnimation}>
+      <m.div
         initial={{
-          width: 0,
-          transition: { duration: 0.2 },
+          opacity: 0,
         }}
         animate={{
-          width: '100%',
+          opacity: 1,
+          delay: 1,
         }}
+        transition={{ duration: 0.2 }}
         exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+        className='min-vh-100'
       >
         <Navbar />
         <Container
@@ -39,7 +42,7 @@ export default function Anonimo() {
             </Button>
           </Container>
         </Container>
-      </motion.div>
+      </m.div>
+    </LazyMotion>
   )
 }
-

@@ -167,8 +167,8 @@ function Personajes() {
           </InfiniteScroll>
           <Subir />
           <Navbar />
-        </m.div>
-      </LazyMotion>
+          </m.div>
+    </LazyMotion>
     )
   }
 }
