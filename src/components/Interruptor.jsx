@@ -72,7 +72,7 @@ export default function Interruptor() {
 
 
     return (
-        <FormGroup className='d-flex flex-row m-3 gap-4'>
+        <FormGroup className='d-flex flex-row m-3 gap-4 align-items-center justify-content-center'>
             <FormControlLabel
                 control={<MaterialUISwitch checked={theme == true} onChange={toggle}  />}
                 className="switch" label={theme ? t('modo-oscuro') : t('modo-claro')}
