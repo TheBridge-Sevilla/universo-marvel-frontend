@@ -22,7 +22,7 @@ export default function Anonimo() {
           opacity: 1,
           delay: 1,
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ duration: 0.3 }}
         exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
         className='min-vh-100'
       >

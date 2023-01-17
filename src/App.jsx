@@ -1,6 +1,6 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import RutasAnimadas from './services/rutasAnimadas'
+import { RutasAnimadas } from './services/rutasAnimadas'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { auth } from './services/firebase/firebase'
 import { useEffect } from 'react'

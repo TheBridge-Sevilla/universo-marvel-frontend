@@ -9,82 +9,47 @@ import TopBar from '../../components/TopBar'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import Carga from '../intro/Carga'
 import { Link } from 'react-router-dom'
-import { useContextoUsuario } from '../../context/contextoUsuario'
 import Subir from '../../components/Subir'
 import { useTranslation } from 'react-i18next'
 import { TextField } from '@mui/material'
 import { Search } from 'react-bootstrap-icons'
+import { usePersonajes } from '../../hooks/usePersonajes'
+import { useContextoUsuario } from '../../context/contextoUsuario'
 
 function Personajes() {
   const { t } = useTranslation()
   const [pagina, setPagina] = useState(1)
-  const [filtro, setFiltro] = useState('')
+  const [filtro, setFiltro] = useState()
+  const { personajesData, filtradosData, valoracionesData } = usePersonajes(
+    pagina,
+    filtro
+  )
+  const [personajes, setPersonajes] = useState()
+  const [valoraciones, setValoraciones] = useState()
+  const { setIsIndice } = useContextoUsuario()
 
-  const {
-    setIsIndice,
-    personajes,
-    setPersonajes,
-    valoraciones,
-    setValoraciones,
-  } = useContextoUsuario()
-  useEffect(() => {
-    if (window.localStorage.getItem('personajes')) {
-      setPersonajes(JSON.parse(window.localStorage.getItem('personajes')))
-      setValoraciones(JSON.parse(window.localStorage.getItem('valoraciones')))
-    }
-  }, [])
-
-  useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_BASE_URL
-    }/personajes?page=${pagina}&limit=${
-      import.meta.env.VITE_PAGINATION_LIMIT
-    }&filter=${filtro}`
-
-    fetch(url)
-      .then(data => data.json())
-      .then(json => {
-        setPersonajes(json.personajes)
-        setValoraciones(json.valoraciones)
-        window.localStorage.setItem(
-          'personajes',
-          JSON.stringify(json.personajes)
-        )
-        window.localStorage.setItem(
-          'valoraciones',
-          JSON.stringify(json.valoraciones)
-        )
-      })
-    setPagina(1)
-  }, [filtro])
-
-  function siguientePaginaPersonajes() {
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
-      pagina + 1
-    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
+  const siguientePaginaPersonajes = () => {
     setPagina(pagina + 1)
-    fetch(url)
-      .then(data => data.json())
-      .then(json => {
-        let nuevosPersonajes = json.personajes
-        nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
-        setPersonajes(nuevosPersonajes)
-        setValoraciones(valoraciones.concat(json.valoraciones))
-        window.localStorage.setItem(
-          'personajes',
-          JSON.stringify(json.personajes)
-        )
-        window.localStorage.setItem(
-          'valoraciones',
-          JSON.stringify(json.valoraciones)
-        )
-      })
   }
-  function onFilter(e) {
-    window.localStorage.removeItem('personajes')
-    window.localStorage.removeItem('valoraciones')
+
+  const filtrarPersonajes = e => {
+    setPagina(1)
     setFiltro(e.target.value)
   }
+
+  useEffect(() => {
+    if (personajesData && (!filtradosData || filtradosData === '')) {
+      setPersonajes(personajesData.docs)
+      setValoraciones(valoracionesData)
+      if (personajes) {
+        setPersonajes(personajes.concat(personajesData.docs))
+        setValoraciones(valoraciones.concat(valoracionesData))
+      }
+    } else if (filtradosData && filtradosData != '') {
+      setPersonajes(filtradosData.docs)
+      setValoraciones(valoracionesData)
+    }
+  }, [personajesData, filtradosData])
 
   if (!personajes) {
     //Componentizar?
@@ -100,25 +65,23 @@ function Personajes() {
             opacity: 1,
             delay: 1,
           }}
-          transition={{ duration: 0.5 }}
-          exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+          transition={{ duration: 0.2 }}
+          exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
           className='min-vh-100'
         >
           <TopBar />
           <Container className='my-4'>
             <TextField
-              onChange={e => {
-                onFilter(e)
-              }}
+              onChange={filtrarPersonajes}
               fullWidth={true}
               label={<Search />}
               placeholder={t('busqueda')}
             />
           </Container>
           <InfiniteScroll
-            className='contenedor_scroll'
-            dataLength={personajes.docs.length}
-            hasMore={pagina < personajes.totalPages}
+            className='contenedor_scroll mb-5'
+            dataLength={personajes.length}
+            hasMore={pagina < personajesData.totalPages}
             next={siguientePaginaPersonajes}
             loader={
               <span>
@@ -127,7 +90,7 @@ function Personajes() {
               </span>
             }
           >
-            {personajes.docs.map((personaje, i) => (
+            {personajes.map((personaje, i) => (
               <Container
                 id=''
                 className='contenedor_personajes'
@@ -140,6 +103,12 @@ function Personajes() {
                   to={`/personaje/${personaje.name
                     .split(' ')[0]
                     .toLowerCase()}`}
+                  state={{
+                    personajes: personajes,
+                    valoraciones: valoraciones,
+                    personaje: personaje,
+                    index: i,
+                  }}
                 >
                   <Image
                     className='imagen_personajes'
@@ -167,8 +136,8 @@ function Personajes() {
           </InfiniteScroll>
           <Subir />
           <Navbar />
-          </m.div>
-    </LazyMotion>
+        </m.div>
+      </LazyMotion>
     )
   }
 }

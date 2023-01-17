@@ -25,7 +25,7 @@ export default function Registrado() {
           delay: 1,
         }}
         transition={{ duration: 0.2 }}
-        exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
         className='min-vh-100'
       >
         <Navbar />

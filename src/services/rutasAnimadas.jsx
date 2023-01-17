@@ -13,7 +13,9 @@ import PrivateRoute from '../components/PrivateRoute'
 import PublicRoute from '../components/PublicRoute'
 import Destacados from '../pages/destacado/Destacado'
 
-function RutasAnimadas() {
+  
+
+export function RutasAnimadas() {
   const location = useLocation()
 
   return (
@@ -90,5 +92,3 @@ function RutasAnimadas() {
     </Container>
   )
 }
-
-export default RutasAnimadas

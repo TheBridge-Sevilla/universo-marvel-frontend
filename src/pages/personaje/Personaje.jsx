@@ -4,7 +4,6 @@ import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
-import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Link } from 'react-router-dom'
@@ -15,19 +14,28 @@ import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
+import Navbar from './../../components/Navbar'
+import { useLocation } from 'react-router-dom'
 import { fetchPost } from '../../services/personaje/fetchPost'
+import { useValoracionPersonal } from '../../hooks/useValoracionPersonal'
 
 function Personaje() {
   const { t } = useTranslation()
-  const { personajes, valoraciones, isIndice, setIsIndice } =
-    useContextoUsuario()
-  const personaje = personajes.docs[isIndice]
-  const valoracion = valoraciones[isIndice]
-  const [valoracionPersonal, setValoracionPersonal] = useState(0)
-  const indiceAnterior = isIndice - 1
-  const indiceSiguiente = isIndice + 1
-  const personajeAnterior = personajes.docs[indiceAnterior]
-  const personajeSiguiente = personajes.docs[indiceSiguiente]
+  const location = useLocation()
+  const personajes = location.state.personajes
+  const valoraciones = location.state.valoraciones
+  const personaje = location.state.personaje
+  const [indiceActual, setIndiceActual] = useState(location.state.index)
+  const valoracion = valoraciones[indiceActual]
+  const tuValoracion = useValoracionPersonal(
+    personaje._id,
+    auth.currentUser.uid
+  )
+  const [valoracionPersonal, setValoracionPersonal] = useState()
+  const indiceAnterior = indiceActual - 1
+  const indiceSiguiente = indiceActual + 1
+  const personajeAnterior = personajes[indiceAnterior]
+  const personajeSiguiente = personajes[indiceSiguiente]
   const apikey = import.meta.env.VITE_MARVEL_KEY
   const timestamp = Date.now()
   const privateKey = import.meta.env.VITE_PRIVATE_KEY
@@ -42,23 +50,16 @@ function Personaje() {
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
   const { postValoracion } = fetchPost()
 
-  useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
-      personaje._id
-    }&idUsuario=${auth.currentUser.uid}`
-    fetch(url, { cache: 'no-store' })
-      .then(data => data.json())
-      .then(json => {
-        setValoracionPersonal(json)
-      })
-  }, [])
-
   const handleValoracion = valoracion => {
     postValoracion(personaje, valoracion)
     setValoracionPersonal(valoracion)
     notificacion(`${t('voto-realizado')}`, 'success')
   }
 
+   useEffect(() => {
+    setValoracionPersonal(tuValoracion)
+  }, [tuValoracion])
+  
   useEffect(() => {
     async function fetchData() {
       try {
@@ -75,13 +76,17 @@ function Personaje() {
     fetchData()
   }, [])
 
+
+
   const siguientePersonaje = () => {
-    setIsIndice(isIndice + 1)
+    setIndiceActual(indiceActual + 1)
   }
 
   const anteriorPersonaje = () => {
-    setIsIndice(isIndice - 1)
+    setIndiceActual(indiceActual - 1)
   }
+
+  console.log(valoracionPersonal)
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -98,7 +103,7 @@ function Personaje() {
       >
         <TopBar />
         <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
-          {isIndice > 0 ? (
+          {indiceActual > 0 ? (
             <Link
               to={`/personaje/${personajeAnterior.name
                 .split(' ')[0]
@@ -160,7 +165,7 @@ function Personaje() {
         </Container>
         <Container className='d-flex flex-column justify-content-center mt-5'>
           <Button
-            className='m-2'
+            className='my-1 mx-3'
             onClick={() => {
               setMostrarInfo(true)
               setModalBackground(
@@ -171,8 +176,11 @@ function Personaje() {
           >
             {t('mostrar-info')}
           </Button>
-          <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
-            {t('ver-comentarios')}
+          <Button
+            className='my-2 mx-3'
+            onClick={() => setMostrarComentarios(true)}
+          >
+            {t('mostrar-comentarios')}
           </Button>
         </Container>
         <Modal
@@ -190,6 +198,7 @@ function Personaje() {
         >
           <Comentarios personaje={personaje} />
         </Modal>
+        <Navbar />
       </m.div>
     </LazyMotion>
   )
