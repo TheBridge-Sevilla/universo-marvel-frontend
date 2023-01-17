@@ -5,14 +5,13 @@ import { Form } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { auth } from '../../services/firebase/firebase'
 import { useContextoAlert } from '../../context/contextoAlert'
-import { fetchPost } from '../../services/personaje/fetchPost'
+import { postComentario } from '../../services/personaje/postComentario'
 
 export default function Comentar(props) {
   const { t } = useTranslation()
   const [comentario, setComentario] = useState('')
   const personaje = props.personaje
   const { notificacion } = useContextoAlert()
-  const { postComentario } = fetchPost()
 
   const onSubmit = e => {
     e.preventDefault()

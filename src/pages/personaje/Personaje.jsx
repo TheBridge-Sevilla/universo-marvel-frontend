@@ -3,7 +3,6 @@ import './personaje.css'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
-import { auth } from '../../services/firebase/firebase'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Link } from 'react-router-dom'
@@ -16,7 +15,6 @@ import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
 import Navbar from './../../components/Navbar'
 import { useLocation } from 'react-router-dom'
-import { fetchPost } from '../../services/personaje/fetchPost'
 import { useValoracionPersonal } from '../../hooks/useValoracionPersonal'
 
 function Personaje() {
@@ -27,11 +25,8 @@ function Personaje() {
   const personaje = location.state.personaje
   const [indiceActual, setIndiceActual] = useState(location.state.index)
   const valoracion = valoraciones[indiceActual]
-  const tuValoracion = useValoracionPersonal(
-    personaje._id,
-    auth.currentUser.uid
-  )
-  const [valoracionPersonal, setValoracionPersonal] = useState()
+  const { tuValoracion, postValoracion } = useValoracionPersonal(personaje)
+  const [valoracionPersonal, setValoracionPersonal] = useState(0)
   const indiceAnterior = indiceActual - 1
   const indiceSiguiente = indiceActual + 1
   const personajeAnterior = personajes[indiceAnterior]
@@ -48,18 +43,19 @@ function Personaje() {
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
-  const { postValoracion } = fetchPost()
 
   const handleValoracion = valoracion => {
-    postValoracion(personaje, valoracion)
+    postValoracion(valoracion)
     setValoracionPersonal(valoracion)
     notificacion(`${t('voto-realizado')}`, 'success')
   }
 
-   useEffect(() => {
-    setValoracionPersonal(tuValoracion)
+  useEffect(() => {
+    if (tuValoracion) {
+      setValoracionPersonal(tuValoracion)
+    }
   }, [tuValoracion])
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -76,8 +72,6 @@ function Personaje() {
     fetchData()
   }, [])
 
-
-
   const siguientePersonaje = () => {
     setIndiceActual(indiceActual + 1)
   }
@@ -86,7 +80,7 @@ function Personaje() {
     setIndiceActual(indiceActual - 1)
   }
 
-  console.log(valoracionPersonal)
+  console.log('valoracion ', tuValoracion)
   return (
     <LazyMotion features={domAnimation}>
       <m.div
