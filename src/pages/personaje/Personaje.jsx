@@ -7,7 +7,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import { Link } from 'react-router-dom'
 import 'react-multi-carousel/lib/styles.css'
-import { MD5 } from 'crypto-js'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
@@ -16,6 +15,7 @@ import Comentarios from './Comentarios'
 import Navbar from './../../components/Navbar'
 import { useLocation } from 'react-router-dom'
 import { useValoracionPersonal } from '../../hooks/useValoracionPersonal'
+import { getComics } from '../../services/personaje/getComics'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -31,18 +31,12 @@ function Personaje() {
   const indiceSiguiente = indiceActual + 1
   const personajeAnterior = personajes[indiceAnterior]
   const personajeSiguiente = personajes[indiceSiguiente]
-  const apikey = import.meta.env.VITE_MARVEL_KEY
-  const timestamp = Date.now()
-  const privateKey = import.meta.env.VITE_PRIVATE_KEY
-  const publicKey = import.meta.env.VITE_PUBLIC_KEY
-  const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
-  const personajeID = personaje.Id
   const { notificacion } = useContextoAlert()
-  const [comics, setComics] = useState([])
-
+  const comics = getComics(personaje)
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
+  document.body.style.background = modalBackground
 
   const handleValoracion = valoracion => {
     postValoracion(valoracion)
@@ -56,22 +50,6 @@ function Personaje() {
     }
   }, [tuValoracion])
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `https://gateway.marvel.com:443/v1/public/characters/${personajeID}/comics?apikey=${apikey}&ts=${timestamp}&hash=${hash}`
-        )
-        const data = await response.json()
-        setComics(data.data.results)
-      } catch (error) {
-        notificacion(error, 'error')
-      }
-      document.body.style.background = modalBackground
-    }
-    fetchData()
-  }, [])
-
   const siguientePersonaje = () => {
     setIndiceActual(indiceActual + 1)
   }
@@ -80,7 +58,6 @@ function Personaje() {
     setIndiceActual(indiceActual - 1)
   }
 
-  console.log('valoracion ', tuValoracion)
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -174,7 +151,7 @@ function Personaje() {
             className='my-2 mx-3'
             onClick={() => setMostrarComentarios(true)}
           >
-            {t('mostrar-comentarios')}
+            {t('ver-comentarios')}
           </Button>
         </Container>
         <Modal
