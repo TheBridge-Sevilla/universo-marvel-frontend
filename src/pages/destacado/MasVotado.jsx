@@ -6,7 +6,6 @@ function MasVotado() {
   const { t } = useTranslation()
   const { json } = fetchDestacados('destacado', 'get', undefined)
 
-  console.log(json)
   return (
     <>
       <p>{t('personaje-votado')}</p>

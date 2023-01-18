@@ -4,12 +4,14 @@ import { Button } from '@mui/material'
 import useSignLikeGuest from '../../hooks/useSignLikeGuest'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const Inicio = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { inicioAnonimo } = useSignLikeGuest()
-
+  const [desactivado, setDesactivado] = useState(true)
+  setTimeout(() => { setDesactivado(false)}, 300)
   return (
     <Container
       className='ocupar-pantalla d-flex flex-column justify-content-around align-items-center'
@@ -28,6 +30,7 @@ const Inicio = () => {
           className='mb-5 aparecer-animacion'
           size='large'
           onClick={inicioAnonimo}
+          disabled={desactivado}
         >
 
           {t('sesion-invitado')}

@@ -14,19 +14,21 @@ import { useTranslation } from 'react-i18next'
 import { TextField } from '@mui/material'
 import { Search } from 'react-bootstrap-icons'
 import { usePersonajes } from '../../hooks/usePersonajes'
-import { useContextoUsuario } from '../../context/contextoUsuario'
 
-function Personajes() {
+function Personajes(props) {
   const { t } = useTranslation()
+  const primerosPersonajes = props.data.personajesData
+  const primerasValoraciones = props.data.valoracionesData
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState()
   const { personajesData, filtradosData, valoracionesData } = usePersonajes(
     pagina,
     filtro
   )
-  const [personajes, setPersonajes] = useState()
-  const [valoraciones, setValoraciones] = useState()
-  const { setIsIndice } = useContextoUsuario()
+  const [personajes, setPersonajes] = useState(
+    primerosPersonajes ? primerosPersonajes.docs : undefined
+  )
+  const [valoraciones, setValoraciones] = useState(primerasValoraciones)
 
   const siguientePaginaPersonajes = () => {
     setPagina(pagina + 1)
@@ -41,7 +43,7 @@ function Personajes() {
     if (personajesData && (!filtradosData || filtradosData === '')) {
       setPersonajes(personajesData.docs)
       setValoraciones(valoracionesData)
-      if (personajes) {
+      if (personajes != primerosPersonajes.docs && personajes != undefined) {
         setPersonajes(personajes.concat(personajesData.docs))
         setValoraciones(valoraciones.concat(valoracionesData))
       }
@@ -81,7 +83,7 @@ function Personajes() {
           <InfiniteScroll
             className='contenedor_scroll mb-5'
             dataLength={personajes.length}
-            hasMore={pagina < personajesData.totalPages}
+            hasMore={pagina < primerosPersonajes.totalPages}
             next={siguientePaginaPersonajes}
             loader={
               <span>
@@ -91,14 +93,7 @@ function Personajes() {
             }
           >
             {personajes.map((personaje, i) => (
-              <Container
-                id=''
-                className='contenedor_personajes'
-                key={i}
-                onClick={() => {
-                  setIsIndice(i)
-                }}
-              >
+              <Container id='' className='contenedor_personajes' key={i}>
                 <Link
                   to={`/personaje/${personaje.name
                     .split(' ')[0]
