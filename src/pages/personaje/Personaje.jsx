@@ -5,7 +5,6 @@ import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Link } from 'react-router-dom'
 import 'react-multi-carousel/lib/styles.css'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +12,7 @@ import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
 import Navbar from './../../components/Navbar'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useValoracionPersonal } from '../../hooks/useValoracionPersonal'
 import { getComics } from '../../services/personaje/getComics'
 
@@ -22,17 +21,24 @@ function Personaje() {
   const location = useLocation()
   const personajes = location.state.personajes
   const valoraciones = location.state.valoraciones
-  const personaje = location.state.personaje
+  const [personajeActual, setPersonajeActual] = useState(
+    location.state.personaje
+  )
   const [indiceActual, setIndiceActual] = useState(location.state.index)
   const valoracion = valoraciones[indiceActual]
-  const { tuValoracion, postValoracion } = useValoracionPersonal(personaje)
+  const { tuValoracion, postValoracion } =
+    useValoracionPersonal(personajeActual)
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
   const indiceAnterior = indiceActual - 1
   const indiceSiguiente = indiceActual + 1
-  const personajeAnterior = personajes[indiceAnterior]
-  const personajeSiguiente = personajes[indiceSiguiente]
+  const [personajeAnterior, setPersonajeAnterior] = useState(
+    personajes[indiceAnterior]
+  )
+  const [personajeSiguiente, setPersonajeSiguiente] = useState(
+    personajes[indiceSiguiente]
+  )
   const { notificacion } = useContextoAlert()
-  const comics = getComics(personaje)
+  const comics = getComics(personajeActual)
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
@@ -52,12 +58,22 @@ function Personaje() {
 
   const siguientePersonaje = () => {
     setIndiceActual(indiceActual + 1)
+    setPersonajeActual(personajeSiguiente)
   }
 
   const anteriorPersonaje = () => {
     setIndiceActual(indiceActual - 1)
+    setPersonajeActual(personajeAnterior)
   }
 
+  useEffect(() => {
+    setPersonajeAnterior(personajes[indiceAnterior])
+    setPersonajeSiguiente(personajes[indiceSiguiente])
+  }, [personajeActual])
+
+  console.log(personajeSiguiente, ' siguiente')
+  console.log(personajeActual, ' actual')
+  console.log(personajeAnterior, ' anterior')
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -73,12 +89,18 @@ function Personaje() {
         className='min-vh-100'
       >
         <TopBar />
-        <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
+        <Container className='d-flex flex-row align-items-center justify-content-between mt-4'>
           {indiceActual > 0 ? (
             <Link
-              to={`/personaje/${personajeAnterior.name
+              to={`/dashboard/${personajeAnterior.name
                 .split(' ')[0]
                 .toLowerCase()}`}
+              state={{
+                personajes: personajes,
+                valoraciones: valoraciones,
+                personaje: personajeAnterior,
+                index: indiceAnterior,
+              }}
             >
               <ArrowBackIosNewIcon
                 className='flecha'
@@ -90,13 +112,19 @@ function Personaje() {
           )}
           <Image
             className='imagen_personaje'
-            src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-            alt={`${personaje.name} imagen`}
+            src={`${personajeActual.thumbnail.path}.${personajeActual.thumbnail.extension}`}
+            alt={`${personajeActual.name} imagen`}
           />
           <Link
-            to={`/personaje/${personajeSiguiente.name
+            to={`/dashboard/${personajeSiguiente.name
               .split(' ')[0]
               .toLowerCase()}`}
+            state={{
+              personajes: personajes,
+              valoraciones: valoraciones,
+              personaje: personajeSiguiente,
+              index: indiceSiguiente,
+            }}
           >
             <ArrowForwardIosIcon
               className='flecha'
@@ -105,7 +133,7 @@ function Personaje() {
           </Link>
         </Container>
         <Container className='contenedor_nombre_personaje'>
-          <h4 className='titulo mb-3'>{personaje.name}</h4>
+          <h4 className='titulo mb-3'>{personajeActual.name}</h4>
         </Container>
         <Container>
           <Typography component='legend'>{t('valoracion-personal')}</Typography>
@@ -140,7 +168,7 @@ function Personaje() {
             onClick={() => {
               setMostrarInfo(true)
               setModalBackground(
-                `${personaje.path}.${personaje.thumbnail.extension}`
+                `${personajeActual.path}.${personajeActual.thumbnail.extension}`
               )
             }}
             size='large'
@@ -159,7 +187,7 @@ function Personaje() {
           show={mostrarInfo}
           onHide={() => setMostrarInfo(false)}
         >
-          <DescripcionPersonaje comics={comics} personaje={personaje} />
+          <DescripcionPersonaje comics={comics} personaje={personajeActual} />
         </Modal>
         <Modal
           fullscreen={true}
@@ -167,7 +195,7 @@ function Personaje() {
           onHide={() => setMostrarComentarios(false)}
           className='modal-comentarios'
         >
-          <Comentarios personaje={personaje} />
+          <Comentarios personaje={personajeActual} />
         </Modal>
         <Navbar />
       </m.div>

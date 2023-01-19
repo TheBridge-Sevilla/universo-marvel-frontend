@@ -95,7 +95,7 @@ function Personajes(props) {
             {personajes.map((personaje, i) => (
               <Container id='' className='contenedor_personajes' key={i}>
                 <Link
-                  to={`/personaje/${personaje.name
+                  to={`/dashboard/${personaje.name
                     .split(' ')[0]
                     .toLowerCase()}`}
                   state={{

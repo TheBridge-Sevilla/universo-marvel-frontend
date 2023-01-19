@@ -118,7 +118,7 @@ function App() {
             }
           />
           <Route
-            path='personaje/*'
+            path='dashboard/:personajeName'
             element={
               <PrivateRoute>
                 <Personaje />
