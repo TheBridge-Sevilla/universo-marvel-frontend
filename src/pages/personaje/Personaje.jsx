@@ -8,7 +8,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import 'react-multi-carousel/lib/styles.css'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
-import DescripcionPersonaje from './descripcionPersonaje'
+import InfoPersonaje from './infoPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
 import Navbar from './../../components/Navbar'
@@ -67,13 +67,15 @@ function Personaje() {
   }
 
   useEffect(() => {
-    setPersonajeAnterior(personajes[indiceAnterior])
-    setPersonajeSiguiente(personajes[indiceSiguiente])
+    if (indiceActual === 0) {
+      setPersonajeAnterior(personajes[0])
+      setPersonajeSiguiente(personajes[indiceSiguiente])
+    } else {
+      setPersonajeAnterior(personajes[indiceAnterior])
+      setPersonajeSiguiente(personajes[indiceSiguiente])
+    }
   }, [personajeActual])
 
-  console.log(personajeSiguiente, ' siguiente')
-  console.log(personajeActual, ' actual')
-  console.log(personajeAnterior, ' anterior')
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -86,7 +88,7 @@ function Personaje() {
         animate='animate'
         exit='exit'
         transition={{ duration: 0.1 }}
-        className='min-vh-100'
+        className='h-100'
       >
         <TopBar />
         <Container className='d-flex flex-row align-items-center justify-content-between mt-4'>
@@ -176,7 +178,7 @@ function Personaje() {
             {t('mostrar-info')}
           </Button>
           <Button
-            className='my-2 mx-3'
+            className='mt-2 mx-3'
             onClick={() => setMostrarComentarios(true)}
           >
             {t('ver-comentarios')}
@@ -187,7 +189,7 @@ function Personaje() {
           show={mostrarInfo}
           onHide={() => setMostrarInfo(false)}
         >
-          <DescripcionPersonaje comics={comics} personaje={personajeActual} />
+          <InfoPersonaje comics={comics} personaje={personajeActual} />
         </Modal>
         <Modal
           fullscreen={true}

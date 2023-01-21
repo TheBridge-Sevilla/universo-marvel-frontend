@@ -1,37 +1,40 @@
-import { Container } from 'react-bootstrap'
-import Carousel from 'react-multi-carousel'
+import { Container, Image } from 'react-bootstrap'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper'
 import { Rating } from '@mui/material'
-import { responsive } from '../responsive'
+import 'swiper/css'
+import 'swiper/css/navigation'
 
-export function Carrusel({ json }) {
+export function Carrusel({personajes}) {
 
   return (
-    <Container className='d-flex flex-column mb-3'>
-      <Carousel
-        responsive={responsive}
-        showDots={false}
-        swipeable={true}
-        className='m-2'
-      >
-        {json.map(comic => (
-          <div key={comic.personaje}>
-            <img
-              src={comic.imagen}
-              alt={comic.personaje}
-              className='imagen-ranking'
-              key={comic.personaje}
+    <Swiper
+      navigation={true}
+      slidesPerView={1}
+      modules={[Navigation]}
+      className='slider-destacados'
+    >
+      {personajes.map(personaje => (
+        <SwiperSlide key={personaje.personaje}>
+          <Container className='d-flex flex-column justify-content-center align-items-center'>
+            <Image
+              className='img-thumbnail'
+              src={personaje.imagen}
+              alt={personaje.personaje}
+              key={personaje.personaje}
+              fluid
             />
-            <p>{comic.personaje}</p>
+            <p className='nombre-personaje'>{personaje.personaje}</p>
             <Rating
               name='half-rating-read'
-              defaultValue={comic.valoracion}
+              defaultValue={personaje.valoracion}
               precision={0.5}
               readOnly
-              key={comic.valoracion}
+              key={personaje.valoracion}
             />
-          </div>
-        ))}
-      </Carousel>
-    </Container>
+          </Container>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   )
 }

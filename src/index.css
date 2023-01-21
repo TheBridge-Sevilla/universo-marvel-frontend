@@ -10,7 +10,6 @@
   --accent: #E7E7E7;
   --hover: #D00000;
   --box-shadow: inset 3.77687px 11.3306px 37.7687px rgba(151, 71, 255, 0.4);
-  margin: 0 auto;
   text-align: center;
 }
 
@@ -288,8 +287,8 @@ p {
   cursor: pointer;
 }
 
-.css-1c99szj-MuiRating-icon svg {
-  color: #FFA30C;
+.MuiSvgIcon-fontSizeInherit>path {
+  color: #ffba0c;
 }
 
 .flecha-subir {
@@ -440,6 +439,40 @@ input[type="text"],
   color: var(--text)
 }
 
-.cambiar-imagen {
-  border: 1px solid var(--primary) !important;
+/* carrusel de destacados */
+.slider-destacados .swiper-slide {
+  padding-top: 70%;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-destacados img {
+  position: absolute;
+  top: 0;
+  height: 75%;
+  width: 75%;
+  object-fit: cover;
+}
+
+.swiper-button-prev {
+  color: var(--primary);
+}
+
+.swiper-button-next {
+  color: var(--primary);
+}
+
+.nombre-personaje {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.enunciado-personaje {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.slider-destacados .css-ryrseu-MuiRating-root {
+  margin-top: -4%;
+  margin-bottom: 3%;
 }

@@ -19,8 +19,8 @@ function Favorito() {
   if (auth.currentUser.displayName != null) {
     return (
       <>
-        <p>{t('personaje-favorito')}</p>
-        <Carrusel json={json} key='favoritos' />
+        <p className='enunciado-personaje'>{t('personaje-favorito')}</p>
+        <Carrusel personajes={json} />
       </>
     )
   } else

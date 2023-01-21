@@ -1,4 +1,3 @@
-import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
@@ -19,6 +18,7 @@ import Personaje from '../src/pages/personaje/Personaje'
 import Configuracion from '../src/pages/configuracion/Configuracion'
 import Destacados from '../src/pages/destacado/Destacado'
 import { usePersonajes } from '../src/hooks/usePersonajes'
+import { useDestacados } from './hooks/useDestacados'
 
 function App() {
   const { i18n } = useTranslation()
@@ -35,6 +35,7 @@ function App() {
   const location = useLocation()
   const pathname = location.pathname
   const { personajesData, valoracionesData } = usePersonajes(1, undefined)
+  const { masVotadosData } = useDestacados()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -129,7 +130,7 @@ function App() {
             path='destacado'
             element={
               <PrivateRoute>
-                <Destacados />
+                <Destacados data={{ masVotadosData }} />
               </PrivateRoute>
             }
           />

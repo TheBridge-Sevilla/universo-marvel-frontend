@@ -1,12 +1,14 @@
 import { Container } from 'react-bootstrap'
-import Carousel from 'react-multi-carousel'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import { Button, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import TopBar from '../../components/TopBar'
 import { useEffect, useState } from 'react'
-import { responsive } from '../../services/responsive'
 
-export default function DescripcionPersonaje(props) {
+export default function InfoPersonaje(props) {
   const { t } = useTranslation()
   const comics = props.comics
   const personaje = props.personaje
@@ -40,29 +42,28 @@ export default function DescripcionPersonaje(props) {
         ) : (
           <></>
         )}
-        <Carousel
-          responsive={responsive}
-          showDots={false}
-          swipeable={true}
-          className='m-2'
-        >
+        <Swiper navigation={true} slidesPerView={2} modules={[Navigation]}>
           {comics.map(comic => (
-            <a
-              className='descripcion-text'
-              key={comic.id}
-              href={comic.urls[0].url}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <img
-                src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-                alt={comic.title}
-                className='imagen-comic'
-              />
-              <p>{comic.title}</p>
-            </a>
+            <SwiperSlide key={comic.id}>
+              <Container className='d-flex'>
+                <a
+                  className='descripcion-text'
+                  key={comic.id}
+                  href={comic.urls[0].url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <img
+                    src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
+                    alt={comic.title}
+                    className='imagen-comic'
+                  />
+                  <p>{comic.title}</p>
+                </a>
+              </Container>
+            </SwiperSlide>
           ))}
-        </Carousel>
+        </Swiper>
         <Button
           onClick={e => {
             e.preventDefault()

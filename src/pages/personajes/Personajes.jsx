@@ -68,7 +68,7 @@ function Personajes(props) {
             delay: 1,
           }}
           transition={{ duration: 0.2 }}
-          exit={{ x: window.innerWidth, transition: { duration: 0.3 } }}
+          exit={{ x: window.innerWidth, transition: { duration: 0.2 } }}
           className='min-vh-100'
         >
           <TopBar />

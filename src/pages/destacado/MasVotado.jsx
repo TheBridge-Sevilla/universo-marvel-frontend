@@ -1,16 +1,18 @@
 import { useTranslation } from 'react-i18next'
-import { fetchDestacados } from '../../services/destacados/fetchDestacados'
+import { Container } from 'react-bootstrap'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import { Carrusel } from '../../services/destacados/Carrusel'
 
-function MasVotado() {
+function MasVotado(props) {
   const { t } = useTranslation()
-  const { json } = fetchDestacados('destacado', 'get', undefined)
+  const personajes = props.json
 
   return (
-    <>
-      <p>{t('personaje-votado')}</p>
-      <Carrusel json={json} />
-    </>
+    <Container>
+      <p className='enunciado-personaje'>{t('personaje-votado')}</p>
+      <Carrusel personajes={personajes} />
+    </Container>
   )
 }
 
