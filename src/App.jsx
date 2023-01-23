@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
@@ -11,7 +12,7 @@ import PublicRoute from '../src/components/PublicRoute'
 import Inicio from '../src/pages/intro/Inicio'
 import IniciarSesionEmail from '../src/pages/login/IniciarSesion'
 import Registro from './../src/pages/login/Registro'
-import Personajes from './../src/pages/personajes/Personajes'
+const Personajes = lazy(() => import('./../src/pages/personajes/Personajes'))
 import ErrorPage from './../src/pages/notFound/Error404'
 import ContraseñaOlvidada from '../src/services/firebase/contraseñaOlvidada'
 import Personaje from '../src/pages/personaje/Personaje'
@@ -19,6 +20,7 @@ import Configuracion from '../src/pages/configuracion/Configuracion'
 import Destacados from '../src/pages/destacado/Destacado'
 import { usePersonajes } from '../src/hooks/usePersonajes'
 import { useDestacados } from './hooks/useDestacados'
+import Carga from './pages/intro/Carga'
 
 function App() {
   const { i18n } = useTranslation()
@@ -34,7 +36,7 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const pathname = location.pathname
-  const { personajesData, valoracionesData } = usePersonajes(1, undefined)
+  const { personajesData, valoracionesData } = usePersonajes(1)
   const { masVotadosData } = useDestacados()
 
   useEffect(() => {
@@ -114,7 +116,9 @@ function App() {
             path='dashboard'
             element={
               <PrivateRoute>
-                <Personajes data={{ personajesData, valoracionesData }} />
+                <Suspense fallback={<Carga />}>
+                  <Personajes data={{ personajesData, valoracionesData }} />
+                </Suspense>
               </PrivateRoute>
             }
           />

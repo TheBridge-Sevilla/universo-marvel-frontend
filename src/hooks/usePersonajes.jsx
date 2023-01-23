@@ -10,20 +10,15 @@ export function usePersonajes(pagina, filtro) {
 
   const data = useFetch(url.toString())
   const [personajesData, setPersonajesData] = useState()
-  const [filtradosData, setFiltradosData] = useState()
+
   const [valoracionesData, setValoracionesData] = useState()
 
   useEffect(() => {
     if (data) {
-      if (filtro) {
-        setFiltradosData(data.personajes)
-        setValoracionesData(data.valoraciones)
-      } else {
-        setPersonajesData(data.personajes)
-        setValoracionesData(data.valoraciones)
-      }
+      setPersonajesData(data.personajes)
+      setValoracionesData(data.valoraciones)
     }
   }, [url])
 
-  return { personajesData, filtradosData, valoracionesData }
+  return { personajesData, valoracionesData }
 }

@@ -5,7 +5,6 @@ import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import 'react-multi-carousel/lib/styles.css'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
 import InfoPersonaje from './infoPersonaje'
@@ -88,7 +87,7 @@ function Personaje() {
         animate='animate'
         exit='exit'
         transition={{ duration: 0.1 }}
-        className='h-100'
+        className='min-vh-100'
       >
         <TopBar />
         <Container className='d-flex flex-row align-items-center justify-content-between mt-4'>

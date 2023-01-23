@@ -21,14 +21,9 @@ function Personajes(props) {
   const primerasValoraciones = props.data.valoracionesData
   const [pagina, setPagina] = useState(1)
   const [filtro, setFiltro] = useState()
-  const { personajesData, filtradosData, valoracionesData } = usePersonajes(
-    pagina,
-    filtro
-  )
-  const [personajes, setPersonajes] = useState(
-    primerosPersonajes ? primerosPersonajes.docs : undefined
-  )
-  const [valoraciones, setValoraciones] = useState(primerasValoraciones)
+  const { personajesData, valoracionesData } = usePersonajes(pagina, filtro)
+  const [personajes, setPersonajes] = useState()
+  const [valoraciones, setValoraciones] = useState()
 
   const siguientePaginaPersonajes = () => {
     setPagina(pagina + 1)
@@ -40,19 +35,25 @@ function Personajes(props) {
   }
 
   useEffect(() => {
-    if (personajesData && (!filtradosData || filtradosData === '')) {
-      setPersonajes(personajesData.docs)
-      setValoraciones(valoracionesData)
-      if (personajes != primerosPersonajes.docs && personajes != undefined) {
+    if (primerosPersonajes && !personajes) {
+      setPersonajes(primerosPersonajes.docs)
+      setValoraciones(primerasValoraciones)
+    }
+  }, [primerosPersonajes])
+
+  useEffect(() => {
+    if (personajesData) {
+      if (personajesData.page > 1) {
         setPersonajes(personajes.concat(personajesData.docs))
         setValoraciones(valoraciones.concat(valoracionesData))
+      } else if (personajesData.page === 1) {
+        setPersonajes(personajesData.docs)
+        setValoraciones(valoracionesData)
       }
-    } else if (filtradosData && filtradosData != '') {
-      setPersonajes(filtradosData.docs)
-      setValoraciones(valoracionesData)
     }
-  }, [personajesData, filtradosData])
+  }, [personajesData])
 
+  console.log(personajesData)
   if (!personajes) {
     //Componentizar?
     return <Carga />
