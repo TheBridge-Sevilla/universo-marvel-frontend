@@ -21,19 +21,7 @@ export function useSignWithG() {
   const provider = new GoogleAuthProvider()
 
   const iniciarSesionConG = () => {
-    if (usuario == 'invitado') {
-      linkWithPopup(auth.currentUser, provider)
-        .then(result => {
-          // Accounts successfully linked.
-          const nombre = result.user
-          setUsuario(nombre)
-          navigate('/dashboard')
-          notificacion(`${t('enlace-cuentas')},${nombre}`, 'success')
-        })
-        .catch(error => {
-          notificacion(error, 'error')
-        })
-    } else {
+  
       signInWithPopup(auth, provider)
         .then(resultado => {
           const nombre = resultado.user.displayName
@@ -46,7 +34,7 @@ export function useSignWithG() {
           notificacion(error, 'error')
         })
     }
-  }
+  
 
   return { iniciarSesionConG }
 }

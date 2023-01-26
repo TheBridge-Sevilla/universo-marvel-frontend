@@ -1,5 +1,6 @@
 {
     "iniciar-sesion": "Iniciar sesión",
+    "iniciar-sesion-google": "Sign in with Google",
     "cerrar-sesion": "Cerrar sesión",
     "contraseña-olvidada": "¿Contraseña olvidada?",
     "continuar": "Continuar",
@@ -30,7 +31,7 @@
     "borrar": "Borrar",
     "subir": "Subir",
     "personaje-favorito": "Personaje Favorito",
-    "personaje-mas-votado": "Personaje Más Votado",
+    "personaje-votado": "Personaje Más Votado",
     "ver-mas": "Ver más",
     "comentarios": "Comentarios",
     "comentar": "Comentar",
@@ -41,8 +42,16 @@
     "valoracion-personal": "Tú valoración",
     "valoracion-global": "Valoración global",
     "mostrar-info": "Mostrar información",
-    "ver-comentarios": "Mostrar comentarios",
     "cargando": "Cargando personajes",
-    "configuracion" : "Configuración",
-    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados"
+    "primer-comentario": "Sé el primero en comentar!",
+    "ranking": "Ranking",
+    "perfil-invitado": "Perfil de Invitado",
+    "español": "Español",
+    "ingles": "Ingles",
+    "modo-claro": "Modo Claro",
+    "modo-oscuro": "Modo Oscuro",
+    "ver-comentarios": "Mostrar comentarios",
+    "configuracion": "Configuración",
+    "solo-usuarios-registrados": "Esta función es exclusiva para miembros registrados",
+    "busqueda": "Busca algo..."
 }

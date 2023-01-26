@@ -1,33 +1,26 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-//import useLocalStorage from 'use-local-storage'
 import RutasAnimadas from './services/rutasAnimadas'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { auth } from './services/firebase/firebase'
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 function App() {
+  const { i18n } = useTranslation()
   const {
     setUsuario,
     setUsuarioActual,
     isRecordarLocal,
     setImagenPerfil,
     usuarioActual,
+    theme,
+    idioma,
   } = useContextoUsuario()
   const navigate = useNavigate()
   const location = useLocation()
   const pathname = location.pathname
-  /* const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-  const [theme, setTheme] = useLocalStorage(
-    'theme',
-    defaultDark ? 'dark' : 'light'
-  )
-
-  const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-  } */
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -58,14 +51,14 @@ function App() {
     } else setImagenPerfil('perfil-invitado.png')
   }, [usuarioActual])
 
-  return (
-    /*     <div className='App' data-theme={theme}>
-           <button onClick={switchTheme}>
-        Cambia a modo {theme == 'light' ? 'Noche' : 'Día'}
-      </button>
-      </div> */
+  useEffect(() => {
+    i18n.changeLanguage(idioma)
+  }, [idioma])
 
-    <RutasAnimadas />
+  return (
+    <div className='App' data-theme={theme}>
+      <RutasAnimadas />
+    </div>
   )
 }
 

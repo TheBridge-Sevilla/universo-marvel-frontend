@@ -11,14 +11,17 @@ import { Button, FormGroup } from '@mui/material' //Link?
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { updatePassword } from 'firebase/auth'
 import { Container } from 'react-bootstrap'
+import { useContextoAlert } from '../../context/contextoAlert'
 
 export default function PasswordUsuario() {
   const { t } = useTranslation()
+  const { notificacion } = useContextoAlert()
   const [CambioContraseña, setCambioContraseña] = useState(false)
   const [contraseña, setContraseña] = useState('')
   const { usuarioActual } = useContextoUsuario()
   const [showPassword, setShowPassword] = useState(false)
   const handleClickShowPassword = () => setShowPassword(show => !show)
+
   const handleMouseDownPassword = e => {
     e.preventDefault()
   }
@@ -30,11 +33,9 @@ export default function PasswordUsuario() {
   async function cambiarContraseña(nuevaContraseña) {
     const user = usuarioActual
     updatePassword(user, nuevaContraseña)
-      .then(() => {
-        console.log('contraseña-cambiada')
-      })
-      .catch(() => {
-        console.log('error')
+      .then(() => {})
+      .catch(error => {
+        notificacion(error, 'error')
       })
   }
 
@@ -48,7 +49,6 @@ export default function PasswordUsuario() {
       setCambioContraseña(!CambioContraseña)
     }
   }
-  console.log(contraseña, 'submitContraseña')
 
   const handleContraseña = () => {
     setCambioContraseña(!CambioContraseña)

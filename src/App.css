@@ -2,12 +2,10 @@
     margin: 0 auto;
     text-align: center;
     font-family: 'DM Sans', sans-serif;
-    background-color: #15121E;
-    color: #FF0000;
+
   }
-  body > #root {
-    height: 100vh;
-  }
+
+
   h1,
   h2,
   h3,

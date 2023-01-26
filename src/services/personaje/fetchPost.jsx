@@ -1,4 +1,4 @@
-import { auth } from './firebase/firebase'
+import { auth } from '../firebase/firebase'
 
 export function fetchPost() {
   const postComentario = (comentario, personaje) => {

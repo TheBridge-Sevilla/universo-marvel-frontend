@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './personaje.css'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
 import { auth } from '../../services/firebase/firebase'
@@ -14,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 import DescripcionPersonaje from './descripcionPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
-import { fetchPost } from '../../services/fetchPost'
+import { fetchPost } from '../../services/personaje/fetchPost'
 
 function Personaje() {
   const { t } = useTranslation()
@@ -52,26 +53,6 @@ function Personaje() {
       })
   }, [])
 
-  /*   function emitirValoracion(valoracion) {
-    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?personaje=${
-      personaje.name
-    }`
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        idUsuario: auth.currentUser != null ? auth.currentUser.uid : undefined,
-        valoracion: valoracion, //id del usuario Firebase
-        idPersonaje: personaje._id,
-      }),
-    }).then(
-      setValoracionPersonal(valoracion),
-      notificacion(`${t('voto-realizado')}`, 'success')
-    )
-  } */
   const handleValoracion = valoracion => {
     postValoracion(personaje, valoracion)
     setValoracionPersonal(valoracion)
@@ -102,101 +83,115 @@ function Personaje() {
     setIsIndice(isIndice - 1)
   }
   return (
-    <>
-      <TopBar />
-      <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
-        {isIndice > 0 ? (
+    <LazyMotion features={domAnimation}>
+      <m.div
+        variants={{
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          exit: { opacity: 0 },
+        }}
+        initial='initial'
+        animate='animate'
+        exit='exit'
+        transition={{ duration: 0.1 }}
+        className='min-vh-100'
+      >
+        <TopBar />
+        <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
+          {isIndice > 0 ? (
+            <Link
+              to={`/personaje/${personajeAnterior.name
+                .split(' ')[0]
+                .toLowerCase()}`}
+            >
+              <ArrowBackIosNewIcon
+                className='flecha'
+                onClick={() => anteriorPersonaje()}
+              />
+            </Link>
+          ) : (
+            <ArrowBackIosNewIcon className='flecha' />
+          )}
+          <Image
+            className='imagen_personaje'
+            src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
+            alt={`${personaje.name} imagen`}
+          />
           <Link
-            to={`/personaje/${personajeAnterior.name
+            to={`/personaje/${personajeSiguiente.name
               .split(' ')[0]
               .toLowerCase()}`}
           >
-            <ArrowBackIosNewIcon
+            <ArrowForwardIosIcon
               className='flecha'
-              onClick={() => anteriorPersonaje()}
+              onClick={() => siguientePersonaje()}
             />
           </Link>
-        ) : (
-          <ArrowBackIosNewIcon className='flecha' />
-        )}
-        <Image
-          className='imagen_personaje'
-          src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-          alt={`${personaje.name} imagen`}
-        />
-        <Link
-          to={`/personaje/${personajeSiguiente.name
-            .split(' ')[0]
-            .toLowerCase()}`}
-        >
-          <ArrowForwardIosIcon
-            className='flecha'
-            onClick={() => siguientePersonaje()}
-          />
-        </Link>
-      </Container>
-      <Container className='contenedor_nombre_personaje'>
-        <h4 className='titulo mb-3'>{personaje.name}</h4>
-      </Container>
-      <Container>
-        <Typography component='legend'>{t('valoracion-personal')}</Typography>
-        <Rating
-          name='simple-controlled'
-          value={valoracionPersonal}
-          onChange={(event, newValue) => handleValoracion(newValue)}
-        />
-      </Container>
-      <br />
-      <Typography>{t('valoracion-global')}</Typography>
-      <Container className='d-flex flex-column justify-content-center align-items-center'>
-        {valoracion ? (
+        </Container>
+        <Container className='contenedor_nombre_personaje'>
+          <h4 className='titulo mb-3'>{personaje.name}</h4>
+        </Container>
+        <Container>
+          <Typography component='legend'>{t('valoracion-personal')}</Typography>
           <Rating
-            name='half-rating-read'
-            defaultValue={valoracion}
-            precision={0.5}
-            readOnly
-            key={valoracion}
+            name='simple-controlled'
+            value={valoracionPersonal}
+            onChange={(event, newValue) => handleValoracion(newValue)}
           />
-        ) : (
-          <Container className='my-2'>
-            <Alert key='error' severity='info'>
-              {t('por-valorar')}
-            </Alert>
-          </Container>
-        )}
-      </Container>
-      <Container className='d-flex flex-column justify-content-center mt-5'>
-        <Button
-          className='m-2'
-          onClick={() => {
-            setMostrarInfo(true)
-            setModalBackground(
-              `${personaje.path}.${personaje.thumbnail.extension}`
-            )
-          }}
-          size='large'
+        </Container>
+        <br />
+        <Typography>{t('valoracion-global')}</Typography>
+        <Container className='d-flex flex-column justify-content-center align-items-center'>
+          {valoracion ? (
+            <Rating
+              name='half-rating-read'
+              defaultValue={valoracion}
+              precision={0.5}
+              readOnly
+              key={valoracion}
+            />
+          ) : (
+            <Container className='my-2'>
+              <Alert key='error' severity='info'>
+                {t('por-valorar')}
+              </Alert>
+            </Container>
+          )}
+        </Container>
+        <Container className='d-flex flex-column justify-content-center mt-5'>
+          <Button
+            className='m-2'
+            onClick={() => {
+              setMostrarInfo(true)
+              setModalBackground(
+                `${personaje.path}.${personaje.thumbnail.extension}`
+              )
+            }}
+            size='large'
+          >
+            {t('mostrar-info')}
+          </Button>
+          <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
+            {t('ver-comentarios')}
+          </Button>
+        </Container>
+        <Modal
+          fullscreen={true}
+          show={mostrarInfo}
+          onHide={() => setMostrarInfo(false)}
         >
-          {t('mostrar-info')}
-        </Button>
-        <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
-          {t('ver-comentarios')}
-        </Button>
-      </Container>
-      <Modal
-        fullscreen={true}
-        show={mostrarInfo}
-        onHide={() => setMostrarInfo(false)}
-      >
-        <DescripcionPersonaje comics={comics} personaje={personaje} />
-      </Modal>
-      <Modal
-        fullscreen={true}
-        show={mostrarComentarios}
-        onHide={() => setMostrarComentarios(false)}
-      >
-        <Comentarios personaje={personaje} />
-      </Modal>
-    </>
+          <DescripcionPersonaje comics={comics} personaje={personaje} />
+        </Modal>
+        <Modal
+          fullscreen={true}
+          show={mostrarComentarios}
+          onHide={() => setMostrarComentarios(false)}
+          className='modal-comentarios'
+        >
+          <Comentarios personaje={personaje} />
+        </Modal>
+      </m.div>
+    </LazyMotion>
   )
 }
 

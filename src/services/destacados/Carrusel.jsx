@@ -4,6 +4,7 @@ import { Rating } from '@mui/material'
 import { responsive } from '../responsive'
 
 export function Carrusel({ json }) {
+
   return (
     <Container className='d-flex flex-column mb-3'>
       <Carousel
@@ -13,11 +14,11 @@ export function Carrusel({ json }) {
         className='m-2'
       >
         {json.map(comic => (
-          <>
+          <div key={comic.personaje}>
             <img
-              src={`${comic.imagen}`}
+              src={comic.imagen}
               alt={comic.personaje}
-              className='imagen-comic'
+              className='imagen-ranking'
               key={comic.personaje}
             />
             <p>{comic.personaje}</p>
@@ -28,7 +29,7 @@ export function Carrusel({ json }) {
               readOnly
               key={comic.valoracion}
             />
-          </>
+          </div>
         ))}
       </Carousel>
     </Container>

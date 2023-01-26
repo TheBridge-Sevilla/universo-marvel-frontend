@@ -14,22 +14,31 @@
   text-align: center;
 }
 
+.App {
+  background-color: var(--background);
+  color: var(--primary);
+}
+
+[data-theme='false'] {
+  --text: #F7F7F7;
+  --background: #15121E;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+[data-theme='true'] {
+  --text: #212121;
+  --background: #F7F7F7;
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
   margin: 0;
-  background-color: #15121E;
+  background-color: var(--background);
   color: var(--primary);
 }
 
-.App {
-  height: 100vh;
-}
-
-[data-theme='dark'] {
-  --text: #F7F7F7;
-  --background: #212121;
-}
 
 .btn-danger {
   background-color: var(--primary);
@@ -52,9 +61,7 @@ body {
   cursor: pointer;
 }
 
-input {
-  color: var(--secondary);
-}
+
 
 span>.css-i4bv87-MuiSvgIcon-root {
   color: var(--primary) !important;
@@ -97,9 +104,6 @@ button:hover {
   background-color: var(--hover) !important;
 }
 
-/* a {
-  color: var(--secondary) !important;
-} */
 
 h1 {
   font-size: 3rem;
@@ -242,9 +246,7 @@ p {
 }
 
 
-/* .modificarSVG > svg {
- background-color: #28b728;
-} */
+
 
 @keyframes fadeIn {
   from {
@@ -283,7 +285,7 @@ p {
 
 .flecha-volver>path {
   color: var(--hover);
-
+  cursor: pointer;
 }
 
 .css-1c99szj-MuiRating-icon svg {
@@ -291,6 +293,22 @@ p {
 }
 
 .flecha-subir {
+  cursor: pointer;
+  -webkit-animation: fadein 1s;
+  -moz-animation: fadein 1s;
+  -ms-animation: fadein 1s;
+  -o-animation: fadein 1s;
+  animation: fadein 1s;
+}
+
+.circulo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--terciary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   bottom: 8%;
   right: 4%;
@@ -346,9 +364,9 @@ p {
   color: grey;
 }
 
-/* .modal-content {
-  background-color: #15121E;
-} */
+.modal-content {
+  background: var(--background);
+}
 
 .MuiListItemText-root p {
   color: var(--accent);
@@ -363,19 +381,20 @@ p {
 
 .background-personaje {
   background-image: url(${personaje.thumbnail.path}.${personaje.thumbnail.extension});
+  max-width: none !important;
+
 }
 
 .descripcion-text {
   color: var(--accent);
 }
 
-/* modificar para el modo oscuro a var background color */
 .sin-favorito {
-  background-color: #15121E;
+  background-color: var(--background);
 }
 
-.comentarios {
-  background-color: #15121E;
+.modal-content {
+  background-color: var(--background);
 }
 
 .titulo {
@@ -383,12 +402,16 @@ p {
 }
 
 .card-comentario {
-  background-color: rgba(24, 22, 36, 0.3);
+  background-color: var(--background);
   border-color: var(--primary);
 }
 
 .texto-comentario {
-  color: var(--accent);
+  color: var(--text);
+}
+
+.modal-comentarios {
+  background-color: var(--background);
 }
 
 .boton-comentar.MuiButtonBase-root {
@@ -396,5 +419,27 @@ p {
 }
 
 .comentar-area.JoyTextarea-root {
-  border-color: var(--accent);
+  border-color: var(--text);
+}
+
+.avatar {
+  cursor: pointer;
+}
+
+.Mui-disabled {
+  -webkit-text-fill-color: var(--primary) !important
+}
+
+input[type="text"],
+[type="email"],
+[type="password"] {
+  color: var(--primary) !important;
+}
+
+.switch {
+  color: var(--text)
+}
+
+.cambiar-imagen {
+  border: 1px solid var(--primary) !important;
 }

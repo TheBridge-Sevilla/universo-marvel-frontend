@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './personajes.css'
-import { Container, Image, Form } from 'react-bootstrap'
+import { Container, Image } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import Spinner from 'react-bootstrap/Spinner'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import Subir from '../../components/Subir'
 import { useTranslation } from 'react-i18next'
+import { TextField } from '@mui/material'
+import { Search } from 'react-bootstrap-icons'
 
 function Personajes() {
   const { t } = useTranslation()
@@ -19,7 +21,6 @@ function Personajes() {
   const [filtro, setFiltro] = useState('')
 
   const {
-    isIndice,
     setIsIndice,
     personajes,
     setPersonajes,
@@ -34,9 +35,11 @@ function Personajes() {
   }, [])
 
   useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL
-      }/personajes?page=${pagina}&limit=${import.meta.env.VITE_PAGINATION_LIMIT
-      }&filter=${filtro}`
+    const url = `${
+      import.meta.env.VITE_BASE_URL
+    }/personajes?page=${pagina}&limit=${
+      import.meta.env.VITE_PAGINATION_LIMIT
+    }&filter=${filtro}`
 
     fetch(url)
       .then(data => data.json())
@@ -52,23 +55,19 @@ function Personajes() {
           JSON.stringify(json.valoraciones)
         )
       })
-
-    console.log(personajes)
     setPagina(1)
   }, [filtro])
 
   function siguientePaginaPersonajes() {
-    console.log('nextentra')
-    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${pagina + 1
-      }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
+    const url = `${import.meta.env.VITE_BASE_URL}/personajes?page=${
+      pagina + 1
+    }&limit=${import.meta.env.VITE_PAGINATION_LIMIT}&filter=${filtro}`
     setPagina(pagina + 1)
     fetch(url)
       .then(data => data.json())
       .then(json => {
-        console.log(personajes)
         let nuevosPersonajes = json.personajes
         nuevosPersonajes.docs = personajes.docs.concat(json.personajes.docs)
-        console.log(nuevosPersonajes)
         setPersonajes(nuevosPersonajes)
         setValoraciones(valoraciones.concat(json.valoraciones))
         window.localStorage.setItem(
@@ -84,7 +83,6 @@ function Personajes() {
   function onFilter(e) {
     window.localStorage.removeItem('personajes')
     window.localStorage.removeItem('valoraciones')
-    console.log('e', e.target.value)
     setFiltro(e.target.value)
   }
 
@@ -103,17 +101,17 @@ function Personajes() {
             delay: 1,
           }}
           transition={{ duration: 0.5 }}
+          className='min-vh-100'
         >
           <TopBar />
-          <Container className='my-4  '>
-            <Form.Control
-              id='filtro'
-              type='text'
-              size='lg'
-              placeholder='Filtro'
+          <Container className='my-4'>
+            <TextField
               onChange={e => {
                 onFilter(e)
               }}
+              fullWidth={true}
+              label={<Search />}
+              placeholder={t('busqueda')}
             />
           </Container>
           <InfiniteScroll
@@ -135,7 +133,6 @@ function Personajes() {
                 key={i}
                 onClick={() => {
                   setIsIndice(i)
-                  console.log(isIndice)
                 }}
               >
                 <Link
@@ -157,7 +154,9 @@ function Personajes() {
                         <span>
                           <AiFillStar />
                         </span>{' '}
-                        {valoraciones[i] ? valoraciones[i].toFixed(1) : 'Non rated'}
+                        {valoraciones[i]
+                          ? valoraciones[i].toFixed(1)
+                          : 'Non rated'}
                       </p>
                     </div>
                   </div>

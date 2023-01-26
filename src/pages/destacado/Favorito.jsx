@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import { fetchDestacados } from '../../services/destacados/fetchDestacados'
 import { useContextoUsuario } from '../../context/contextoUsuario'
 import { Carrusel } from '../../services/destacados/Carrusel'
+import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 function Favorito() {
   const { t } = useTranslation()
@@ -18,7 +19,6 @@ function Favorito() {
     JSON.stringify({ idUsuario: idUsuario })
   )
 
-  console.log(json)
   if (usuarioActual.displayName != null) {
     return (
       <>
@@ -31,6 +31,7 @@ function Favorito() {
       <Card className='sin-favorito my-5'>
         <Card.Header>{t('personaje-favorito')}</Card.Header>
         <Card.Body>
+        <LockPersonIcon className='m-5'  fontSize="large"/>
           <Card.Text>{t('solo-usuarios-registrados')}</Card.Text>
         </Card.Body>
       </Card>

@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import useLocalStorage from 'use-local-storage'
 
-
 const ContextoUsuario = createContext({})
 
 export const useContextoUsuario = () => useContext(ContextoUsuario)
@@ -11,11 +10,11 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [usuarioActual, setUsuarioActual] = useState('')
   const [pantalla, setPantalla] = useState('')
   const [isIndice, setIsIndice] = useState('')
-/*   const [personajeSeleccionado, setPersonajeSeleccionado] = useState('')
-  const [valoracionSeleccionado, setValoracionSeleccionado] = useState('') */
   const [personajes, setPersonajes] = useState('')
   const [valoraciones, setValoraciones] = useState('')
-  const defaultRecordar = window.matchMedia('(recordar-usuario: no-recordar)').matches
+  const defaultRecordar = window.matchMedia(
+    '(recordar-usuario: no-recordar)'
+  ).matches
   const [isRecordarLocal, setIsRecordarLocal] = useLocalStorage(
     'isRecordar',
     defaultRecordar ? 'no-recordar' : 'recordar'
@@ -23,10 +22,20 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [imagenPerfil, setImagenPerfil] = useState('')
 
   const switchRecordar = () => {
-    const newRecodar = isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'
+    const newRecodar =
+      isRecordarLocal === 'recordar' ? 'no-recordar' : 'recordar'
     setIsRecordarLocal(newRecodar)
   }
-
+  const defaultDark = window.matchMedia('(prefers-color-scheme: true)').matches
+  const [theme, setTheme] = useLocalStorage(
+    'theme',
+    defaultDark ? 'true' : 'false'
+  )
+  const defaultIdioma = window.matchMedia('(idioma: es)').matches
+  const [idioma, setIdioma] = useLocalStorage(
+    'idioma',
+    defaultIdioma ? 'es' : 'en'
+  )
 
   const contextValue = {
     usuario,
@@ -40,17 +49,18 @@ export const ContextoUsuarioProvider = ({ children }) => {
     switchRecordar,
     imagenPerfil,
     setImagenPerfil,
-/*     personajeSeleccionado,
-    setPersonajeSeleccionado,
-    valoracionSeleccionado,
-    setValoracionSeleccionado, */
     personajes,
     setPersonajes,
     valoraciones,
     setValoraciones,
     isIndice,
-    setIsIndice
+    setIsIndice,
+    theme,
+    setTheme,
+    idioma,
+    setIdioma,
   }
+
 
   return (
     <ContextoUsuario.Provider value={contextValue}>
