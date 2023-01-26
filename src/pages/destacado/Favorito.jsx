@@ -7,7 +7,6 @@ import { auth } from '../../services/firebase/firebase'
 
 function Favorito() {
   const { t } = useTranslation()
-
   let idUsuario = auth.currentUser.uid
 
   const { json } = fetchDestacados(
