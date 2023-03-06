@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Container, Card } from 'react-bootstrap'
-import Comentar from '../../components/comentarios/FormComentario'
+import Comentar from '../../components/comentarios/formComentario'
 import TopBar from '../../components/TopBar'
 import { getComentarios } from '../../services/personaje/getComentarios'
 

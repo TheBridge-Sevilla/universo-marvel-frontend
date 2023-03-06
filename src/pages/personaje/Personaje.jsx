@@ -3,85 +3,78 @@ import './personaje.css'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import { Image, Alert, Container, Modal } from 'react-bootstrap'
 import { Rating, Typography, Button } from '@mui/material'
-import { auth } from '../../services/firebase/firebase'
-import { useContextoUsuario } from '../../context/contextoUsuario'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-import { Link } from 'react-router-dom'
-import 'react-multi-carousel/lib/styles.css'
-import { MD5 } from 'crypto-js'
 import { useContextoAlert } from '../../context/contextoAlert'
 import { useTranslation } from 'react-i18next'
-import DescripcionPersonaje from './descripcionPersonaje'
+import InfoPersonaje from './infoPersonaje'
 import TopBar from '../../components/TopBar'
 import Comentarios from './Comentarios'
-import { fetchPost } from '../../services/personaje/fetchPost'
+import Navbar from './../../components/Navbar'
+import { useLocation, Link } from 'react-router-dom'
+import { useValoracionPersonal } from '../../hooks/useValoracionPersonal'
+import { getComics } from '../../services/personaje/getComics'
 
 function Personaje() {
   const { t } = useTranslation()
-  const { personajes, valoraciones, isIndice, setIsIndice } =
-    useContextoUsuario()
-  const personaje = personajes.docs[isIndice]
-  const valoracion = valoraciones[isIndice]
+  const location = useLocation()
+  const personajes = location.state.personajes
+  const valoraciones = location.state.valoraciones
+  const [personajeActual, setPersonajeActual] = useState(
+    location.state.personaje
+  )
+  const [indiceActual, setIndiceActual] = useState(location.state.index)
+  const valoracion = valoraciones[indiceActual]
+  const { tuValoracion, postValoracion } =
+    useValoracionPersonal(personajeActual)
   const [valoracionPersonal, setValoracionPersonal] = useState(0)
-  const indiceAnterior = isIndice - 1
-  const indiceSiguiente = isIndice + 1
-  const personajeAnterior = personajes.docs[indiceAnterior]
-  const personajeSiguiente = personajes.docs[indiceSiguiente]
-  const apikey = import.meta.env.VITE_MARVEL_KEY
-  const timestamp = Date.now()
-  const privateKey = import.meta.env.VITE_PRIVATE_KEY
-  const publicKey = import.meta.env.VITE_PUBLIC_KEY
-  const hash = MD5(`${timestamp}${privateKey}${publicKey}`)
-  const personajeID = personaje.Id
+  const indiceAnterior = indiceActual - 1
+  const indiceSiguiente = indiceActual + 1
+  const [personajeAnterior, setPersonajeAnterior] = useState(
+    personajes[indiceAnterior]
+  )
+  const [personajeSiguiente, setPersonajeSiguiente] = useState(
+    personajes[indiceSiguiente]
+  )
   const { notificacion } = useContextoAlert()
-  const [comics, setComics] = useState([])
-
+  const comics = getComics(personajeActual)
   const [mostrarInfo, setMostrarInfo] = useState(false)
   const [modalBackground, setModalBackground] = useState()
   const [mostrarComentarios, setMostrarComentarios] = useState(false)
-  const { postValoracion } = fetchPost()
-
-  useEffect(() => {
-    const url = `${import.meta.env.VITE_BASE_URL}/valoraciones?idPersonaje=${
-      personaje._id
-    }&idUsuario=${auth.currentUser.uid}`
-    fetch(url, { cache: 'no-store' })
-      .then(data => data.json())
-      .then(json => {
-        setValoracionPersonal(json)
-      })
-  }, [])
+  document.body.style.background = modalBackground
 
   const handleValoracion = valoracion => {
-    postValoracion(personaje, valoracion)
+    postValoracion(valoracion)
     setValoracionPersonal(valoracion)
     notificacion(`${t('voto-realizado')}`, 'success')
   }
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch(
-          `https://gateway.marvel.com:443/v1/public/characters/${personajeID}/comics?apikey=${apikey}&ts=${timestamp}&hash=${hash}`
-        )
-        const data = await response.json()
-        setComics(data.data.results)
-      } catch (error) {
-        notificacion(error, 'error')
-      }
-      document.body.style.background = modalBackground
+    if (tuValoracion) {
+      setValoracionPersonal(tuValoracion)
     }
-    fetchData()
-  }, [])
+  }, [tuValoracion])
 
   const siguientePersonaje = () => {
-    setIsIndice(isIndice + 1)
+    setIndiceActual(indiceActual + 1)
+    setPersonajeActual(personajeSiguiente)
   }
 
   const anteriorPersonaje = () => {
-    setIsIndice(isIndice - 1)
+    setIndiceActual(indiceActual - 1)
+    setPersonajeActual(personajeAnterior)
   }
+
+  useEffect(() => {
+    if (indiceActual === 0) {
+      setPersonajeAnterior(personajes[0])
+      setPersonajeSiguiente(personajes[indiceSiguiente])
+    } else {
+      setPersonajeAnterior(personajes[indiceAnterior])
+      setPersonajeSiguiente(personajes[indiceSiguiente])
+    }
+  }, [personajeActual])
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -97,12 +90,18 @@ function Personaje() {
         className='min-vh-100'
       >
         <TopBar />
-        <Container className='d-flex flex-row align-items-center justify-content-between mt-5'>
-          {isIndice > 0 ? (
+        <Container className='d-flex flex-row align-items-center justify-content-between mt-4'>
+          {indiceActual > 0 ? (
             <Link
-              to={`/personaje/${personajeAnterior.name
+              to={`/dashboard/${personajeAnterior.name
                 .split(' ')[0]
                 .toLowerCase()}`}
+              state={{
+                personajes: personajes,
+                valoraciones: valoraciones,
+                personaje: personajeAnterior,
+                index: indiceAnterior,
+              }}
             >
               <ArrowBackIosNewIcon
                 className='flecha'
@@ -114,13 +113,19 @@ function Personaje() {
           )}
           <Image
             className='imagen_personaje'
-            src={`${personaje.thumbnail.path}.${personaje.thumbnail.extension}`}
-            alt={`${personaje.name} imagen`}
+            src={`${personajeActual.thumbnail.path}.${personajeActual.thumbnail.extension}`}
+            alt={`${personajeActual.name} imagen`}
           />
           <Link
-            to={`/personaje/${personajeSiguiente.name
+            to={`/dashboard/${personajeSiguiente.name
               .split(' ')[0]
               .toLowerCase()}`}
+            state={{
+              personajes: personajes,
+              valoraciones: valoraciones,
+              personaje: personajeSiguiente,
+              index: indiceSiguiente,
+            }}
           >
             <ArrowForwardIosIcon
               className='flecha'
@@ -129,7 +134,7 @@ function Personaje() {
           </Link>
         </Container>
         <Container className='contenedor_nombre_personaje'>
-          <h4 className='titulo mb-3'>{personaje.name}</h4>
+          <h4 className='titulo mb-3'>{personajeActual.name}</h4>
         </Container>
         <Container>
           <Typography component='legend'>{t('valoracion-personal')}</Typography>
@@ -160,18 +165,21 @@ function Personaje() {
         </Container>
         <Container className='d-flex flex-column justify-content-center mt-5'>
           <Button
-            className='m-2'
+            className='my-1 mx-3'
             onClick={() => {
               setMostrarInfo(true)
               setModalBackground(
-                `${personaje.path}.${personaje.thumbnail.extension}`
+                `${personajeActual.path}.${personajeActual.thumbnail.extension}`
               )
             }}
             size='large'
           >
             {t('mostrar-info')}
           </Button>
-          <Button className='m-2' onClick={() => setMostrarComentarios(true)}>
+          <Button
+            className='mt-2 mx-3'
+            onClick={() => setMostrarComentarios(true)}
+          >
             {t('ver-comentarios')}
           </Button>
         </Container>
@@ -180,7 +188,7 @@ function Personaje() {
           show={mostrarInfo}
           onHide={() => setMostrarInfo(false)}
         >
-          <DescripcionPersonaje comics={comics} personaje={personaje} />
+          <InfoPersonaje comics={comics} personaje={personajeActual} />
         </Modal>
         <Modal
           fullscreen={true}
@@ -188,8 +196,9 @@ function Personaje() {
           onHide={() => setMostrarComentarios(false)}
           className='modal-comentarios'
         >
-          <Comentarios personaje={personaje} />
+          <Comentarios personaje={personajeActual} />
         </Modal>
+        <Navbar />
       </m.div>
     </LazyMotion>
   )

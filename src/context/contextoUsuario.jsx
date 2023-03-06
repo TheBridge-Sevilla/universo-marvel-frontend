@@ -9,9 +9,6 @@ export const ContextoUsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState('')
   const [usuarioActual, setUsuarioActual] = useState('')
   const [pantalla, setPantalla] = useState('')
-  const [isIndice, setIsIndice] = useState('')
-  const [personajes, setPersonajes] = useState('')
-  const [valoraciones, setValoraciones] = useState('')
   const defaultRecordar = window.matchMedia(
     '(recordar-usuario: no-recordar)'
   ).matches
@@ -49,12 +46,6 @@ export const ContextoUsuarioProvider = ({ children }) => {
     switchRecordar,
     imagenPerfil,
     setImagenPerfil,
-    personajes,
-    setPersonajes,
-    valoraciones,
-    setValoraciones,
-    isIndice,
-    setIsIndice,
     theme,
     setTheme,
     idioma,
