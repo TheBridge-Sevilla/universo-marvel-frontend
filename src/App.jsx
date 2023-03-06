@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContextoUsuario } from './context/contextoUsuario'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
 import { AnimatePresence } from 'framer-motion'
 import { auth } from './services/firebase/firebase'
 import { useEffect } from 'react'
@@ -73,7 +72,7 @@ function App() {
   }, [idioma])
 
   return (
-    <Container
+    <div
       className='App'
       data-theme={theme}
       style={{ overflowX: 'hidden', padding: '0' }}
@@ -149,7 +148,7 @@ function App() {
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
-    </Container>
+    </div>
   )
 }
 
